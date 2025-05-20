@@ -22,13 +22,5 @@
     "usuario": "Janaina",
     "salario": 2000.0,
     "senha": "121325"
-  },
-  {
-    "id": 3,
-    "nome": "Gabriel Moraes",
-    "cargo": "Mecânico Geral",
-    "usuario": "GM",
-    "salario": 100.0,
-    "senha": "0482"
   }
 ]
