@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Funcionario;
 
 public class DadosFuncionario {
-    private static final String ARQUIVO_FUNCIONARIOS = "funcionarios.json";
+    private static final String ARQUIVO_FUNCIONARIOS = "bd/funcionarios.json";
 
     public static ArrayList<Funcionario> listaFuncionarios = carregarFuncionarios();
     

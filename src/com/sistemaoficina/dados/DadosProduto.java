@@ -15,7 +15,7 @@ import com.sistemaoficina.dto.Produto;
 
 public class DadosProduto {
 
-    private static final String ARQUIVO_PRODUTOS = "produtos.json";
+    private static final String ARQUIVO_PRODUTOS = "bd/produtos.json";
 
     public static ArrayList<Produto> listaProdutos = carregarProdutos();
 

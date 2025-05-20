@@ -29,11 +29,15 @@ public class Main {
             boolean usuarioAdmin = usuario.getCargo().equals("Admin");
             if (usuarioPropietario || usuarioAdmin) {
                 System.out.println("1. Menu Cliente");
-                System.out.println("2. Menu Funcionario");
-                System.out.println("3. Menu Produto");
-                System.out.println("4. Menu Agendamento");
+                System.out.println("2. Menu Produto");
+                System.out.println("3. Menu Agendamento");
+                System.out.println("4. Menu Funcionario");
                 if(usuarioPropietario) System.out.println("5. Menu Financeiro");
                 if(usuarioAdmin) System.out.println("5. Menu Admin");
+            } else {
+                System.out.println("1. Menu Cliente");
+                System.out.println("2. Menu Produto");
+                System.out.println("3. Menu Agendamento");
             }
 
             System.out.println("0. Sair");
@@ -46,13 +50,17 @@ public class Main {
                     menuCliente();
                 }
                 case 2 -> {
-                    menuFuncionario();
-                }
-                case 3 -> {
                     menuProduto();
                 }
-                case 4 -> {
+                case 3 -> {
                     menuAgendamento();
+                }
+                case 4 -> {
+                    if(usuarioPropietario || usuarioAdmin) {
+                        menuFuncionario();
+                    } else {
+                        System.out.println("Opção inválida.");
+                    }
                 }
                 case 5 -> {
                     if(usuarioPropietario) {
@@ -76,6 +84,7 @@ public class Main {
             System.out.println("1. Cadastrar Cliente");
             System.out.println("2. Editar Cliente");
             System.out.println("3. Excluir Cliente");
+            System.out.println("4. Listar Clientes");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -85,6 +94,7 @@ public class Main {
                 case 1 -> DadosClientes.cadastrar(scanner);
                 case 2 -> DadosClientes.editar(scanner);
                 case 3 -> DadosClientes.excluir(scanner);
+                case 4 -> DadosClientes.listar();
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
@@ -97,6 +107,7 @@ public class Main {
             System.out.println("1. Cadastrar Funcionario");
             System.out.println("2. Editar Funcionario");
             System.out.println("3. Excluir Funcionario");
+            System.out.println("4. Listar Funcionarios");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -106,6 +117,7 @@ public class Main {
                 case 1 -> DadosFuncionario.cadastrar(scanner);
                 case 2 -> DadosFuncionario.editar(scanner);
                 case 3 -> DadosFuncionario.excluir(scanner);
+                case 4 -> DadosFuncionario.listar();
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
@@ -141,6 +153,7 @@ public class Main {
             System.out.println("1. Cadastrar Agendamento");
             System.out.println("2. Cancelar Agendamento");
             System.out.println("3. Finalizar Agendamento");
+            System.out.println("4. Listar Agendamentos");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -150,6 +163,7 @@ public class Main {
                 case 1 -> DadosAgendamento.cadastrar(scanner);   
                 case 2 -> DadosAgendamento.cancelar(scanner);   
                 case 3 -> DadosAgendamento.finalizar(scanner);
+                case 4 -> DadosAgendamento.listar();
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }

@@ -15,7 +15,7 @@ import com.sistemaoficina.dto.Agendamento;
 import com.sistemaoficina.dto.Cliente;
 
 public class DadosAgendamento {
-    private static final String ARQUIVO_AGENDAMENTOS = "agendamentos.json";
+    private static final String ARQUIVO_AGENDAMENTOS = "bd/agendamentos.json";
 
     public static ArrayList<Agendamento> listaAgendamentos = carregarAgendamentos();
 

@@ -15,7 +15,7 @@ import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.Veiculo;
 
 public class DadosClientes {
-    private static final String ARQUIVO_CLIENTES = "clientes.json";
+    private static final String ARQUIVO_CLIENTES = "bd/clientes.json";
 
     public static ArrayList<Cliente> listaClientes = carregarClientes();
 
