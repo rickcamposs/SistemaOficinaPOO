@@ -1,0 +1,16 @@
+[
+  {
+    "id": 0,
+    "quantidade": 0,
+    "nome": "Pneu",
+    "valorPago": 200.0,
+    "valorVendido": 300.0
+  },
+  {
+    "id": 1,
+    "quantidade": 5,
+    "nome": "Roda",
+    "valorPago": 100.0,
+    "valorVendido": 200.0
+  }
+]

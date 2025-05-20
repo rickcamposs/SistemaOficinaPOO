@@ -1,4 +1,4 @@
-package com.mycompany.sistemaoficinamecanica;
+package com.sistemaoficina.dto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,8 +9,10 @@ import java.util.Scanner;
  * Esta classe oferece funcionalidades para adicionar, editar, remover e listar veículos
  * de um cliente, além de realizar o cadastro de novos clientes via console.
  */
-public class Clientes {
+public class Cliente {
     
+    private int id;
+
     /**
      * Nome do cliente.
      */
@@ -44,7 +46,7 @@ public class Clientes {
     /**
      * Construtor vazio que inicializa a lista de veículos.
      */
-    public Clientes() {
+    public Cliente() {
         this.veiculos = new ArrayList<>();
     }
 
@@ -57,7 +59,7 @@ public class Clientes {
      * @param email O email do cliente.
      * @param cpfAnonimizado O CPF anonimizado do cliente.
      */
-    public Clientes(String nome, String endereco, String telefone, String email, String cpfAnonimizado) {
+    public Cliente(String nome, String endereco, String telefone, String email, String cpfAnonimizado) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
@@ -66,7 +68,15 @@ public class Clientes {
         this.veiculos = new ArrayList<>();
     }
 
-    // Getters e Setters
+    // Getters e Setter
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     /**
      * Retorna o nome do cliente.
@@ -243,7 +253,7 @@ public class Clientes {
      * 
      * @return Um objeto Cliente com os dados fornecidos pelo usuário.
      */
-    public static Clientes cadastrarCliente() {
+    public static Cliente cadastrarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Nome: ");
@@ -261,6 +271,8 @@ public class Clientes {
         System.out.print("CPF (Anonimizado): ");
         String cpf = scanner.nextLine();
 
-        return new Clientes(nome, endereco, telefone, email, cpf);
+        scanner.close();
+
+        return new Cliente(nome, endereco, telefone, email, cpf);
     }
 }

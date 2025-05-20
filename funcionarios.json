@@ -1,16 +1,34 @@
 [
   {
+    "id": 0,
+    "nome": "Riquelme Campos",
+    "cargo": "Proprietario",
+    "usuario": "prop",
+    "salario": 0.0,
+    "senha": "0000"
+  },
+  {
+    "id": 1,
+    "nome": "Admin",
+    "cargo": "Admin",
+    "usuario": "admin",
+    "salario": 0.0,
+    "senha": "1234"
+  },
+  {
+    "id": 2,
     "nome": "Janaina Alves Cordeiro",
     "cargo": "Atendente",
     "usuario": "Janaina",
-    "senha": "121325",
-    "salario": 2000.0
+    "salario": 2000.0,
+    "senha": "121325"
   },
   {
+    "id": 3,
     "nome": "Gabriel Moraes",
     "cargo": "Mecânico Geral",
     "usuario": "GM",
-    "senha": "0482",
-    "salario": 100.0
+    "salario": 100.0,
+    "senha": "0482"
   }
 ]
