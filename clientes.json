@@ -1,0 +1,18 @@
+[
+  {
+    "nome": "Riquelme Moreira Campos",
+    "endereco": "Rua José Adalmo de Carvalho ",
+    "telefone": "38999226674",
+    "email": "riquelmemoreiracampos@gmail.com",
+    "cpfAnonimizado": "09259633648",
+    "veiculos": [
+      {
+        "placa": "PQV-5868",
+        "modelo": "Porshe 911",
+        "ano": 2025,
+        "cor": "Roxa",
+        "combustivel": "Gasolina Aditivada"
+      }
+    ]
+  }
+]

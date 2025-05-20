@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1000,
+    "nomeCliente": "Riquelme Moreira Campos",
+    "placaVeiculo": "PQV-5868",
+    "data": "09/04/2025",
+    "descricao": "Troca de Óleo",
+    "valorEstimado": 400.0,
+    "cancelado": true,
+    "finalizado": true
+  },
+  {
+    "id": 1001,
+    "nomeCliente": "Riquelme Moreira Campos",
+    "placaVeiculo": "PQV-5868",
+    "data": "09/04/2003",
+    "descricao": "Troca de óleo",
+    "valorEstimado": 120.0,
+    "cancelado": false,
+    "finalizado": true
+  },
+  {
+    "id": 1002,
+    "nomeCliente": "Riquelme Moreira Campos",
+    "placaVeiculo": "PQV-5868",
+    "data": "06/07/2023",
+    "descricao": "Troca de Pneu",
+    "valorEstimado": 50.0,
+    "cancelado": false,
+    "finalizado": false
+  }
+]
