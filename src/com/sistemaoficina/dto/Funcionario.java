@@ -2,7 +2,8 @@ package com.sistemaoficina.dto;
 
 /**
  * Representa um funcionário do sistema de oficina mecânica.
- * Contém informações sobre o nome, cargo, usuário, senha e salário do funcionário.
+ * Contém informações sobre o nome, cargo, usuário, senha e salário do
+ * funcionário.
  */
 public class Funcionario {
     private int id;
@@ -15,10 +16,10 @@ public class Funcionario {
     /**
      * Construtor para criar um novo funcionário.
      * 
-     * @param nome O nome do funcionário.
-     * @param cargo O cargo do funcionário.
+     * @param nome    O nome do funcionário.
+     * @param cargo   O cargo do funcionário.
      * @param usuario O nome de usuário do funcionário para autenticação.
-     * @param senha A senha do funcionário para autenticação.
+     * @param senha   A senha do funcionário para autenticação.
      * @param salario O salário do funcionário.
      */
     public Funcionario(String nome, String cargo, String usuario, String senha, double salario) {
@@ -90,7 +91,7 @@ public class Funcionario {
      * Valida as credenciais do funcionário (usuário e senha).
      * 
      * @param usuario O nome de usuário fornecido para autenticação.
-     * @param senha A senha fornecida para autenticação.
+     * @param senha   A senha fornecida para autenticação.
      * @return Verdadeiro se as credenciais corresponderem, falso caso contrário.
      */
     public boolean validarCredenciais(String usuario, String senha) {
