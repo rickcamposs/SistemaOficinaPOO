@@ -32,8 +32,8 @@ public class Main {
                 System.out.println("2. Menu Produto");
                 System.out.println("3. Menu Agendamento");
                 System.out.println("4. Menu Funcionario");
-                if(usuarioPropietario) System.out.println("5. Menu Financeiro");
-                if(usuarioAdmin) System.out.println("5. Menu Admin");
+                System.out.println("5. Menu Admin");
+            if(usuarioPropietario) System.out.println("6. Menu Financeiro");
             } else {
                 System.out.println("1. Menu Cliente");
                 System.out.println("2. Menu Produto");
@@ -62,7 +62,15 @@ public class Main {
                         System.out.println("Opção inválida.");
                     }
                 }
+                
                 case 5 -> {
+                    if (usuarioPropietario || usuarioAdmin){
+                        menuAdmin(usuario);
+                    } else {
+                        System.out.println("Opção Inválida");
+                    }
+                } 
+                case 6 -> {
                     if(usuarioPropietario) {
                         menuFinanceiro();
                     } else if(usuarioAdmin) {
@@ -131,6 +139,7 @@ public class Main {
             System.out.println("1. Cadastrar Produto");
             System.out.println("2. Editar Produto");
             System.out.println("3. Verificar estoque de Produto");
+            System.out.println("4. Baixa Produto");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -139,7 +148,8 @@ public class Main {
             switch (opcao) {
                 case 1 -> DadosProduto.cadastrar(scanner);         
                 case 2 -> DadosProduto.editar(scanner);
-                case 3 -> DadosProduto.verificarEstoque(scanner);
+                case 3 -> DadosProduto.listar();
+                case 4 -> DadosProduto.excluir(scanner);
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }

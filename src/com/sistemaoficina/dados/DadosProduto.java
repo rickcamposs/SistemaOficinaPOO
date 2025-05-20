@@ -11,6 +11,11 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import static com.sistemaoficina.dados.DadosClientes.buscarId;
+import static com.sistemaoficina.dados.DadosClientes.listaClientes;
+import static com.sistemaoficina.dados.DadosClientes.listar;
+import static com.sistemaoficina.dados.DadosClientes.salvarClientesJson;
+import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.Produto;
 
 public class DadosProduto {
@@ -95,7 +100,7 @@ public class DadosProduto {
         
         System.out.println("Produto editado com sucesso.");
     }
-
+    /*
     public static void verificarEstoque(Scanner scanner){
         System.out.println("Escolha um produto por Id:");
         listar();
@@ -114,7 +119,7 @@ public class DadosProduto {
         }
         System.out.println("Produto: " + prod.getNome() + " | Quantidade em estoque: " + prod.getQuantidade());
     }
-
+*/
     public static void listar(){
         if(listaProdutos.isEmpty()){
             System.out.println("Não há produtos para serem listados!");
@@ -123,7 +128,7 @@ public class DadosProduto {
             System.out.println("Id: " + p.getId() + " - " + p.getNome() + " - Estoque: " + p.getQuantidade());
         }
     }
-
+    
     public static Produto buscarId(int id){
         for(Produto p : listaProdutos){
             if(p.getId() == id){
@@ -131,5 +136,21 @@ public class DadosProduto {
             }
         }
         return null;
+    }
+    
+    public static void excluir(Scanner scanner) {
+        listar();
+        if(listaProdutos.isEmpty()) return;
+        System.out.print("Digite o número do produto que deseja excluir: ");
+        int indice = Integer.parseInt(scanner.nextLine());
+        Produto p = buscarId(indice);
+        if(p == null){
+            System.out.println("Produto não existente!");
+            return;
+        }
+
+        listaProdutos.remove(p);
+        salvarProdutosJson(); 
+        System.out.println("Produto excluido com sucesso.");
     }
 }
