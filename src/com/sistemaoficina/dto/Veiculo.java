@@ -15,11 +15,25 @@ public class Veiculo {
         this.combustivel = combustivel;
     }
 
-    public String getPlaca() { return placa; }
-    public String getModelo() { return modelo; }
-    public int getAno() { return ano; }
-    public String getCor() { return cor; }
-    public String getCombustivel() { return combustivel; }
+    public String getPlaca() {
+        return placa;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public String getCombustivel() {
+        return combustivel;
+    }
 
     @Override
     public String toString() {

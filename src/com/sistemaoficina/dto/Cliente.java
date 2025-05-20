@@ -1,43 +1,44 @@
 package com.sistemaoficina.dto;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
- * Representa um cliente da oficina, com informações como nome, endereço, telefone,
+ * Representa um cliente da oficina, com informações como nome, endereço,
+ * telefone,
  * email, CPF anonimizado e uma lista de veículos associados ao cliente.
- * Esta classe oferece funcionalidades para adicionar, editar, remover e listar veículos
+ * Esta classe oferece funcionalidades para adicionar, editar, remover e listar
+ * veículos
  * de um cliente, além de realizar o cadastro de novos clientes via console.
  */
 public class Cliente {
-    
+
     private int id;
 
     /**
      * Nome do cliente.
      */
     private String nome;
-    
+
     /**
      * Endereço do cliente.
      */
     private String endereco;
-    
+
     /**
      * Telefone do cliente.
      */
     private String telefone;
-    
+
     /**
      * Email do cliente.
      */
     private String email;
-    
+
     /**
      * CPF anonimizado do cliente.
      */
     private String cpfAnonimizado;
-    
+
     /**
      * Lista de veículos associados ao cliente.
      */
@@ -51,12 +52,13 @@ public class Cliente {
     }
 
     /**
-     * Construtor que inicializa um cliente com os dados fornecidos e também a lista de veículos.
+     * Construtor que inicializa um cliente com os dados fornecidos e também a lista
+     * de veículos.
      * 
-     * @param nome O nome do cliente.
-     * @param endereco O endereço do cliente.
-     * @param telefone O telefone do cliente.
-     * @param email O email do cliente.
+     * @param nome           O nome do cliente.
+     * @param endereco       O endereço do cliente.
+     * @param telefone       O telefone do cliente.
+     * @param email          O email do cliente.
      * @param cpfAnonimizado O CPF anonimizado do cliente.
      */
     public Cliente(String nome, String endereco, String telefone, String email, String cpfAnonimizado) {
@@ -69,7 +71,7 @@ public class Cliente {
     }
 
     // Getters e Setter
-    
+
     public int getId() {
         return id;
     }
@@ -77,7 +79,7 @@ public class Cliente {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     /**
      * Retorna o nome do cliente.
      * 
@@ -187,7 +189,7 @@ public class Cliente {
     }
 
     // Métodos de manipulação de veículos
-    
+
     /**
      * Adiciona um veículo à lista de veículos do cliente.
      * 
@@ -198,9 +200,10 @@ public class Cliente {
     }
 
     /**
-     * Edita um veículo na lista de veículos do cliente, substituindo o veículo na posição especificada.
+     * Edita um veículo na lista de veículos do cliente, substituindo o veículo na
+     * posição especificada.
      * 
-     * @param index O índice do veículo a ser editado.
+     * @param index   O índice do veículo a ser editado.
      * @param veiculo O novo veículo a ser inserido.
      */
     public void editarVeiculo(int index, Veiculo veiculo) {
@@ -230,7 +233,8 @@ public class Cliente {
     }
 
     /**
-     * Retorna uma representação em string do cliente, incluindo nome, endereço, telefone, email,
+     * Retorna uma representação em string do cliente, incluindo nome, endereço,
+     * telefone, email,
      * CPF anonimizado e a lista de veículos.
      * 
      * @return A representação em string do cliente.
@@ -247,32 +251,4 @@ public class Cliente {
                 '}';
     }
 
-    /**
-     * Método auxiliar para cadastrar um novo cliente através do console.
-     * Este método solicita os dados do cliente ao usuário e retorna um objeto Cliente.
-     * 
-     * @return Um objeto Cliente com os dados fornecidos pelo usuário.
-     */
-    public static Cliente cadastrarCliente() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-
-        System.out.print("Endereço: ");
-        String endereco = scanner.nextLine();
-
-        System.out.print("Telefone: ");
-        String telefone = scanner.nextLine();
-
-        System.out.print("Email: ");
-        String email = scanner.nextLine();
-
-        System.out.print("CPF (Anonimizado): ");
-        String cpf = scanner.nextLine();
-
-        scanner.close();
-
-        return new Cliente(nome, endereco, telefone, email, cpf);
-    }
 }
