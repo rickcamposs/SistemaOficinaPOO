@@ -1,4 +1,4 @@
-package com.mycompany.sistemaoficinamecanica;
+package com.sistemaoficina.dto;
 
 public class Veiculo {
     private String placa;

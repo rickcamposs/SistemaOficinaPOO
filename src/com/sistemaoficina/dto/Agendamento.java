@@ -1,4 +1,4 @@
-package com.mycompany.sistemaoficinamecanica;
+package com.sistemaoficina.dto;
 
 public class Agendamento {
     private int id;
@@ -56,4 +56,9 @@ public String getPlacaVeiculo() {
                 "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado) +
                 "\nStatus: " + (cancelado ? "Cancelado (20% retido)" : "Agendado");
     }
+
+    public double getValorEstimado() {
+        return valorEstimado;
+    }
+    
 }

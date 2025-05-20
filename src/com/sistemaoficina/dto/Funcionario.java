@@ -1,15 +1,16 @@
-package com.mycompany.sistemaoficinamecanica;
+package com.sistemaoficina.dto;
 
 /**
  * Representa um funcionário do sistema de oficina mecânica.
  * Contém informações sobre o nome, cargo, usuário, senha e salário do funcionário.
  */
 public class Funcionario {
+    private int id;
     private String nome;
     private String cargo;
     private String usuario;
-    private String senha;
     private double salario;
+    private String senha;
 
     /**
      * Construtor para criar um novo funcionário.
@@ -71,6 +72,18 @@ public class Funcionario {
      */
     public double getSalario() {
         return salario;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     /**
