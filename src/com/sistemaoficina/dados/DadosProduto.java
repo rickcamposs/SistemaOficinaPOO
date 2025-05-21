@@ -100,7 +100,7 @@ public class DadosProduto {
         
         System.out.println("Produto editado com sucesso.");
     }
-    /*
+    
     public static void verificarEstoque(Scanner scanner){
         System.out.println("Escolha um produto por Id:");
         listar();
@@ -119,7 +119,7 @@ public class DadosProduto {
         }
         System.out.println("Produto: " + prod.getNome() + " | Quantidade em estoque: " + prod.getQuantidade());
     }
-*/
+
     public static void listar(){
         if(listaProdutos.isEmpty()){
             System.out.println("Não há produtos para serem listados!");
