@@ -1,4 +1,5 @@
 package com.sistemaoficina.dto;
+import com.SistemaOficina.enums.StatusServico;
 
 public class Agendamento {
     private int id;
@@ -9,6 +10,9 @@ public class Agendamento {
     private double valorEstimado;
     private boolean cancelado;
     private boolean finalizado;
+    private StatusServico status;
+    /*private final StatusServico status*/
+    
 
     public Agendamento(int id, String nomeCliente, String placaVeiculo, String data, String descricao,
             double valorEstimado) {
@@ -18,10 +22,18 @@ public class Agendamento {
         this.data = data;
         this.descricao = descricao;
         this.valorEstimado = valorEstimado;
+        this.status = StatusServico.RECEBIDO;
         this.cancelado = false;
         this.finalizado = false;
+    
     }
 
+    public StatusServico getStatus(){
+        return status;
+}
+    public void setStatus(StatusServico status){
+        this.status = status;
+}
     public int getId() {
         return id;
     }
@@ -54,6 +66,7 @@ public class Agendamento {
     public void setId(int id) {
         this.id = id;
     }
+    
 
     @Override
     public String toString() {
@@ -63,11 +76,14 @@ public class Agendamento {
                 "\nData: " + data +
                 "\nDescrição: " + descricao +
                 "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado) +
-                "\nStatus: " + (cancelado ? "Cancelado (20% retido)" : "Agendado");
+                "\nStatus Agendamento: " + (cancelado ? "Cancelado (20% retido)" : "Agendado")+
+                "\nStatus Serviço: " + status.name();
     }
 
     public double getValorEstimado() {
         return valorEstimado;
     }
+    
+    
 
 }

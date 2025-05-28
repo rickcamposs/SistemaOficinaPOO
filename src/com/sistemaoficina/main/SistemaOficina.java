@@ -8,7 +8,7 @@ import com.sistemaoficina.dados.DadosFuncionario;
 import com.sistemaoficina.dados.DadosProduto;
 import com.sistemaoficina.dto.Funcionario;
 
-public class Main {
+public class SistemaOficina {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -164,6 +164,7 @@ public class Main {
             System.out.println("2. Cancelar Agendamento");
             System.out.println("3. Finalizar Agendamento");
             System.out.println("4. Listar Agendamentos");
+            System.out.println("5. Atualizar Status");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -174,6 +175,7 @@ public class Main {
                 case 2 -> DadosAgendamento.cancelar(scanner);   
                 case 3 -> DadosAgendamento.finalizar(scanner);
                 case 4 -> DadosAgendamento.listar();
+                case 5 -> DadosAgendamento.atualizarStatus(scanner);
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
