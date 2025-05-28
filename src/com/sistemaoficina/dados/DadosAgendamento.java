@@ -13,7 +13,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Agendamento;
 import com.sistemaoficina.dto.Cliente;
+import com.SistemaOficina.enums.StatusServico;
 
+@SuppressWarnings("empty-statement")
 public class DadosAgendamento {
     private static final String ARQUIVO_AGENDAMENTOS = "bd/agendamentos.json";
 
@@ -167,5 +169,56 @@ public class DadosAgendamento {
         salvarAgendamentosJson();        
         System.out.println("Agendamento salvo com sucesso!\n");
     } 
+    
+    public static void atualizarStatus(Scanner scanner) {
+    listar();
+    int op = Integer.parseInt(scanner.nextLine());
+    System.out.print("Digite o ID do agendamento: ");
+    int id = Integer.parseInt(scanner.nextLine());
 
+    Agendamento ag = buscarId(id);
+    if (ag == null) {
+        System.out.println("Agendamento não encontrado.");
+        return;
+    }
+
+    System.out.println("Status atual: " + ag.getStatus());
+    System.out.println("Selecione o novo status:");
+    System.out.println("1. Recebido");
+    System.out.println("2. Analise do Mecanico Geral");
+    System.out.println("3. Em Manutenção Geral");
+    System.out.println("4. Enviado Setor Especialista");
+    System.out.println("5. Em Manutenção Especialista");
+    System.out.println("6. Finalizado ");
+    System.out.println("7. Direcionamento");
+    System.out.println("8. Entregue ");
+    System.out.println("9. Cancelado");
+    System.out.print("Escolha: ");
+    op = scanner.nextInt();
+    scanner.nextLine();
+
+    StatusServico novoStatus;
+        switch (op){
+            case 1 -> novoStatus = StatusServico.RECEBIDO;
+            case 2 -> novoStatus = StatusServico.Analise_do_Mecanico_Geral;
+            case 3 -> novoStatus = StatusServico.Em_Manutenção_Geral;
+            case 4 -> novoStatus = StatusServico.Enviado_Setor_Especializado;
+            case 5 -> novoStatus = StatusServico.Em_Manutenção_Especializada;
+            case 6 -> novoStatus = StatusServico.Finalizado;
+            case 7 -> novoStatus = StatusServico.Direcionamento;
+            case 8 -> novoStatus = StatusServico.Entregue;
+            case 9 -> novoStatus = StatusServico.Cancelado;
+            default -> {
+                System.out.println("Opção Inválida");
+                return;
+            }
+                
+        };
+while (op != 0);
+    
+    
+    ag.setStatus(novoStatus);
+    salvarAgendamentosJson();
+    System.out.println("Status atualizado com sucesso!");
+    }
 }
