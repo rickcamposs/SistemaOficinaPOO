@@ -1,4 +1,4 @@
-package com.SistemaOficina.enums; 
+package com.sistemaoficina.enums; 
 
 public enum StatusServico{
     RECEBIDO,

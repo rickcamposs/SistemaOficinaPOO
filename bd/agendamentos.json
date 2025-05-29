@@ -6,8 +6,7 @@
     "data": "05/09/2004",
     "descricao": "Troca de oleo",
     "valorEstimado": 80.0,
-    "cancelado": true,
-    "finalizado": false
+    "status": "RECEBIDO"
   },
   {
     "id": 1,
@@ -16,8 +15,6 @@
     "data": "06082025",
     "descricao": "carro nÃ£o liga",
     "valorEstimado": 0.0,
-    "cancelado": false,
-    "finalizado": false,
-    "status": "RECEBIDO"
+    "status": "Em_Manutenção_Geral"
   }
 ]
