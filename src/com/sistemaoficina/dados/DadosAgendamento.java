@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Agendamento;
 import com.sistemaoficina.dto.Cliente;
-import com.SistemaOficina.enums.StatusServico;
+import com.sistemaoficina.enums.StatusServico;
 
 @SuppressWarnings("empty-statement")
 public class DadosAgendamento {
@@ -93,16 +93,23 @@ public class DadosAgendamento {
             System.out.println("Não há agendamentos para serem listados");
         }
         for (Agendamento a : listaAgendamentos) {
-            String textoCanceladoFinalizado = "Agendado";
-            if(a.isCancelado()){
-                textoCanceladoFinalizado = "Cancelado";
-            }
-            if(a.isFinalizado()){
-                textoCanceladoFinalizado = "Finalizado";
-            }
             System.out.println("Id: " + a.getId() + " - " + a.getNomeCliente() + 
-                " - R$" + a.getValorEstimado() + " - " + textoCanceladoFinalizado);
+                " - R$" + a.getValorEstimado() + " - " + getTextoStatus(a.getStatus()));
         }
+    }
+
+    public static String getTextoStatus(StatusServico status){
+        return switch (status) {
+            case RECEBIDO -> "Recebido";
+            case Analise_do_Mecanico_Geral -> "Análise do Mecânico Geral";
+            case Em_Manutenção_Geral -> "Em Manutenção Geral";
+            case Enviado_Setor_Especializado -> "Enviado ao Setor Especializado";
+            case Em_Manutenção_Especializada -> "Em Manutenção Especializada";
+            case Direcionamento -> "Direcionamento";
+            case Entregue -> "Entregue";
+            case Cancelado -> "Cancelado";
+            case Finalizado -> "Finalizado";
+        };
     }
 
     public static void cancelar(Scanner scanner) {
@@ -131,7 +138,7 @@ public class DadosAgendamento {
             return;
         }
 
-        ag.cancelar();
+        ag.setStatus(StatusServico.Cancelado);
         System.out.println("Agendamento cancelado com 20% retido.");
 
         listaAgendamentos.set(index, ag);
@@ -162,7 +169,8 @@ public class DadosAgendamento {
             return;
         }
 
-        ag.finalizar();
+        
+        ag.setStatus(StatusServico.Finalizado);
 
         System.out.println("Agendamento finalizado!");
         listaAgendamentos.set(index, ag);
@@ -175,24 +183,22 @@ public class DadosAgendamento {
         StatusServico novoStatus;
         System.out.print("Digite o ID do agendamento: ");
         int id = Integer.parseInt(scanner.nextLine());
-       Agendamento ag = buscarId(id);
+        Agendamento ag = buscarId(id);
         int index = listaAgendamentos.indexOf(ag);
         if (ag == null) {
             System.out.println("Agendamento não encontrado.");
              return;
         }
             
-        System.out.println("Status atual: " + ag.getStatus());
+        System.out.println("Status atual: " + getTextoStatus(ag.getStatus()));
         System.out.println("Selecione o novo status:");
         System.out.println("1. Recebido");
         System.out.println("2. Analise do Mecanico Geral");
         System.out.println("3. Em Manutenção Geral");
         System.out.println("4. Enviado Setor Especialista");
         System.out.println("5. Em Manutenção Especialista");
-        System.out.println("6. Finalizado ");
-        System.out.println("7. Direcionamento");
-        System.out.println("8. Entregue ");
-        System.out.println("9. Cancelado");
+        System.out.println("6. Direcionamento");
+        System.out.println("7. Entregue ");
         System.out.print("Escolha: ");
         
         int op = scanner.nextInt();
@@ -204,10 +210,8 @@ public class DadosAgendamento {
             case 3 -> novoStatus = StatusServico.Em_Manutenção_Geral;
             case 4 -> novoStatus = StatusServico.Enviado_Setor_Especializado;
             case 5 -> novoStatus = StatusServico.Em_Manutenção_Especializada;
-            case 6 -> novoStatus = StatusServico.Finalizado;
-            case 7 -> novoStatus = StatusServico.Direcionamento;
-            case 8 -> novoStatus = StatusServico.Entregue;
-            case 9 -> novoStatus = StatusServico.Cancelado;
+            case 6 -> novoStatus = StatusServico.Direcionamento;
+            case 7 -> novoStatus = StatusServico.Entregue;
             default -> {
                 System.out.println("Opção Inválida");
                 return;

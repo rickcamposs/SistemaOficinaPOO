@@ -1,5 +1,6 @@
 package com.sistemaoficina.dto;
-import com.SistemaOficina.enums.StatusServico;
+
+import com.sistemaoficina.enums.StatusServico;
 
 public class Agendamento {
     private int id;
@@ -8,11 +9,7 @@ public class Agendamento {
     private String data;
     private String descricao;
     private double valorEstimado;
-    private boolean cancelado;
-    private boolean finalizado;
     private StatusServico status;
-    /*private final StatusServico status*/
-    
 
     public Agendamento(int id, String nomeCliente, String placaVeiculo, String data, String descricao,
             double valorEstimado) {
@@ -23,27 +20,27 @@ public class Agendamento {
         this.descricao = descricao;
         this.valorEstimado = valorEstimado;
         this.status = StatusServico.RECEBIDO;
-        this.cancelado = false;
-        this.finalizado = false;
-    
+
     }
 
-    public StatusServico getStatus(){
+    public StatusServico getStatus() {
         return status;
-}
-    public void setStatus(StatusServico status){
+    }
+
+    public void setStatus(StatusServico status) {
         this.status = status;
-}
+    }
+
     public int getId() {
         return id;
     }
 
     public boolean isCancelado() {
-        return cancelado;
+        return this.status == StatusServico.Cancelado;
     }
 
     public void cancelar() {
-        this.cancelado = true;
+        this.status = StatusServico.Cancelado;
         this.valorEstimado *= 0.80; // Retém 20%
     }
 
@@ -56,17 +53,17 @@ public class Agendamento {
     }
 
     public boolean isFinalizado() {
-        return finalizado;
+        return this.status == StatusServico.Finalizado || this.status == StatusServico.Entregue
+                || this.status == StatusServico.Direcionamento;
     }
 
     public void finalizar() {
-        this.finalizado = true;
+        this.status = StatusServico.Finalizado;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-    
 
     @Override
     public String toString() {
@@ -76,14 +73,12 @@ public class Agendamento {
                 "\nData: " + data +
                 "\nDescrição: " + descricao +
                 "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado) +
-                "\nStatus Agendamento: " + (cancelado ? "Cancelado (20% retido)" : "Agendado")+
+                "\nStatus Agendamento: " + status +
                 "\nStatus Serviço: " + status.name();
     }
 
     public double getValorEstimado() {
         return valorEstimado;
     }
-    
-    
 
 }
