@@ -171,34 +171,34 @@ public class DadosAgendamento {
     } 
     
     public static void atualizarStatus(Scanner scanner) {
-    listar();
-    int op = Integer.parseInt(scanner.nextLine());
-    System.out.print("Digite o ID do agendamento: ");
-    int id = Integer.parseInt(scanner.nextLine());
+        listar();
+        StatusServico novoStatus;
+        System.out.print("Digite o ID do agendamento: ");
+        int id = Integer.parseInt(scanner.nextLine());
+       Agendamento ag = buscarId(id);
+        int index = listaAgendamentos.indexOf(ag);
+        if (ag == null) {
+            System.out.println("Agendamento não encontrado.");
+             return;
+        }
+            
+        System.out.println("Status atual: " + ag.getStatus());
+        System.out.println("Selecione o novo status:");
+        System.out.println("1. Recebido");
+        System.out.println("2. Analise do Mecanico Geral");
+        System.out.println("3. Em Manutenção Geral");
+        System.out.println("4. Enviado Setor Especialista");
+        System.out.println("5. Em Manutenção Especialista");
+        System.out.println("6. Finalizado ");
+        System.out.println("7. Direcionamento");
+        System.out.println("8. Entregue ");
+        System.out.println("9. Cancelado");
+        System.out.print("Escolha: ");
+        
+        int op = scanner.nextInt();
+        scanner.nextLine();
 
-    Agendamento ag = buscarId(id);
-    if (ag == null) {
-        System.out.println("Agendamento não encontrado.");
-        return;
-    }
-
-    System.out.println("Status atual: " + ag.getStatus());
-    System.out.println("Selecione o novo status:");
-    System.out.println("1. Recebido");
-    System.out.println("2. Analise do Mecanico Geral");
-    System.out.println("3. Em Manutenção Geral");
-    System.out.println("4. Enviado Setor Especialista");
-    System.out.println("5. Em Manutenção Especialista");
-    System.out.println("6. Finalizado ");
-    System.out.println("7. Direcionamento");
-    System.out.println("8. Entregue ");
-    System.out.println("9. Cancelado");
-    System.out.print("Escolha: ");
-    op = scanner.nextInt();
-    scanner.nextLine();
-
-    StatusServico novoStatus;
-        switch (op){
+        switch (op) {
             case 1 -> novoStatus = StatusServico.RECEBIDO;
             case 2 -> novoStatus = StatusServico.Analise_do_Mecanico_Geral;
             case 3 -> novoStatus = StatusServico.Em_Manutenção_Geral;
@@ -212,13 +212,11 @@ public class DadosAgendamento {
                 System.out.println("Opção Inválida");
                 return;
             }
-                
         };
-while (op != 0);
-    
-    
-    ag.setStatus(novoStatus);
-    salvarAgendamentosJson();
-    System.out.println("Status atualizado com sucesso!");
+
+        ag.setStatus(novoStatus);
+        listaAgendamentos.set(index, ag);
+        salvarAgendamentosJson();
+        System.out.println("Status atualizado com sucesso!");
     }
 }
