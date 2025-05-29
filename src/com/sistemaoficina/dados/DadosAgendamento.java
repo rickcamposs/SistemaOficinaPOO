@@ -95,10 +95,16 @@ public class DadosAgendamento {
         for (Agendamento a : listaAgendamentos) {
             System.out.println("Id: " + a.getId() + " - " + a.getNomeCliente() + 
                 " - R$" + a.getValorEstimado() + " - " + getTextoStatus(a.getStatus()));
+        if (a.getStatus() == StatusServico.Direcionamento && a.getDirecionamento() != null){
+            System.out.println("| Direcionamento: " + a.getDirecionamento());
+        }
         }
     }
 
     public static String getTextoStatus(StatusServico status){
+        if(status == null){
+            return "Status Indefinido";
+        }
         return switch (status) {
             case RECEBIDO -> "Recebido";
             case Analise_do_Mecanico_Geral -> "Análise do Mecânico Geral";
@@ -203,6 +209,8 @@ public class DadosAgendamento {
         
         int op = scanner.nextInt();
         scanner.nextLine();
+        
+        novoStatus = null;
 
         switch (op) {
             case 1 -> novoStatus = StatusServico.RECEBIDO;
@@ -210,13 +218,18 @@ public class DadosAgendamento {
             case 3 -> novoStatus = StatusServico.Em_Manutenção_Geral;
             case 4 -> novoStatus = StatusServico.Enviado_Setor_Especializado;
             case 5 -> novoStatus = StatusServico.Em_Manutenção_Especializada;
-            case 6 -> novoStatus = StatusServico.Direcionamento;
+            case 6 -> { 
+                novoStatus = StatusServico.Direcionamento;
+                System.out.println("Informe o Direcionamento: ");
+                String infoDirecionamento = scanner.nextLine();
+                ag.setDirecionamento(infoDirecionamento);
+            }
             case 7 -> novoStatus = StatusServico.Entregue;
             default -> {
                 System.out.println("Opção Inválida");
                 return;
             }
-        };
+        }
 
         ag.setStatus(novoStatus);
         listaAgendamentos.set(index, ag);
