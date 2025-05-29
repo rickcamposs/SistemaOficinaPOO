@@ -10,6 +10,7 @@ public class Agendamento {
     private String descricao;
     private double valorEstimado;
     private StatusServico status;
+    private String direcionamento;
 
     public Agendamento(int id, String nomeCliente, String placaVeiculo, String data, String descricao,
             double valorEstimado) {
@@ -29,6 +30,14 @@ public class Agendamento {
 
     public void setStatus(StatusServico status) {
         this.status = status;
+    }
+    
+    public String getDirecionamento(){
+        return direcionamento;
+    }
+    
+    public void setDirecionamento(String direcionamento){
+        this.direcionamento = direcionamento;
     }
 
     public int getId() {
@@ -67,14 +76,20 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return "Agendamento ID: " + id +
-                "\nCliente: " + nomeCliente +
-                "\nVeículo: " + placaVeiculo +
-                "\nData: " + data +
-                "\nDescrição: " + descricao +
-                "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado) +
-                "\nStatus Agendamento: " + status +
-                "\nStatus Serviço: " + status.name();
+        String info = "Agendamento ID: " + id
+                + "\nCliente: " + nomeCliente
+                + "\nVeículo: " + placaVeiculo
+                + "\nData: " + data
+                + "\nDescrição: " + descricao
+                + "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado)
+                + "\nStatus Agendamento: " + status
+                + "\nStatus Serviço: " + status.name();
+
+        if (status == StatusServico.Direcionamento && direcionamento != null) {
+            info += "\nDirecionamento: " + direcionamento;
+        }
+
+        return info;
     }
 
     public double getValorEstimado() {

@@ -139,7 +139,7 @@ public class SistemaOficina {
             System.out.println("1. Cadastrar Produto");
             System.out.println("2. Editar Produto");
             System.out.println("3. Verificar estoque de Produto");
-            System.out.println("4. Baixa Produto");
+            System.out.println("4. Excluir Produto");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();

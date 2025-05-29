@@ -6,7 +6,8 @@
     "data": "05/09/2004",
     "descricao": "Troca de oleo",
     "valorEstimado": 80.0,
-    "status": "RECEBIDO"
+    "status": "Em_Manutenção_Geral",
+    "direcionamento": "Problema relatado era no carburador, muito delicado, recomendo levar em mecânica especializada"
   },
   {
     "id": 1,
@@ -15,6 +16,16 @@
     "data": "06082025",
     "descricao": "carro não liga",
     "valorEstimado": 0.0,
-    "status": "Em_Manuten��o_Geral"
+    "status": "Direcionamento",
+    "direcionamento": "Necessário comprar outro motor, verificar com a montadora"
+  },
+  {
+    "id": 2,
+    "nomeCliente": "Riquelme Moreira Campos",
+    "placaVeiculo": "PVC-5898",
+    "data": "10 06 2025",
+    "descricao": "falha na ignicao",
+    "valorEstimado": 5000.0,
+    "status": "RECEBIDO"
   }
 ]
