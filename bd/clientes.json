@@ -15,5 +15,22 @@
         "combustivel": "Gasolina Comum"
       }
     ]
+  },
+  {
+    "id": 1,
+    "nome": "Leo",
+    "endereco": "Divinopolis",
+    "telefone": "3897898564",
+    "email": "leosindasilva@gmail.com",
+    "cpfAnonimizado": "1234447887",
+    "veiculos": [
+      {
+        "placa": "ETX6996",
+        "modelo": "FORD FOCUS",
+        "ano": 1990,
+        "cor": "Rosa",
+        "combustivel": "Diesel"
+      }
+    ]
   }
 ]

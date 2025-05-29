@@ -8,5 +8,16 @@
     "valorEstimado": 80.0,
     "cancelado": true,
     "finalizado": false
+  },
+  {
+    "id": 1,
+    "nomeCliente": "Leo",
+    "placaVeiculo": "ETX6996",
+    "data": "06082025",
+    "descricao": "carro não liga",
+    "valorEstimado": 0.0,
+    "cancelado": false,
+    "finalizado": false,
+    "status": "RECEBIDO"
   }
 ]
