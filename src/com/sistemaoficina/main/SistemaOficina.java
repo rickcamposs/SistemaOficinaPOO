@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.sistemaoficina.dados.DadosAgendamento;
 import com.sistemaoficina.dados.DadosClientes;
 import com.sistemaoficina.dados.DadosFuncionario;
+import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosProduto;
 import com.sistemaoficina.dto.Funcionario;
 
@@ -31,9 +32,10 @@ public class SistemaOficina {
                 System.out.println("1. Menu Cliente");
                 System.out.println("2. Menu Produto");
                 System.out.println("3. Menu Agendamento");
-                System.out.println("4. Menu Funcionario");
-                System.out.println("5. Menu Admin");
-            if(usuarioPropietario) System.out.println("6. Menu Financeiro");
+                System.out.println("4. Menu Ordem de Serviço");
+                System.out.println("5. Menu Funcionario");
+                System.out.println("6. Menu Admin");
+            if(usuarioPropietario) System.out.println("7. Menu Financeiro");
             } else {
                 System.out.println("1. Menu Cliente");
                 System.out.println("2. Menu Produto");
@@ -56,6 +58,9 @@ public class SistemaOficina {
                     menuAgendamento();
                 }
                 case 4 -> {
+                    menuOrdemServico();
+                }
+                case 5 -> {
                     if(usuarioPropietario || usuarioAdmin) {
                         menuFuncionario();
                     } else {
@@ -63,14 +68,14 @@ public class SistemaOficina {
                     }
                 }
                 
-                case 5 -> {
+                case 6 -> {
                     if (usuarioPropietario || usuarioAdmin){
                         menuAdmin(usuario);
                     } else {
                         System.out.println("Opção Inválida");
                     }
                 } 
-                case 6 -> {
+                case 7 -> {
                     if(usuarioPropietario) {
                         menuFinanceiro();
                     } else if(usuarioAdmin) {
@@ -79,7 +84,7 @@ public class SistemaOficina {
                         System.out.println("Opção inválida.");
                     }
                 }
-                case 0 -> System.err.println("SAINDO!");
+                case 0 -> System.err.println("O PROGRAMA FOI ENCERRADO!");
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
@@ -181,7 +186,33 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    public static void menuOrdemServico(){
+        int opcao;
+        do {
+            System.out.println("\n--- Ordem de Serviço ---");
+            System.out.println("1. Criar Ordem de Serviço");
+            System.out.println("2. Atualizar Ordem de Serviço");
+            System.out.println("3. Finalizar Ordem de Serviço");
+            System.out.println("4. Listar Ordem de Serviço");
+            System.out.println("5. Cancelar Ordem de Serviço");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
 
+            switch (opcao) {   
+                case 1 -> DadosOrdemServico.cadastrar(scanner);   
+                case 2 -> DadosOrdemServico.atualizar(scanner);   
+                case 3 -> DadosOrdemServico.finalizar(scanner);
+                case 4 -> DadosOrdemServico.listar();
+                case 5 -> DadosOrdemServico.cancelar(scanner);
+                case 0 -> {}
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+    
     public static void menuFinanceiro() {
         int opcao;
         do {
@@ -221,5 +252,4 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
-
 }
