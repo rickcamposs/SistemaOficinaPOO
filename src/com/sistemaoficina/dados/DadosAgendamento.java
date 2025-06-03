@@ -50,10 +50,15 @@ public class DadosAgendamento {
         DadosClientes.listar();
         if(DadosClientes.listaClientes.isEmpty()) return;
         System.out.print("Selecione o cliente para agendamento: ");
-        int indice = scanner.nextInt();
+        int indiceCliente = scanner.nextInt();
         scanner.nextLine();
 
-        Cliente cliente = DadosClientes.buscarId(indice);
+        Cliente cliente = DadosClientes.buscarId(indiceCliente);
+
+        if(cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return;
+        }
 
         if (cliente.getVeiculos().isEmpty()) {
             System.out.println("Cliente não tem veículos cadastrados.");
@@ -72,8 +77,7 @@ public class DadosAgendamento {
         OptionalInt maxId = listaAgendamentos.stream()
             .mapToInt(Agendamento::getId)
             .max();
-        Agendamento novoAgendamento = new Agendamento(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, cliente.getNome(),
-                cliente.getVeiculos().get(0).getPlaca(), data, descricao, valor);
+        Agendamento novoAgendamento = new Agendamento(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente, data, descricao, valor);
         listaAgendamentos.add(novoAgendamento);
         salvarAgendamentosJson();
         System.out.println("Agendamento realizado com sucesso!\n");
@@ -93,7 +97,8 @@ public class DadosAgendamento {
             System.out.println("Não há agendamentos para serem listados");
         }
         for (Agendamento a : listaAgendamentos) {
-            System.out.println("Id: " + a.getId() + " - " + a.getNomeCliente() + 
+            Cliente cliente = DadosClientes.buscarId(a.getIdCliente());
+            System.out.println("Id: " + a.getId() + " - " + cliente.getNome() + 
                 " - R$" + a.getValorEstimado() + " - " + getTextoStatus(a.getStatus()));
         if (a.getStatus() == StatusServico.Direcionamento && a.getDirecionamento() != null){
             System.out.println("| Direcionamento: " + a.getDirecionamento());

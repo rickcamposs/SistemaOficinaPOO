@@ -11,8 +11,8 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.sistemaoficina.dto.Agendamento;
 import com.sistemaoficina.dto.Cliente;
+import com.sistemaoficina.dto.Funcionario;
 import com.sistemaoficina.dto.OrdemServico;
 import com.sistemaoficina.enums.StatusServico;
 
@@ -49,21 +49,50 @@ public class DadosOrdemServico {
         }
         
         DadosClientes.listar();
-        
         if(DadosClientes.listaClientes.isEmpty()) return;
+
         System.out.println("Selecione o cliente para iniciar a Ordem de Serviço: ");
-        int indice = scanner.nextInt();
+        int indiceCliente = scanner.nextInt();
         scanner.nextLine();
         
-        Cliente cliente = DadosClientes.buscarId(indice);
+        Cliente cliente = DadosClientes.buscarId(indiceCliente);
         
+        if(cliente == null) {
+            System.out.println("Cliente não encontrado.");
+            return;
+        }
+
         if (cliente.getVeiculos().isEmpty()) {
             System.out.println("Cliente não têm veículos cadastrados.");
             return;
         }
         
         System.out.println("Veiculo: " + cliente.getVeiculos().get(0).getModelo() + "| Placa: " +cliente.getVeiculos().get(0).getPlaca());
+
+
+        System.out.println("Selecione o funcionário responsável da Ordem de Serviço: ");
+
+        DadosFuncionario.listar();
+        if(DadosFuncionario.listaFuncionarios.isEmpty()) return;
+
+        int indiceFuncionario = scanner.nextInt();
+        scanner.nextLine();
         
+        Funcionario funcionario = DadosFuncionario.buscarId(indiceFuncionario);
+
+        if(funcionario == null) {
+            System.out.println("Funcionário não encontrado.");
+            return;
+        }
+
+        OptionalInt maxId = listaOrdemServico.stream()
+                .mapToInt(OrdemServico::getId)
+                .max();
+                
+        OrdemServico novaOrdem = new OrdemServico(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente, indiceFuncionario);
+        listaOrdemServico.add(novaOrdem);
+        salvarOrdemServicoJson();
+        System.out.println("Ordem de Serviço criada!");
     
     }
     
@@ -80,8 +109,11 @@ public class DadosOrdemServico {
         if(listaOrdemServico.isEmpty()){
             System.out.println("Não há Ordens de Serviços para serem listadas");
         }
+
+        
         for (OrdemServico ordem : listaOrdemServico){
-            System.out.println("Id: " + ordem.getId() + " - " + ordem.getNomeCliente() + 
+            Cliente cliente = DadosClientes.buscarId(ordem.getIdCliente());
+            System.out.println("Id: " + ordem.getId() + " - " + cliente.getNome() + 
                     " - R$" + ordem.getValorEstimado() + " - " + getTextoStatus(ordem.getStatus()));
         if (ordem.getStatus() == StatusServico.Direcionamento && ordem.getDiagnostico() != null){
             System.out.println(" |Diadnóstico: " + ordem.getDiagnostico());
@@ -182,25 +214,49 @@ public class DadosOrdemServico {
         System.out.println("Escolha uma Ordem de Serviço para atualizar por ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         OrdemServico ordemS = buscarId(id);
-        /*int index = listaOrdemServico.indexOf(ordemS);*/
         if(ordemS == null){
             System.out.println("Ordem de Serviço inexistente.");
             return;
+        }
+        
+        System.out.println("Status atual: " + getTextoStatus(ordemS.getStatus()) + " - Digite o status atualizado: ");
+        System.out.println("Selecione o novo status:");
+        System.out.println("1. Recebido");
+        System.out.println("2. Analise do Mecanico Geral");
+        System.out.println("3. Em Manutenção Geral");
+        System.out.println("4. Enviado Setor Especialista");
+        System.out.println("5. Em Manutenção Especialista");
+        System.out.println("6. Entregue ");
+        System.out.print("Escolha: ");
+
+        int op = scanner.nextInt();
+        scanner.nextLine();
+        
+        StatusServico novoStatus;
+
+        switch (op) {
+            case 1 -> novoStatus = StatusServico.RECEBIDO;
+            case 2 -> novoStatus = StatusServico.Analise_do_Mecanico_Geral;
+            case 3 -> novoStatus = StatusServico.Em_Manutenção_Geral;
+            case 4 -> novoStatus = StatusServico.Enviado_Setor_Especializado;
+            case 5 -> novoStatus = StatusServico.Em_Manutenção_Especializada;
+            case 6 -> novoStatus = StatusServico.Entregue;
+            default -> {
+                System.out.println("Opção Inválida");
+                return;
+            }
         }
         
         System.out.println("Digite o diagnóstico atualizado: ");
         String diagnostico = scanner.nextLine();
         System.out.println("Solução Atualizada: ");
         String solucao = scanner.nextLine();
-        
-        OrdemServico novaOrdem = new OrdemServico(diagnostico, solucao);
-        novaOrdem.setId(ordemS.getId());
-        
+
         int index = listaOrdemServico.indexOf(ordemS);
-        
-        if(index != -1){
-            listaOrdemServico.set(index, novaOrdem);
-        }
+        ordemS.setStatus(novoStatus);
+        ordemS.setDiagnostico(diagnostico);
+        ordemS.setSolucao(solucao);
+        listaOrdemServico.set(index, ordemS);
         salvarOrdemServicoJson();
         
         System.out.println("Ordem de Serviço atualizada com sucesso!");

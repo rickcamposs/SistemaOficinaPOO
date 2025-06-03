@@ -11,11 +11,6 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import static com.sistemaoficina.dados.DadosClientes.buscarId;
-import static com.sistemaoficina.dados.DadosClientes.listaClientes;
-import static com.sistemaoficina.dados.DadosClientes.listar;
-import static com.sistemaoficina.dados.DadosClientes.salvarClientesJson;
-import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.Produto;
 
 public class DadosProduto {
