@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "idCliente": 1,
+    "idFuncionarioResponsavel": 0,
+    "diagnostico": "ta vendo o b.o",
+    "solucao": "nao sabe ainda",
+    "valorEstimado": 0.0,
+    "status": "Analise_do_Mecanico_Geral"
+  },
+  {
+    "id": 1,
+    "idCliente": 0,
+    "idFuncionarioResponsavel": 0,
+    "diagnostico": "",
+    "solucao": "",
+    "valorEstimado": 0.0,
+    "status": "RECEBIDO"
+  }
+]

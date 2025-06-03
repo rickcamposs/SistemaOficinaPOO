@@ -4,20 +4,18 @@ import com.sistemaoficina.enums.StatusServico;
 
 public class Agendamento {
     private int id;
-    private String nomeCliente;
-    private String placaVeiculo;
+    private int idCliente;
     private String data;
     private String descricao;
     private double valorEstimado;
     private StatusServico status;
     private String direcionamento;
 
-    public Agendamento(int id, String nomeCliente, String placaVeiculo, String data, String descricao,
+    public Agendamento(int id, int idCliente, String data, String descricao,
             double valorEstimado) {
         this.id = id;
-        this.nomeCliente = nomeCliente;
-        this.placaVeiculo = placaVeiculo;
         this.data = data;
+        this.idCliente = idCliente;
         this.descricao = descricao;
         this.valorEstimado = valorEstimado;
         this.status = StatusServico.RECEBIDO;
@@ -34,6 +32,14 @@ public class Agendamento {
     
     public String getDirecionamento(){
         return direcionamento;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
     
     public void setDirecionamento(String direcionamento){
@@ -53,14 +59,6 @@ public class Agendamento {
         this.valorEstimado *= 0.80; // Retém 20%
     }
 
-    public String getNomeCliente() {
-        return nomeCliente;
-    }
-
-    public String getPlacaVeiculo() {
-        return placaVeiculo;
-    }
-
     public boolean isFinalizado() {
         return this.status == StatusServico.Finalizado || this.status == StatusServico.Entregue
                 || this.status == StatusServico.Direcionamento;
@@ -77,8 +75,6 @@ public class Agendamento {
     @Override
     public String toString() {
         String info = "Agendamento ID: " + id
-                + "\nCliente: " + nomeCliente
-                + "\nVeículo: " + placaVeiculo
                 + "\nData: " + data
                 + "\nDescrição: " + descricao
                 + "\nValor Estimado: R$ " + String.format("%.2f", valorEstimado)

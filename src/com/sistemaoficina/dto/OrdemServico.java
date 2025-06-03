@@ -1,27 +1,38 @@
 package com.sistemaoficina.dto;
+
 import com.sistemaoficina.enums.StatusServico;
 
 public class OrdemServico{
     private int id;
-    private String nomeCliente;
-    private String placaVeiculo;
+    private int idCliente;
+    private int idFuncionarioResponsavel;
     private String diagnostico;
     private String solucao;
     private String dataServico;
     private double valorEstimado;
     private StatusServico status;
-    private String funcionarioResponsavel;
-    
-    public OrdemServico (int id, String nomeCliente, String placaVeiculo, String diagnostico, String solucao, String dataServico, 
-            double valorEstimado, String funcionarioResponsavel) {
+
+    public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel) {
         this.id = id;
-        this.nomeCliente = nomeCliente;
-        this.placaVeiculo = placaVeiculo;
-        this.solucao = solucao;
-        this.dataServico = dataServico;
-        this.valorEstimado = valorEstimado;
+        this.idCliente = idCliente;
+        this.idFuncionarioResponsavel = idFuncionarioResponsavel;
         this.status = StatusServico.RECEBIDO;
-        this.funcionarioResponsavel = funcionarioResponsavel;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public int getIdFuncionarioResponsavel() {
+        return idFuncionarioResponsavel;
+    }
+
+    public void setIdFuncionarioResponsavel(int idFuncionarioResponsavel) {
+        this.idFuncionarioResponsavel = idFuncionarioResponsavel;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
     
     public StatusServico getStatus(){
@@ -30,13 +41,6 @@ public class OrdemServico{
     
     public void setStatus (StatusServico status){
         this.status = status;
-    }
-    public String getfuncionarioResponsavel(){
-        return funcionarioResponsavel;
-    }
-    
-    public void setFuncionarioResponsavel(String funcionarioRepsonsavel){
-        this.funcionarioResponsavel = funcionarioResponsavel;
     }
     
     public String getDiagnostico(){
@@ -59,12 +63,7 @@ public class OrdemServico{
         this.status = StatusServico.Cancelado;
         this.valorEstimado *= 0.80;
     }
-    public String getNomeCliente(){
-        return nomeCliente;
-    }
-    public String getPlacaVeiculo(){
-        return placaVeiculo;
-    }
+
     public boolean isFinalizado(){
         return this.status == StatusServico.Finalizado || this.status == StatusServico.Entregue
                 || this.status == StatusServico.Direcionamento;
@@ -79,8 +78,6 @@ public class OrdemServico{
     @Override
     public String toString(){
         String info = "Ordem de Serviço ID: " + id
-                +"\nCliente: " + nomeCliente
-                +"\nVeículo: " + placaVeiculo
                 +"\nData: " + dataServico
                 +"\nDiagnostico: " + diagnostico
                 +"\nSolução: " + solucao
@@ -97,6 +94,14 @@ public class OrdemServico{
     
     public double getValorEstimado(){
         return valorEstimado;
+    }
+
+    public String getSolucao() {
+        return solucao;
+    }
+
+    public void setSolucao(String solucao) {
+        this.solucao = solucao;
     }
     
 } 
