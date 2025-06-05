@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.sistemaoficina.dados.DadosAgendamento;
 import com.sistemaoficina.dados.DadosClientes;
+import com.sistemaoficina.dados.DadosElevador;
 import com.sistemaoficina.dados.DadosFuncionario;
 import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosProduto;
@@ -34,15 +35,18 @@ public class SistemaOficina {
                 System.out.println("2. Menu Veículo");
                 System.out.println("3. Menu Produto");
                 System.out.println("4. Menu Agendamento");
-                System.out.println("5. Menu Ordem de Serviço");
-                System.out.println("6. Menu Funcionario");
-                System.out.println("7. Menu Admin");
-                if(usuarioPropietario) System.out.println("8. Menu Financeiro");
+                System.out.println("5. Menu Elevador");
+                System.out.println("6. Menu Ordem de Serviço");
+                System.out.println("7. Menu Funcionario");
+                System.out.println("8. Menu Admin");
+                if(usuarioPropietario) System.out.println("9. Menu Financeiro");
             } else {
                 System.out.println("1. Menu Cliente");                
                 System.out.println("2. Menu Veículo");
                 System.out.println("3. Menu Produto");
                 System.out.println("4. Menu Agendamento");
+                System.out.println("5. Menu Elevador");
+                System.out.println("6. Menu Ordem de Serviço");
             }
 
             System.out.println("0. Sair");
@@ -64,23 +68,26 @@ public class SistemaOficina {
                     menuAgendamento();
                 }
                 case 5 -> {
-                    menuOrdemServico();
-                }                
+                    menuElevador();
+                } 
                 case 6 -> {
+                    menuOrdemServico();
+                }                 
+                case 7 -> {
                     if(usuarioPropietario || usuarioAdmin) {
                         menuFuncionario();
                     } else {
                         System.out.println("Opção inválida.");
                     }
                 } 
-                case 7 -> {                    
+                case 8 -> {                    
                     if (usuarioPropietario || usuarioAdmin){
                         menuAdmin(usuario);
                     } else {
                         System.out.println("Opção Inválida");
                     }
                 }
-                case 8 -> {                    
+                case 9 -> {                    
                     if(usuarioPropietario) {
                         menuFinanceiro();
                     } else {
@@ -242,6 +249,7 @@ public class SistemaOficina {
         do {
             System.out.println("\n--- ADMIN ---");
             System.out.println("1. Alterar senha");
+            System.out.println("2. Inicializar elevadores");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -249,6 +257,7 @@ public class SistemaOficina {
 
             switch (opcao) {
                 case 1 -> DadosFuncionario.alterarSenha(usuario, scanner);
+                case 2 -> DadosElevador.inicilizarElevadores();
                 case 0 -> {
                 }
                 default -> System.out.println("Opção inválida.");
@@ -278,6 +287,28 @@ public class SistemaOficina {
                 case 4 -> DadosVeiculo.listar();
                 case 5 -> DadosVeiculo.atribuirCliente(scanner);
                 case 6 -> DadosVeiculo.desvincularCliente(scanner);
+                case 0 -> {}
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+
+    public static void menuElevador(){
+        int opcao;
+        do {
+            System.out.println("\n--- ELEVADOR ---");
+            System.out.println("1. Atribuir OS a elevador");
+            System.out.println("2. Desvincular OS do elevador");
+            System.out.println("3. Listar elevadores");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {   
+                case 1 -> DadosElevador.atribuirOrdemServico(scanner);  
+                case 2 -> DadosElevador.desvincularOrdemServico(scanner);  
+                case 3 -> DadosElevador.listar();
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
