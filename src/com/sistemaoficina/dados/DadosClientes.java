@@ -61,7 +61,6 @@ public class DadosClientes {
         String cpf = scanner.nextLine();
 
         Cliente cliente = new Cliente(nome, endereco, telefone, email, cpf);
-        cadastrarVeiculo(cliente, scanner);
         OptionalInt maxId = listaClientes.stream()
             .mapToInt(Cliente::getId)
             .max();
@@ -69,49 +68,6 @@ public class DadosClientes {
         listaClientes.add(cliente);
         salvarClientesJson();
         System.out.println("Cliente cadastrado com sucesso.");
-    }
-
-    public static void cadastrarVeiculo(Cliente cliente, Scanner scanner) {
-        System.out.println("Cadastrar veiculo");
-        System.out.print("Modelo do veiculo: ");
-        String modelo = scanner.nextLine();
-        System.out.print("Placa do veiculo: ");
-        String placa = scanner.nextLine();
-        System.out.print("Cor do veiculo: ");
-        String cor = scanner.nextLine();
-        System.out.print("Ano do veiculo: ");
-        int ano = scanner.nextInt();
-        scanner.nextLine();
-        String combustivel = selecionarCombustivel(scanner);
-
-        Veiculo veiculo = new Veiculo(placa, modelo, ano, cor, combustivel);
-        cliente.adicionarVeiculo(veiculo);
-    }
-
-    public static String selecionarCombustivel(Scanner scanner) {
-        System.out.println("Selecione o tipo de combustível do veiculo:");
-        System.out.println("1 - Diesel");
-        System.out.println("2 - Álcool");
-        System.out.println("3 - Gasolina Comum");
-        System.out.println("4 - Gasolina Aditivada");
-        System.out.println("5 - Outro");
-        System.out.println("6 - Carro Elétrico");
-
-        int opcao = scanner.nextInt();
-        scanner.nextLine();
-
-        return switch (opcao) {
-            case 1 -> "Diesel";
-            case 2 -> "Álcool";
-            case 3 -> "Gasolina Comum";
-            case 4 -> "Gasolina Aditivada";
-            case 5 -> {
-                System.out.print("Digite o tipo de combustível: ");
-                yield scanner.nextLine();
-            }
-            case 6 -> "Carro Elétrico";
-            default -> "Não especificado";
-        };
     }
 
     public static void editar(Scanner scanner){
@@ -138,7 +94,6 @@ public class DadosClientes {
 
         Cliente novoCliente = new Cliente(nome, endereco, telefone, email, cpf);
         novoCliente.setId(cliente.getId());
-        cadastrarVeiculo(novoCliente, scanner);
 
         int index = listaClientes.indexOf(cliente);
 
@@ -186,5 +141,20 @@ public class DadosClientes {
         salvarClientesJson();
         
         System.out.println("Cliente excluido com sucesso.");
+    }
+
+    public static void listarVeiculosCliente(Cliente cliente) {
+        if (cliente.getVeiculos().isEmpty()) {
+            System.out.println("Este cliente não possui veículos cadastrados.");
+        } else {
+            System.out.println("Veículos do cliente " + cliente.getNome() + ":");
+            for (int idVeiculo : cliente.getVeiculos()) {
+                Veiculo veiculo = DadosVeiculo.buscarId(idVeiculo);
+                if (veiculo != null) {
+                    System.out.println("Id: " + veiculo.getId() + " - Placa: " + veiculo.getPlaca() + " - Modelo: " + veiculo.getModelo());
+                }
+            }
+        }
+        
     }
 }

@@ -65,7 +65,7 @@ public class DadosAgendamento {
             return;
         }
 
-        System.out.println("Veiculo: " + cliente.getVeiculos().get(0).getModelo() + " | Placa: " + cliente.getVeiculos().get(0).getPlaca());        
+        DadosClientes.listarVeiculosCliente(cliente);    
 
         System.out.print("Data do agendamento (dd/mm/aaaa): ");
         String data = scanner.nextLine();

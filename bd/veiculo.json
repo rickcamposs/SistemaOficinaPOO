@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "placa": "BVC-5898",
+    "modelo": "Ford new fiesta",
+    "ano": 2013,
+    "cor": "Rosa",
+    "combustivel": "HIBRIDO"
+  },
+  {
+    "id": 1,
+    "placa": "AAA-1111",
+    "modelo": "BMW S1000RR",
+    "ano": 2025,
+    "cor": "branca",
+    "combustivel": "GASOLINA"
+  },
+  {
+    "id": 2,
+    "placa": "AAA-0000",
+    "modelo": "Carro",
+    "ano": 2025,
+    "cor": "Branco",
+    "combustivel": "DIESEL"
+  }
+]

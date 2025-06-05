@@ -7,13 +7,7 @@
     "email": "riquelmemoreiracampos@gmail.com",
     "cpfAnonimizado": "0929633648",
     "veiculos": [
-      {
-        "placa": "PVC-5898",
-        "modelo": "Porsche 911 GT",
-        "ano": 2025,
-        "cor": "Roxo",
-        "combustivel": "Gasolina Comum"
-      }
+      0
     ]
   },
   {
@@ -24,13 +18,8 @@
     "email": "leosindasilva@gmail.com",
     "cpfAnonimizado": "1234447887",
     "veiculos": [
-      {
-        "placa": "ETX6996",
-        "modelo": "FORD FOCUS",
-        "ano": 1990,
-        "cor": "Rosa",
-        "combustivel": "Diesel"
-      }
+      1,
+      2
     ]
   }
 ]
