@@ -7,6 +7,7 @@ import com.sistemaoficina.dados.DadosClientes;
 import com.sistemaoficina.dados.DadosFuncionario;
 import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosProduto;
+import com.sistemaoficina.dados.DadosVeiculo;
 import com.sistemaoficina.dto.Funcionario;
 
 public class SistemaOficina {
@@ -30,16 +31,18 @@ public class SistemaOficina {
             boolean usuarioAdmin = usuario.getCargo().equals("Admin");
             if (usuarioPropietario || usuarioAdmin) {
                 System.out.println("1. Menu Cliente");
-                System.out.println("2. Menu Produto");
-                System.out.println("3. Menu Agendamento");
-                System.out.println("4. Menu Ordem de Serviço");
-                System.out.println("5. Menu Funcionario");
-                System.out.println("6. Menu Admin");
-            if(usuarioPropietario) System.out.println("7. Menu Financeiro");
+                System.out.println("2. Menu Veículo");
+                System.out.println("3. Menu Produto");
+                System.out.println("4. Menu Agendamento");
+                System.out.println("5. Menu Ordem de Serviço");
+                System.out.println("6. Menu Funcionario");
+                System.out.println("7. Menu Admin");
+                if(usuarioPropietario) System.out.println("8. Menu Financeiro");
             } else {
-                System.out.println("1. Menu Cliente");
-                System.out.println("2. Menu Produto");
-                System.out.println("3. Menu Agendamento");
+                System.out.println("1. Menu Cliente");                
+                System.out.println("2. Menu Veículo");
+                System.out.println("3. Menu Produto");
+                System.out.println("4. Menu Agendamento");
             }
 
             System.out.println("0. Sair");
@@ -52,34 +55,34 @@ public class SistemaOficina {
                     menuCliente();
                 }
                 case 2 -> {
-                    menuProduto();
+                    menuVeiculo();
                 }
                 case 3 -> {
-                    menuAgendamento();
+                    menuProduto();
                 }
                 case 4 -> {
-                    menuOrdemServico();
+                    menuAgendamento();
                 }
                 case 5 -> {
+                    menuOrdemServico();
+                }                
+                case 6 -> {
                     if(usuarioPropietario || usuarioAdmin) {
                         menuFuncionario();
                     } else {
                         System.out.println("Opção inválida.");
                     }
-                }
-                
-                case 6 -> {
+                } 
+                case 7 -> {                    
                     if (usuarioPropietario || usuarioAdmin){
                         menuAdmin(usuario);
                     } else {
                         System.out.println("Opção Inválida");
                     }
-                } 
-                case 7 -> {
+                }
+                case 8 -> {                    
                     if(usuarioPropietario) {
                         menuFinanceiro();
-                    } else if(usuarioAdmin) {
-                        menuAdmin(usuario);
                     } else {
                         System.out.println("Opção inválida.");
                     }
@@ -248,6 +251,34 @@ public class SistemaOficina {
                 case 1 -> DadosFuncionario.alterarSenha(usuario, scanner);
                 case 0 -> {
                 }
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+
+    public static void menuVeiculo(){
+        int opcao;
+        do {
+            System.out.println("\n--- VEÍCULO ---");
+            System.out.println("1. Cadastrar veículo");
+            System.out.println("2. Editar veículo");
+            System.out.println("3. Excluir veículo");
+            System.out.println("4. Listar veículos");
+            System.out.println("5. Atribuir veículo a cliente");
+            System.out.println("6. Desvincular veículo do cliente");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {   
+                case 1 -> DadosVeiculo.cadastrar(scanner);   
+                case 2 -> DadosVeiculo.editar(scanner);   
+                case 3 -> DadosVeiculo.excluir(scanner);
+                case 4 -> DadosVeiculo.listar();
+                case 5 -> DadosVeiculo.atribuirCliente(scanner);
+                case 6 -> DadosVeiculo.desvincularCliente(scanner);
+                case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 0);

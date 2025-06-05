@@ -10,4 +10,4 @@ public enum StatusServico{
     Direcionamento,
     Entregue,
     Cancelado
-    }
+}

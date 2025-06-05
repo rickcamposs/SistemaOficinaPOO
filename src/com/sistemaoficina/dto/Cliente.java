@@ -42,7 +42,7 @@ public class Cliente {
     /**
      * Lista de veículos associados ao cliente.
      */
-    private ArrayList<Veiculo> veiculos;
+    private ArrayList<Integer> veiculos;
 
     /**
      * Construtor vazio que inicializa a lista de veículos.
@@ -175,7 +175,7 @@ public class Cliente {
      * 
      * @return A lista de veículos do cliente.
      */
-    public ArrayList<Veiculo> getVeiculos() {
+    public ArrayList<Integer> getVeiculos() {
         return veiculos;
     }
 
@@ -184,7 +184,7 @@ public class Cliente {
      * 
      * @param veiculos A lista de veículos do cliente.
      */
-    public void setVeiculos(ArrayList<Veiculo> veiculos) {
+    public void setVeiculos(ArrayList<Integer> veiculos) {
         this.veiculos = veiculos;
     }
 
@@ -195,7 +195,7 @@ public class Cliente {
      * 
      * @param veiculo O veículo a ser adicionado.
      */
-    public void adicionarVeiculo(Veiculo veiculo) {
+    public void adicionarVeiculo(Integer veiculo) {
         this.veiculos.add(veiculo);
     }
 
@@ -206,7 +206,7 @@ public class Cliente {
      * @param index   O índice do veículo a ser editado.
      * @param veiculo O novo veículo a ser inserido.
      */
-    public void editarVeiculo(int index, Veiculo veiculo) {
+    public void editarVeiculo(int index, Integer veiculo) {
         if (index >= 0 && index < veiculos.size()) {
             veiculos.set(index, veiculo);
         }
@@ -227,7 +227,7 @@ public class Cliente {
      * Lista todos os veículos associados ao cliente.
      */
     public void listarVeiculos() {
-        for (Veiculo veiculo : veiculos) {
+        for (Integer veiculo : veiculos) {
             System.out.println(veiculo);
         }
     }

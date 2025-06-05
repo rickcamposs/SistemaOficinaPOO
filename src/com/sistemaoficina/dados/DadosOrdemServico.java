@@ -67,8 +67,7 @@ public class DadosOrdemServico {
             return;
         }
         
-        System.out.println("Veiculo: " + cliente.getVeiculos().get(0).getModelo() + "| Placa: " +cliente.getVeiculos().get(0).getPlaca());
-
+        DadosClientes.listarVeiculosCliente(cliente);
 
         System.out.println("Selecione o funcionário responsável da Ordem de Serviço: ");
 
