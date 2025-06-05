@@ -14,11 +14,12 @@ import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.Funcionario;
 import com.sistemaoficina.dto.OrdemServico;
+import com.sistemaoficina.dto.Veiculo;
 import com.sistemaoficina.enums.StatusServico;
 
 @SuppressWarnings("empty-statement")
 public class DadosOrdemServico {
-    private static final String ARQUIVO_ORDEMSERVICO = "bd/OrdemdeServico.json";
+    private static final String ARQUIVO_ORDEMSERVICO = "bd/ordemservico.json";
 
     public static ArrayList<OrdemServico> listaOrdemServico = carregarOrdemServico();
 
@@ -50,7 +51,6 @@ public class DadosOrdemServico {
         
         DadosClientes.listar();
         if(DadosClientes.listaClientes.isEmpty()) return;
-
         System.out.println("Selecione o cliente para iniciar a Ordem de Serviço: ");
         int indiceCliente = scanner.nextInt();
         scanner.nextLine();
@@ -67,7 +67,15 @@ public class DadosOrdemServico {
             return;
         }
         
+        System.out.println("Selecione o veículo do cliente: ");
         DadosClientes.listarVeiculosCliente(cliente);
+        int idVeiculo = scanner.nextInt();
+        scanner.nextLine();
+
+        if (!cliente.getVeiculos().contains(idVeiculo)) {
+            System.out.println("Veículo não encontrado.");
+            return;
+        }
 
         System.out.println("Selecione o funcionário responsável da Ordem de Serviço: ");
 
@@ -88,7 +96,7 @@ public class DadosOrdemServico {
                 .mapToInt(OrdemServico::getId)
                 .max();
                 
-        OrdemServico novaOrdem = new OrdemServico(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente, indiceFuncionario);
+        OrdemServico novaOrdem = new OrdemServico(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente, indiceFuncionario, idVeiculo);
         listaOrdemServico.add(novaOrdem);
         salvarOrdemServicoJson();
         System.out.println("Ordem de Serviço criada!");
@@ -112,8 +120,12 @@ public class DadosOrdemServico {
         
         for (OrdemServico ordem : listaOrdemServico){
             Cliente cliente = DadosClientes.buscarId(ordem.getIdCliente());
+            Veiculo veiculo = DadosVeiculo.buscarId(ordem.getIdVeiculo());
+            Funcionario funcionario = DadosFuncionario.buscarId(ordem.getIdFuncionarioResponsavel());
             System.out.println("Id: " + ordem.getId() + " - " + cliente.getNome() + 
-                    " - R$" + ordem.getValorEstimado() + " - " + getTextoStatus(ordem.getStatus()));
+                    " - R$" + ordem.getValorEstimado() + " - " + getTextoStatus(ordem.getStatus())
+                    + " - Veículo: " + veiculo.getPlaca() + " " + veiculo.getModelo()
+                    + " - Funcionário: " + funcionario.getNome());
         if (ordem.getStatus() == StatusServico.Direcionamento && ordem.getDiagnostico() != null){
             System.out.println(" |Diadnóstico: " + ordem.getDiagnostico());
         }

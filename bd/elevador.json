@@ -1,0 +1,13 @@
+[
+  {
+    "idOrdemServico": 0,
+    "tipoElevador": "Elevador geral"
+  },
+  {
+    "idOrdemServico": 1,
+    "tipoElevador": "Elevador geral"
+  },
+  {
+    "tipoElevador": "Elevador de alinhamento e balanceamento"
+  }
+]

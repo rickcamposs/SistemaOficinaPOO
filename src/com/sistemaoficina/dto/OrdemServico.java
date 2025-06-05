@@ -6,17 +6,19 @@ public class OrdemServico{
     private int id;
     private int idCliente;
     private int idFuncionarioResponsavel;
+    private int idVeiculo;
     private String diagnostico;
     private String solucao;
     private String dataServico;
     private double valorEstimado;
     private StatusServico status;
 
-    public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel) {
+    public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel, int idVeiculo) {
         this.id = id;
         this.idCliente = idCliente;
         this.idFuncionarioResponsavel = idFuncionarioResponsavel;
         this.status = StatusServico.RECEBIDO;
+        this.idVeiculo = idVeiculo;
     }
 
     public int getIdCliente() {
@@ -102,6 +104,14 @@ public class OrdemServico{
 
     public void setSolucao(String solucao) {
         this.solucao = solucao;
+    }
+
+    public int getIdVeiculo() {
+        return idVeiculo;
+    }
+
+    public void setIdVeiculo(int idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
     
 } 

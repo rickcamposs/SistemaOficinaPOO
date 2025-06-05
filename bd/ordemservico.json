@@ -1,0 +1,18 @@
+[
+  {
+    "id": 0,
+    "idCliente": 1,
+    "idFuncionarioResponsavel": 0,
+    "idVeiculo": 2,
+    "valorEstimado": 0.0,
+    "status": "RECEBIDO"
+  },
+  {
+    "id": 1,
+    "idCliente": 1,
+    "idFuncionarioResponsavel": 2,
+    "idVeiculo": 1,
+    "valorEstimado": 0.0,
+    "status": "RECEBIDO"
+  }
+]
