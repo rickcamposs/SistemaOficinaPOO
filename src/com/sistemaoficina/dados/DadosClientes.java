@@ -1,4 +1,5 @@
 package com.sistemaoficina.dados;
+//package com.sistemaoficina.comparator;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,12 +8,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.OptionalInt;
 import java.util.Scanner;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sistemaoficina.comparator.ComparatorCliente;
 import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.Veiculo;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 
 public class DadosClientes {
     private static final String ARQUIVO_CLIENTES = "bd/clientes.json";
@@ -125,7 +132,6 @@ public class DadosClientes {
         return null;
     }
 
-
     public static void excluir(Scanner scanner) {
         listar();
         if(listaClientes.isEmpty()) return;
@@ -156,5 +162,63 @@ public class DadosClientes {
             }
         }
         
+    }
+    
+    //Questão 16
+    
+    public static void listaCrescente(){
+        List<Cliente> listaCrescente = new ArrayList<>(listaClientes);
+        
+        Collections.sort(listaCrescente, ComparatorCliente.usuarioCrescente);
+        
+        listaCrescente.forEach(c -> System.out.println("Cliente " + "Nome: " + c.getNome() + " " + "ID: " + c.getId()));
+        
+    }
+    
+    public static void listaDecrescente(){
+        List<Cliente> listaDecrescente = new ArrayList<>(listaClientes);
+        
+        Collections.sort(listaDecrescente, ComparatorCliente.usuarioDecrescente);
+        
+        listaDecrescente.forEach(d -> System.out.println("Cliente " + "Nome: " + d.getNome() + " " + "ID: " + d.getId()));
+        
+    }
+    
+    //final 16
+    
+    //Questão 17
+    
+    public static void buscarIdIterator(Scanner scanner){
+        System.out.println("Digite o ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Iterator<Cliente> iterator = listaClientes.iterator();
+        while(iterator.hasNext()){
+            Cliente c = iterator.next();
+            if(c.getId() == id){
+                System.out.println(c.getId() + " - " + c.getNome());
+                return;
+            } 
+        }
+        
+        System.out.println("Usuário Não Encontrado");
+    }
+    
+    public static void buscaIdBinary(Scanner scanner){
+        System.out.println("Digite o ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Cliente cliente = new Cliente();
+        cliente.setId(id);
+        List<Cliente> listaOrdenadaCrescente = new ArrayList<>(listaClientes);
+        Collections.sort(listaOrdenadaCrescente, ComparatorCliente.usuarioCrescente);
+        Integer pos = Collections.binarySearch(listaOrdenadaCrescente, cliente, Comparator.comparing(Cliente::getId));
+        
+        if(pos >= 0){
+            Cliente usr = listaOrdenadaCrescente.get(pos);
+            System.out.println("Usuario Encontrado: " + usr.getId() + " - " + usr.getNome());
+        } else {
+            System.out.println("Usuário Não Encontrado");
+        }
     }
 }

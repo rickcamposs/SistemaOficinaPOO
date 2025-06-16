@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Funcionario;
+import java.util.Iterator;
 
 public class DadosFuncionario {
     private static final String ARQUIVO_FUNCIONARIOS = "bd/funcionarios.json";
@@ -166,6 +167,36 @@ public class DadosFuncionario {
         }
         return null;
     }
+    
+    //Questão 15
+    
+    public static void buscarIdIterator(Scanner sc){
+        System.out.println("Digite o ID que deseja buscar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        Iterator<Funcionario> iterator = listaFuncionarios.iterator();
+        while (iterator.hasNext()){
+            Funcionario func = iterator.next();
+            if(func.getId() == id){
+                System.out.println(func.getNome() + " " + func.getCargo());
+            }
+        }
+    }
+    
+    
+    public static void buscarIdForEach(Scanner sc){
+        System.out.println("Digite o ID que deseja buscar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        
+        listaFuncionarios.forEach(f -> {
+            if(f.getId() == id){
+                System.out.println(f.getNome() + " " + f.getCargo());
+            }
+        });
+    }
+    
+    //final questão 15
 
     public static void excluir(Scanner scanner) {
         listar();

@@ -108,6 +108,10 @@ public class SistemaOficina {
             System.out.println("2. Editar Cliente");
             System.out.println("3. Excluir Cliente");
             System.out.println("4. Listar Clientes");
+            System.out.println("5. Lista Clientes Crescente");
+            System.out.println("6. Lista Clientes Decrescente");
+            System.out.println("7. Busca Clientes (Iterator)");
+            System.out.println("8. Busca Clientes (Binary Search)");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -118,6 +122,10 @@ public class SistemaOficina {
                 case 2 -> DadosClientes.editar(scanner);
                 case 3 -> DadosClientes.excluir(scanner);
                 case 4 -> DadosClientes.listar();
+                case 5 -> DadosClientes.listaCrescente();
+                case 6 -> DadosClientes.listaDecrescente();
+                case 7 -> DadosClientes.buscarIdIterator(scanner);
+                case 8 -> DadosClientes.buscaIdBinary(scanner);
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
@@ -131,6 +139,8 @@ public class SistemaOficina {
             System.out.println("2. Editar Funcionario");
             System.out.println("3. Excluir Funcionario");
             System.out.println("4. Listar Funcionarios");
+            System.out.println("5. Buscar Funcionarios (Interator)");
+            System.out.println("6. Buscar Funcionarios (ForEach)");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -141,6 +151,8 @@ public class SistemaOficina {
                 case 2 -> DadosFuncionario.editar(scanner);
                 case 3 -> DadosFuncionario.excluir(scanner);
                 case 4 -> DadosFuncionario.listar();
+                case 5 -> DadosFuncionario.buscarIdIterator(scanner);
+                case 6 -> DadosFuncionario.buscarIdForEach(scanner);
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
