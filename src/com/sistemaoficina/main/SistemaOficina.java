@@ -1,5 +1,7 @@
 package com.sistemaoficina.main;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.sistemaoficina.dados.DadosAgendamento;
@@ -7,6 +9,7 @@ import com.sistemaoficina.dados.DadosClientes;
 import com.sistemaoficina.dados.DadosElevador;
 import com.sistemaoficina.dados.DadosFuncionario;
 import com.sistemaoficina.dados.DadosOrdemServico;
+import com.sistemaoficina.dados.DadosPonto;
 import com.sistemaoficina.dados.DadosProduto;
 import com.sistemaoficina.dados.DadosVeiculo;
 import com.sistemaoficina.dto.Funcionario;
@@ -26,27 +29,44 @@ public class SistemaOficina {
 
     public static void menuPrincipal(Funcionario usuario) {
         int opcao;
+        boolean usuarioProprietario = usuario.getCargo().equals("Proprietario");
+        boolean usuarioAdmin = usuario.getCargo().equals("Admin");
+
+        Map<Integer, Runnable> acoesMenu = new HashMap<>();
+        acoesMenu.put(1, () -> menuCliente());
+        acoesMenu.put(2, () -> menuVeiculo());
+        acoesMenu.put(3, () -> menuProduto());
+        acoesMenu.put(4, () -> menuAgendamento());
+        acoesMenu.put(5, () -> menuElevador());
+        acoesMenu.put(6, () -> menuOrdemServico());
+        acoesMenu.put(7, () -> menuPonto(usuario));
+
+        if (usuarioAdmin || usuarioProprietario) {
+            acoesMenu.put(8, () -> menuFuncionario());
+            acoesMenu.put(9, () -> menuAdmin(usuario));
+        }
+
+        if (usuarioProprietario) {
+            acoesMenu.put(10, () -> menuFinanceiro());
+        }
+
         do {
             System.out.println("\n===== MENU PRINCIPAL =====");
-            boolean usuarioPropietario = usuario.getCargo().equals("Proprietario");
-            boolean usuarioAdmin = usuario.getCargo().equals("Admin");
-            if (usuarioPropietario || usuarioAdmin) {
-                System.out.println("1. Menu Cliente");
-                System.out.println("2. Menu Veículo");
-                System.out.println("3. Menu Produto");
-                System.out.println("4. Menu Agendamento");
-                System.out.println("5. Menu Elevador");
-                System.out.println("6. Menu Ordem de Serviço");
-                System.out.println("7. Menu Funcionario");
-                System.out.println("8. Menu Admin");
-                if(usuarioPropietario) System.out.println("9. Menu Financeiro");
-            } else {
-                System.out.println("1. Menu Cliente");                
-                System.out.println("2. Menu Veículo");
-                System.out.println("3. Menu Produto");
-                System.out.println("4. Menu Agendamento");
-                System.out.println("5. Menu Elevador");
-                System.out.println("6. Menu Ordem de Serviço");
+            System.out.println("1. Menu Cliente");
+            System.out.println("2. Menu Veículo");
+            System.out.println("3. Menu Produto");
+            System.out.println("4. Menu Agendamento");
+            System.out.println("5. Menu Elevador");
+            System.out.println("6. Menu Ordem de Serviço");
+            System.out.println("7. Menu Ponto");
+
+            if (usuarioAdmin || usuarioProprietario) {
+                System.out.println("8. Menu Funcionario");
+                System.out.println("9. Menu Admin");
+            }
+
+            if (usuarioProprietario) {
+                System.out.println("10. Menu Financeiro");
             }
 
             System.out.println("0. Sair");
@@ -54,49 +74,18 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {
-                case 1 -> {
-                    menuCliente();
-                }
-                case 2 -> {
-                    menuVeiculo();
-                }
-                case 3 -> {
-                    menuProduto();
-                }
-                case 4 -> {
-                    menuAgendamento();
-                }
-                case 5 -> {
-                    menuElevador();
-                } 
-                case 6 -> {
-                    menuOrdemServico();
-                }                 
-                case 7 -> {
-                    if(usuarioPropietario || usuarioAdmin) {
-                        menuFuncionario();
-                    } else {
-                        System.out.println("Opção inválida.");
-                    }
-                } 
-                case 8 -> {                    
-                    if (usuarioPropietario || usuarioAdmin){
-                        menuAdmin(usuario);
-                    } else {
-                        System.out.println("Opção Inválida");
-                    }
-                }
-                case 9 -> {                    
-                    if(usuarioPropietario) {
-                        menuFinanceiro();
-                    } else {
-                        System.out.println("Opção inválida.");
-                    }
-                }
-                case 0 -> System.err.println("O PROGRAMA FOI ENCERRADO!");
-                default -> System.out.println("Opção inválida.");
+            if (opcao == 0) {
+                System.err.println("O PROGRAMA FOI ENCERRADO!");
+                break;
             }
+
+            Runnable acao = acoesMenu.get(opcao);
+            if (acao != null) {
+                acao.run();
+            } else {
+                System.out.println("Opção inválida.");
+            }
+
         } while (opcao != 0);
     }
 
@@ -321,6 +310,38 @@ public class SistemaOficina {
                 case 1 -> DadosElevador.atribuirOrdemServico(scanner);  
                 case 2 -> DadosElevador.desvincularOrdemServico(scanner);  
                 case 3 -> DadosElevador.listar();
+                case 0 -> {}
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+
+    public static void menuPonto(Funcionario usuario){
+        int opcao;
+        boolean usuarioProprietario = usuario.getCargo().equals("Proprietario");
+        do {
+
+            System.out.println("\n--- PONTO ---");
+            System.out.println("1. Abrir ponto");
+            System.out.println("2. Fechar ponto");
+            if(usuarioProprietario) {
+                System.out.println("3. Listar pontos");
+            }
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {   
+                case 1 -> DadosPonto.abrirPonto(usuario);
+                case 2 -> DadosPonto.fecharPonto(usuario);
+                case 3 -> {
+                    if (usuarioProprietario){
+                        DadosPonto.listarPontosPorUsuario(scanner);
+                    } else {
+                        System.out.println("Opção Inválida");
+                    }
+                }
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
