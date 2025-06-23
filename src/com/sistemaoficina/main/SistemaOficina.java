@@ -7,8 +7,9 @@ import java.util.Scanner;
 import com.sistemaoficina.dados.DadosAgendamento;
 import com.sistemaoficina.dados.DadosClientes;
 import com.sistemaoficina.dados.DadosElevador;
-import com.sistemaoficina.dados.DadosFinanceiro;
+import com.sistemaoficina.dados.DadosDespesas;
 import com.sistemaoficina.dados.DadosFuncionario;
+import com.sistemaoficina.dados.DadosNotaFiscal;
 import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosPonto;
 import com.sistemaoficina.dados.DadosProduto;
@@ -208,6 +209,7 @@ public class SistemaOficina {
             System.out.println("3. Finalizar Ordem de Serviço");
             System.out.println("4. Listar Ordem de Serviço");
             System.out.println("5. Cancelar Ordem de Serviço");
+            System.out.println("6. Notas Fiscais");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -219,8 +221,30 @@ public class SistemaOficina {
                 case 3 -> DadosOrdemServico.finalizar(scanner);
                 case 4 -> DadosOrdemServico.listar();
                 case 5 -> DadosOrdemServico.cancelar(scanner);
+                case 6 -> menuNotasFiscais();
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+    
+    public static void menuNotasFiscais(){
+        int opcao;
+        do{
+            System.out.println("\n--- Notas Fiscais ---");
+            System.out.println("1. Criar Nota Fiscal de Serviço");
+            System.out.println("2. Baixa em Nota Fiscal de Serviço");
+            System.out.println("3. Listar Nota Fiscal de Serviço");
+            System.out.println("0. Voltar");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (opcao){
+                case 1 -> DadosNotaFiscal.criarNF(scanner);
+                case 2 -> DadosNotaFiscal.baixaNF(scanner);
+                case 3 -> DadosNotaFiscal.listar(); 
+                case 0 -> {}
+                default ->System.out.println("Opção Inválida");
             }
         } while (opcao != 0);
     }
@@ -232,19 +256,17 @@ public class SistemaOficina {
             System.out.println("1. Adicionar Despesa");
             System.out.println("2. Relatorio balanco mensal");
             System.out.println("3. Relatorio de vendas e servicos");
-            System.out.println("4. Emissão de Nota Fiscal");
-            System.out.println("5. Listar Despesas");
+            System.out.println("4. Listar Despesas");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosFinanceiro.adicionarDespesa(scanner);
+                case 1 -> DadosDespesas.adicionarDespesa(scanner);
                 case 2 -> System.out.println("Função de geração de relatório será implementada futuramente.");
                 case 3 -> System.out.println("Função de geração de relatório será implementada futuramente.");
-                case 4 -> System.out.println("Função de geração de relatório será implementada futuramente.");
-                case 5 -> DadosFinanceiro.listar();
+                case 4 -> DadosDespesas.listar();
                 case 0 -> {
                 }
                 default -> System.out.println("Opção inválida.");

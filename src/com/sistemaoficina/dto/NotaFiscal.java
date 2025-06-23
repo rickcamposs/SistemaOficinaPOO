@@ -5,20 +5,25 @@ import java.time.LocalDateTime;
 public class NotaFiscal {
     
     private int id;
-    private LocalDateTime data;
+    private String data;
     private double total = 0;
+    private String descricao;
 
-    public NotaFiscal(int id, LocalDateTime data) {
-        this.id = id;
+    public NotaFiscal(String data,String descricao) {
         this.data = data;
+        this.descricao = descricao;
     }
 
     public int getId() {
         return id;
     }
 
-    public LocalDateTime getData() {
+    public String getData() {
         return data;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public double getTotal() {
@@ -29,8 +34,12 @@ public class NotaFiscal {
         this.id = id;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(String data) {
         this.data = data;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public void setTotal(double total) {

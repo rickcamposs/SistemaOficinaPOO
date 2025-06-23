@@ -15,7 +15,7 @@ import com.sistemaoficina.dto.Despesa;
 import com.sistemaoficina.enums.CategoriaFinanceiro;
 import java.util.OptionalInt;
 
-public class DadosFinanceiro {
+public class DadosDespesas {
     
     private static final String ARQUIVO_DESPESA = "bd/Despesas.json";
 
@@ -48,7 +48,7 @@ public class DadosFinanceiro {
         }
         for (Despesa d : listaDespesa) {
             System.out.println("DESPESAS");
-            System.out.println("Descrição: " + d.getDescricao() + " |Valor: " + d.getValor());
+            System.out.println("Descrição: " + d.getDescricao() + " | Valor: " + d.getValor());
         }
     }
     
