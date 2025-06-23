@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.sistemaoficina.dados.DadosAgendamento;
 import com.sistemaoficina.dados.DadosClientes;
 import com.sistemaoficina.dados.DadosElevador;
+import com.sistemaoficina.dados.DadosFinanceiro;
 import com.sistemaoficina.dados.DadosFuncionario;
 import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosPonto;
@@ -228,16 +229,22 @@ public class SistemaOficina {
         int opcao;
         do {
             System.out.println("\n--- FINANCEIRO ---");
-            System.out.println("1. Relatorio balanco mensal");
-            System.out.println("2. Relatorio de vendas e servicos");
+            System.out.println("1. Adicionar Despesa");
+            System.out.println("2. Relatorio balanco mensal");
+            System.out.println("3. Relatorio de vendas e servicos");
+            System.out.println("4. Emissão de Nota Fiscal");
+            System.out.println("5. Listar Despesas");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> System.out.println("Função de geração de relatório será implementada futuramente.");
+                case 1 -> DadosFinanceiro.adicionarDespesa(scanner);
                 case 2 -> System.out.println("Função de geração de relatório será implementada futuramente.");
+                case 3 -> System.out.println("Função de geração de relatório será implementada futuramente.");
+                case 4 -> System.out.println("Função de geração de relatório será implementada futuramente.");
+                case 5 -> DadosFinanceiro.listar();
                 case 0 -> {
                 }
                 default -> System.out.println("Opção inválida.");

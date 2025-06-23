@@ -178,7 +178,7 @@ public class DadosFuncionario {
         while (iterator.hasNext()){
             Funcionario func = iterator.next();
             if(func.getId() == id){
-                System.out.println(func.getNome() + " " + func.getCargo());
+                System.out.println("Nome: " + func.getNome() + " | Cargo: " + func.getCargo());
             }
         }
     }
@@ -191,7 +191,7 @@ public class DadosFuncionario {
         
         listaFuncionarios.forEach(f -> {
             if(f.getId() == id){
-                System.out.println(f.getNome() + " " + f.getCargo());
+                System.out.println("Nome: " + f.getNome() + " | Cargo " + f.getCargo());
             }
         });
     }
