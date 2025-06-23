@@ -1,0 +1,10 @@
+[
+  {
+    "id": 0,
+    "nome": "Fluido de Freio",
+    "valor": 100.0,
+    "descricao": "Fluido para lubrificação dos freios ",
+    "data": "23/06/2025",
+    "categoria": "DESPESAS_GERAIS"
+  }
+]
