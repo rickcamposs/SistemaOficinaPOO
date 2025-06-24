@@ -1,10 +1,10 @@
 [
   {
     "id": 0,
-    "nome": "sa",
-    "valor": 78.0,
-    "descricao": "7",
-    "data": "",
+    "nome": "Conta de Luz",
+    "valor": 100.0,
+    "descricao": "-",
+    "data": "Jun 24, 2025, 12:34:36 AM",
     "categoria": "DESPESAS_CONTAS"
   }
 ]

@@ -11,8 +11,7 @@
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Agendamento.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/OrdemServico.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Elevador.java</file>
-            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/enums/StatusServico.java</file>
-            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/enums/Combustivel.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Ponto.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosClientes.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosVeiculo.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosFuncionario.java</file>
@@ -21,7 +20,11 @@
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosOrdemServico.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosElevador.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/comparator/ComparatorCliente.java</file>
-            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/RegistroPonto.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosPonto.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Despesa.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosDespesas.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosNotaFiscal.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/NotaFiscal.java</file>
         </group>
     </open-files>
 </project-private>

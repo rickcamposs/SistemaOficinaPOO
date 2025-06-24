@@ -13,12 +13,13 @@ public class OrdemServico{
     private double valorEstimado;
     private StatusServico status;
 
-    public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel, int idVeiculo) {
+    public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel, int idVeiculo, double valorEstimado) {
         this.id = id;
         this.idCliente = idCliente;
         this.idFuncionarioResponsavel = idFuncionarioResponsavel;
         this.status = StatusServico.RECEBIDO;
         this.idVeiculo = idVeiculo;
+        this.valorEstimado = valorEstimado;
     }
 
     public int getIdCliente() {
@@ -113,5 +114,8 @@ public class OrdemServico{
     public void setIdVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
-    
+
+    public void setValorEstimado(double valorEstimado) {
+        this.valorEstimado = valorEstimado;
+    }
 } 

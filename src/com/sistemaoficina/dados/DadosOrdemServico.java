@@ -91,12 +91,18 @@ public class DadosOrdemServico {
             System.out.println("Funcionário não encontrado.");
             return;
         }
+        
+        System.out.println("Informe o Valor Estimado para o Serviço: ");
+        double valorEstimado = Double.parseDouble(scanner.nextLine());
+        
 
         OptionalInt maxId = listaOrdemServico.stream()
                 .mapToInt(OrdemServico::getId)
                 .max();
                 
-        OrdemServico novaOrdem = new OrdemServico(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente, indiceFuncionario, idVeiculo);
+        OrdemServico novaOrdem = new OrdemServico(maxId.isPresent() ? maxId.getAsInt() + 1 : 0, indiceCliente,
+                indiceFuncionario, idVeiculo, valorEstimado);
+        
         listaOrdemServico.add(novaOrdem);
         salvarOrdemServicoJson();
         System.out.println("Ordem de Serviço criada!");
@@ -262,11 +268,14 @@ public class DadosOrdemServico {
         String diagnostico = scanner.nextLine();
         System.out.println("Solução Atualizada: ");
         String solucao = scanner.nextLine();
+        System.out.println("Atualize o Valor Final: ");
+        double valorTotal = Double.parseDouble(scanner.nextLine());        
 
         int index = listaOrdemServico.indexOf(ordemS);
         ordemS.setStatus(novoStatus);
         ordemS.setDiagnostico(diagnostico);
         ordemS.setSolucao(solucao);
+        ordemS.setValorEstimado(valorTotal);
         listaOrdemServico.set(index, ordemS);
         salvarOrdemServicoJson();
         
