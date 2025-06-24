@@ -12,11 +12,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Despesa;
 import com.sistemaoficina.enums.CategoriaDespesa;
+import java.util.Date;
 import java.util.OptionalInt;
 
 public class DadosDespesas {
     
-    private static final String ARQUIVO_DESPESA = "bd/Despesas.json";
+    private static final String ARQUIVO_DESPESA = "bd/despesas.json";
 
     public static ArrayList<Despesa> listaDespesa = carregarDespesa();
 
@@ -47,7 +48,7 @@ public class DadosDespesas {
         }
         for (Despesa d : listaDespesa) {
             System.out.println("DESPESAS");
-            System.out.println( d.getId()+ " -> Nome: " +  d.getNome() + " | Data: " + d.getData() + 
+            System.out.println( "ID: " + d.getId()+ " -> Nome: " +  d.getNome() + " | Data: " + d.getData() + 
                     " | Descrição: " + d.getDescricao() + " | Valor: " + d.getValor() + " | Tipo: " + d.getCategoria());
         }
     }
@@ -58,15 +59,13 @@ public class DadosDespesas {
         String nome = scanner.nextLine();
         System.out.print("Valor da Despesa: ");
         double valor = Double.parseDouble(scanner.nextLine());
-        System.out.print("Digite a Data: ");
-        String data = scanner.nextLine();
         System.out.print("Faça uma Descrição da Despesa: ");
         String descricao = scanner.nextLine();
         System.out.print("Selecione o Tipo de Despesa: ");
         CategoriaDespesa categoria =  selecionarCategoria(scanner);
         
         
-        Despesa financa = new Despesa(nome, valor, data, descricao, categoria);
+        Despesa financa = new Despesa(nome, valor, new Date(), descricao, categoria);
         OptionalInt maxId = listaDespesa.stream()
             .mapToInt(Despesa::getId)
             .max();
@@ -152,15 +151,13 @@ public class DadosDespesas {
         String nome = scanner.nextLine();
         System.out.print("Valor da Despesa: ");
         double valor = Double.parseDouble(scanner.nextLine());
-        System.out.print("Data da Despesa: ");
-        String data = scanner.nextLine();
         System.out.print("Descrição: ");
         String descricao = scanner.nextLine();
         System.out.print("Categoria da Despesa: ");
         CategoriaDespesa categoria = selecionarCategoria(scanner);
 
         
-        Despesa novaDespesa = new Despesa(nome, valor, data, descricao, categoria);
+        Despesa novaDespesa = new Despesa(nome, valor, new Date(), descricao, categoria);
         novaDespesa.setId(despesa.getId());
 
         int index = listaDespesa.indexOf(despesa);

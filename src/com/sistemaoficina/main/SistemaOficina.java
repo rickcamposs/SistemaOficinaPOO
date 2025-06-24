@@ -233,16 +233,16 @@ public class SistemaOficina {
         do{
             System.out.println("\n--- Notas Fiscais ---");
             System.out.println("1. Criar Nota Fiscal de Serviço");
-            System.out.println("2. Baixa em Nota Fiscal de Serviço");
-            System.out.println("3. Listar Nota Fiscal de Serviço");
+            System.out.println("2. Listar Nota Fiscal de Serviço");
+            System.out.println("3. Imprimir Nota Fiscal");
             System.out.println("0. Voltar");
             opcao = scanner.nextInt();
             scanner.nextLine();
             
             switch (opcao){
                 case 1 -> DadosNotaFiscal.criarNF(scanner);
-                /*case 2 -> DadosNotaFiscal.baixaNF(scanner);*/
-                case 3 -> DadosNotaFiscal.listar(); 
+                case 2 -> DadosNotaFiscal.listar();
+                case 3 -> DadosNotaFiscal.imprimirNF(scanner);
                 case 0 -> {}
                 default ->System.out.println("Opção Inválida");
             }
@@ -277,7 +277,7 @@ public class SistemaOficina {
     public static void menuDespesas() {
         int opcao;
         do {
-            System.out.println("\n--- FINANCEIRO ---");
+            System.out.println("\n--- Despesas ---");
             System.out.println("1. Adicionar Despesas");
             System.out.println("2. Excluir Despesas");
             System.out.println("3. Editar Despesas");

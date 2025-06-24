@@ -1,17 +1,17 @@
 package com.sistemaoficina.dto;
 import com.sistemaoficina.enums.CategoriaDespesa;
+import java.util.Date;
 
 public class Despesa {
     private int id;
     private String nome;
     private double valor;
     private String descricao;
-    private String data;
+    private Date data;
     private CategoriaDespesa categoria;
     
 
-    public Despesa(String nome, double valor, String data, String descricao, CategoriaDespesa categoria) {
-        this.id = id;
+    public Despesa(String nome, double valor, Date data, String descricao, CategoriaDespesa categoria) {
         this.descricao = descricao;
         this.data = data;
         this.categoria = categoria;
@@ -27,7 +27,7 @@ public class Despesa {
         return descricao;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
@@ -51,7 +51,7 @@ public class Despesa {
         this.descricao = descricao;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

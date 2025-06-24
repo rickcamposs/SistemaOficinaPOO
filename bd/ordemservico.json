@@ -14,5 +14,13 @@
     "idVeiculo": 1,
     "valorEstimado": 0.0,
     "status": "RECEBIDO"
+  },
+  {
+    "id": 2,
+    "idCliente": 0,
+    "idFuncionarioResponsavel": 2,
+    "idVeiculo": 0,
+    "valorEstimado": 0.0,
+    "status": "RECEBIDO"
   }
 ]

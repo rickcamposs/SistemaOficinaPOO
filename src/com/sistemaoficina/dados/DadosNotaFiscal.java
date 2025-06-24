@@ -11,22 +11,23 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.sistemaoficina.dto.Cliente;
 import com.sistemaoficina.dto.NotaFiscal;
 import com.sistemaoficina.dto.Despesa;
-import com.sistemaoficina.dto.Veiculo;
+import com.sistemaoficina.dto.OrdemServico;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.OptionalInt;
 
 
 public class DadosNotaFiscal {
     
-    private static final String ARQUIVO_NF = "bd/NF.json";
+    private static final String ARQUIVO_NF = "bd/notafiscal.json";
 
     public static ArrayList<NotaFiscal> listaNF = carregarNF();
 
     public static ArrayList<NotaFiscal> carregarNF() {
         try (FileReader reader = new FileReader(ARQUIVO_NF)) {
-            Type listaTipo = new TypeToken<ArrayList<Despesa>>() {
+            Type listaTipo = new TypeToken<ArrayList<NotaFiscal>>() {
             }.getType();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             return gson.fromJson(reader, listaTipo);
@@ -47,11 +48,12 @@ public class DadosNotaFiscal {
     
     public static void listar() {
         if(listaNF.isEmpty()){
-            System.out.println("Não existem Notass Fiscais para serem listadas!");
+            System.out.println("Não existem Notas Fiscais para serem listadas!");
         }
         for (NotaFiscal nf : listaNF) {
             System.out.println("Notas Fiscais");
-            System.out.println("Descrição: " + nf.getId() + " | Valor: " + nf.getData());
+            System.out.println( "ID: " + nf.getId()+ " -> Descrição: " +  nf.getDescricao() + " | Data: " + nf.getData()
+            + "| Valor Total do Serviço: " + DadosOrdemServico.buscarId(nf.getIdOrdemServico()).getValorEstimado());
         }
     }
     
@@ -64,14 +66,23 @@ public class DadosNotaFiscal {
         return null;
     }
      
-    public static void criarNF(Scanner scanner){
+    public static void criarNF(Scanner scanner) {
         System.out.println("Crie a Nota Fiscal");
         System.out.print("Descreva o que foi utilizado no serviço realizado: ");
         String descricao = scanner.nextLine();
-        System.out.print("Informe a data de criação da NF: ");
-        String data = scanner.nextLine();
+        System.out.println("Selecione o ID da Ordem de Serviço referente a essa Nota Fiscal: ");
+        DadosOrdemServico.listar();
+        if (DadosOrdemServico.listaOrdemServico.isEmpty()) {
+            return;
+        }
+        int idOrdemServico = Integer.parseInt(scanner.nextLine());
+        OrdemServico or = DadosOrdemServico.buscarId(idOrdemServico);
+        if (or == null) {
+            System.out.println("Ordem de Serviço inexistente");
+            return;
+        }
         
-        NotaFiscal f = new NotaFiscal(descricao, data);
+        NotaFiscal f = new NotaFiscal(new Date(), descricao, idOrdemServico);
         OptionalInt maxId = listaNF.stream()
             .mapToInt(NotaFiscal::getId)
             .max();
@@ -83,26 +94,46 @@ public class DadosNotaFiscal {
         System.out.println("NF salva com sucesso.");
     }
     
-    /*public static void baixaNF(Scanner scanner) {
-        listar();
-        if(listaNF.isEmpty()) return;
-        System.out.print("Digite o id da Nota Fiscal que deseja dar baixa: ");
-        int indice = Integer.parseInt(scanner.nextLine());
-        NotaFiscal v = buscarId(indice);
-        if(v == null){
-            System.out.println("NF inexistente!");
-            return;
-        }
+    public static void imprimirNF(Scanner scanner){
+        if (listaNF.isEmpty()) {
+        System.out.println("Não há notas fiscais para imprimir.");
+        return;
+    }
 
-        for (Cliente cliente : DadosClientes.listaClientes) {
-            if (cliente.getVeiculos() != null && cliente.getVeiculos().contains(v.getId())) {
-                System.out.println("Este veículo está vinculado a um cliente. Desvincule-o antes de excluir.");
-                return;
-            }
-        }
+    listar(); // Mostra resumo para o usuário escolher
 
-        listaNF.remove(v);
-        salvarNFJson(); 
-        System.out.println("Veículo excluido com sucesso.");
-    }*/
+    System.out.print("Digite o ID da nota fiscal que deseja imprimir: ");
+    int id = Integer.parseInt(scanner.nextLine());
+    NotaFiscal nf = buscarId(id);
+
+    if (nf == null) {
+        System.out.println("Nota Fiscal não encontrada.");
+    } else {
+        imprimirNotaFiscal(nf); // Aqui faz o print completo
+    }
+    }
+    
+    public static void imprimirNotaFiscal(NotaFiscal nf) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    System.out.println("========================================");
+    System.out.println("            OFICINA MILHO VERDE         ");
+    System.out.println("           NOTA FISCAL SIMPLIFICADA     ");
+    System.out.println("========================================");
+    System.out.println("Data: " + sdf.format(nf.getData()));
+    System.out.println("----------------------------------------");
+    System.out.println("ID: " + nf.getId());
+    System.out.println("Descrição: " + nf.getDescricao());
+
+    OrdemServico os = DadosOrdemServico.buscarId(nf.getIdOrdemServico());
+    if (os != null) {
+        System.out.printf("Valor Total do Serviço: R$ %.2f\n", os.getValorEstimado());
+    } else {
+        System.out.println("Valor Total do Serviço: [OS não encontrada]");
+    }
+
+    System.out.println("----------------------------------------");
+    System.out.println("Obrigado pela preferência!");
+    System.out.println("========================================\n");
+}
 }
