@@ -241,7 +241,7 @@ public class SistemaOficina {
             
             switch (opcao){
                 case 1 -> DadosNotaFiscal.criarNF(scanner);
-                case 2 -> DadosNotaFiscal.baixaNF(scanner);
+                /*case 2 -> DadosNotaFiscal.baixaNF(scanner);*/
                 case 3 -> DadosNotaFiscal.listar(); 
                 case 0 -> {}
                 default ->System.out.println("Opção Inválida");
@@ -253,7 +253,7 @@ public class SistemaOficina {
         int opcao;
         do {
             System.out.println("\n--- FINANCEIRO ---");
-            System.out.println("1. Adicionar Despesa");
+            System.out.println("1. Menu de Despesas");
             System.out.println("2. Relatorio balanco mensal");
             System.out.println("3. Relatorio de vendas e servicos");
             System.out.println("4. Listar Despesas");
@@ -263,9 +263,34 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosDespesas.adicionarDespesa(scanner);
+                case 1 -> menuDespesas();
                 case 2 -> System.out.println("Função de geração de relatório será implementada futuramente.");
                 case 3 -> System.out.println("Função de geração de relatório será implementada futuramente.");
+                case 4 -> DadosDespesas.listar();
+                case 0 -> {
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+    
+    public static void menuDespesas() {
+        int opcao;
+        do {
+            System.out.println("\n--- FINANCEIRO ---");
+            System.out.println("1. Adicionar Despesas");
+            System.out.println("2. Excluir Despesas");
+            System.out.println("3. Editar Despesas");
+            System.out.println("4. Listar Despesas");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1 -> DadosDespesas.adicionarDespesa(scanner);
+                case 2 -> DadosDespesas.excluirDespesa(scanner);
+                case 3 -> DadosDespesas.editar(scanner);
                 case 4 -> DadosDespesas.listar();
                 case 0 -> {
                 }

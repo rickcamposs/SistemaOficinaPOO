@@ -1,6 +1,6 @@
 package com.sistemaoficina.enums;
 
-public enum CategoriaFinanceiro {
+public enum CategoriaDespesa {
     
     DESPESAS_GERAIS,
     DESPESAS_FUNCIONARIO,

@@ -1,5 +1,5 @@
 package com.sistemaoficina.dto;
-import com.sistemaoficina.enums.CategoriaFinanceiro;
+import com.sistemaoficina.enums.CategoriaDespesa;
 
 public class Despesa {
     private int id;
@@ -7,10 +7,10 @@ public class Despesa {
     private double valor;
     private String descricao;
     private String data;
-    private CategoriaFinanceiro categoria;
+    private CategoriaDespesa categoria;
     
 
-    public Despesa(String nome, double valor, String data, String descricao, CategoriaFinanceiro categoria) {
+    public Despesa(String nome, double valor, String data, String descricao, CategoriaDespesa categoria) {
         this.id = id;
         this.descricao = descricao;
         this.data = data;
@@ -31,7 +31,7 @@ public class Despesa {
         return data;
     }
 
-    public CategoriaFinanceiro getTipo() {
+    public CategoriaDespesa getCategoria() {
         return categoria;
     }
 
@@ -55,7 +55,7 @@ public class Despesa {
         this.data = data;
     }
 
-    public void setTipo(CategoriaFinanceiro tipo) {
+    public void setCategoria(CategoriaDespesa tipo) {
         this.categoria = categoria;
     }
 

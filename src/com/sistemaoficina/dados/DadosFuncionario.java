@@ -107,7 +107,7 @@ public class DadosFuncionario {
         int idFuncionario = Integer.parseInt(scanner.nextLine());
         Funcionario funcionario = buscarId(idFuncionario);
         if (funcionario == null) {
-            System.out.println("Cliente não existente!");
+            System.out.println("Funcionário não existente!");
             return;
         }        
         System.out.println("Digite as informações do funcionario: ");
