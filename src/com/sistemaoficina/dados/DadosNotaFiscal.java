@@ -80,10 +80,10 @@ public class DadosNotaFiscal {
         listaNF.add(f);
         salvarNFJson();
         
-        System.out.println("Despesas salvas com sucesso.");
+        System.out.println("NF salva com sucesso.");
     }
     
-    public static void baixaNF(Scanner scanner) {
+    /*public static void baixaNF(Scanner scanner) {
         listar();
         if(listaNF.isEmpty()) return;
         System.out.print("Digite o id da Nota Fiscal que deseja dar baixa: ");
@@ -104,5 +104,5 @@ public class DadosNotaFiscal {
         listaNF.remove(v);
         salvarNFJson(); 
         System.out.println("Veículo excluido com sucesso.");
-    }
+    }*/
 }
