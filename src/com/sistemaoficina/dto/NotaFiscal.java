@@ -56,4 +56,15 @@ public class NotaFiscal {
         this.idOrdemServico = idOrdemServico;
     }
     
+    @Override
+    public String toString() {
+        return "NotaFiscal{" +
+                "id='" + id + '\'' +
+                ", data='" + data + '\'' +
+                ", total='" + total + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", idOrdemServico='" + idOrdemServico + '\'' +
+                '}';
+    }
+    
 }

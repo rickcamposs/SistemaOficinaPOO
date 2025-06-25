@@ -5,7 +5,13 @@
     "idFuncionarioResponsavel": 0,
     "idVeiculo": 2,
     "valorEstimado": 0.0,
-    "status": "RECEBIDO"
+    "status": "RECEBIDO",
+    "produtosUtilizados": [
+      {
+        "idProduto": 0,
+        "quantidade": 1
+      }
+    ]
   },
   {
     "id": 1,
@@ -13,7 +19,8 @@
     "idFuncionarioResponsavel": 2,
     "idVeiculo": 1,
     "valorEstimado": 0.0,
-    "status": "RECEBIDO"
+    "status": "RECEBIDO",
+    "produtosUtilizados": []
   },
   {
     "id": 2,
@@ -21,6 +28,12 @@
     "idFuncionarioResponsavel": 2,
     "idVeiculo": 0,
     "valorEstimado": 0.0,
-    "status": "RECEBIDO"
+    "status": "RECEBIDO",
+    "produtosUtilizados": [
+      {
+        "idProduto": 1,
+        "quantidade": 2
+      }
+    ]
   }
 ]

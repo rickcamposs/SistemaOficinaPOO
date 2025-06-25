@@ -39,4 +39,15 @@ public class Ponto {
     public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
+    
+    @Override
+    public String toString() {
+        return "Ponto{" +
+                "id='" + id + '\'' +
+                ", Dataentrada='" + dataEntrada + '\'' +
+                ", dataSaida='" + dataSaida + '\'' +
+                ", idFuncionario='" + idFuncionario + '\'' +
+                '}';
+    }
+    
 }

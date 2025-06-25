@@ -1,14 +1,14 @@
 [
   {
     "id": 0,
-    "quantidade": 1,
+    "quantidade": 10,
     "nome": "Pneu",
-    "valorPago": 50.0,
-    "valorVendido": 68.9
+    "valorPago": 10.0,
+    "valorVendido": 20.0
   },
   {
     "id": 1,
-    "quantidade": 10,
+    "quantidade": 3,
     "nome": "Rodas",
     "valorPago": 50.0,
     "valorVendido": 75.0

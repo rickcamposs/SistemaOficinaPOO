@@ -14,6 +14,7 @@ import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosPonto;
 import com.sistemaoficina.dados.DadosProduto;
 import com.sistemaoficina.dados.DadosVeiculo;
+import com.sistemaoficina.dados.DadosVendas;
 import com.sistemaoficina.dto.Funcionario;
 
 public class SistemaOficina {
@@ -42,14 +43,15 @@ public class SistemaOficina {
         acoesMenu.put(5, () -> menuElevador());
         acoesMenu.put(6, () -> menuOrdemServico());
         acoesMenu.put(7, () -> menuPonto(usuario));
+        acoesMenu.put(8, () -> menuVendasServicos());
 
         if (usuarioAdmin || usuarioProprietario) {
-            acoesMenu.put(8, () -> menuFuncionario());
-            acoesMenu.put(9, () -> menuAdmin(usuario));
+            acoesMenu.put(9, () -> menuFuncionario());
+            acoesMenu.put(10, () -> menuAdmin(usuario));
         }
 
         if (usuarioProprietario) {
-            acoesMenu.put(10, () -> menuFinanceiro());
+            acoesMenu.put(11, () -> menuFinanceiro());
         }
 
         do {
@@ -61,14 +63,15 @@ public class SistemaOficina {
             System.out.println("5. Menu Elevador");
             System.out.println("6. Menu Ordem de Serviço");
             System.out.println("7. Menu Ponto");
+            System.out.println("8. Menu Vendas");
 
             if (usuarioAdmin || usuarioProprietario) {
-                System.out.println("8. Menu Funcionario");
-                System.out.println("9. Menu Admin");
+                System.out.println("9. Menu Funcionario");
+                System.out.println("10. Menu Admin");
             }
 
             if (usuarioProprietario) {
-                System.out.println("10. Menu Financeiro");
+                System.out.println("11. Menu Financeiro");
             }
 
             System.out.println("0. Sair");
@@ -210,6 +213,7 @@ public class SistemaOficina {
             System.out.println("4. Listar Ordem de Serviço");
             System.out.println("5. Cancelar Ordem de Serviço");
             System.out.println("6. Notas Fiscais");
+            System.out.println("7. Vincular Produto a Ordem de Serviço");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -222,6 +226,13 @@ public class SistemaOficina {
                 case 4 -> DadosOrdemServico.listar();
                 case 5 -> DadosOrdemServico.cancelar(scanner);
                 case 6 -> menuNotasFiscais();
+                case 7 -> {
+                    System.out.print("Digite o ID da Ordem de Serviço para adicionar produtos: ");
+                    DadosOrdemServico.listar();
+                    int idOrdem = scanner.nextInt();
+                    scanner.nextLine();
+                    DadosOrdemServico.adicionarProdutosNaOrdem(idOrdem, scanner);
+                }
                 case 0 -> {}
                 default -> System.out.println("Opção inválida.");
             }
@@ -253,10 +264,9 @@ public class SistemaOficina {
         int opcao;
         do {
             System.out.println("\n--- FINANCEIRO ---");
-            System.out.println("1. Menu de Despesas");
+            System.out.println("1. Menu Despesas");
             System.out.println("2. Relatorio balanco mensal");
-            System.out.println("3. Relatorio de vendas e servicos");
-            System.out.println("4. Listar Despesas");
+            System.out.println("3. Relatorio Vendas e Servicos");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
@@ -264,9 +274,36 @@ public class SistemaOficina {
 
             switch (opcao) {
                 case 1 -> menuDespesas();
-                case 2 -> System.out.println("Função de geração de relatório será implementada futuramente.");
-                case 3 -> System.out.println("Função de geração de relatório será implementada futuramente.");
-                case 4 -> DadosDespesas.listar();
+                case 2 -> {
+                    System.out.print("Digite o mês (1-12): ");
+                    int mes = scanner.nextInt();
+                    System.out.print("Digite o ano (ex: 2025): ");
+                    int ano = scanner.nextInt();
+                    scanner.nextLine();
+                    DadosDespesas.gerarBalancoMensal(mes, ano);;
+                }
+                case 3 -> DadosVendas.gerarRelatorioVendas();
+                case 0 -> {
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+    
+    public static void menuVendasServicos(){
+        int opcao;
+        do {
+            System.out.println("\n--- VENDAS E SERVICOS ---");
+            System.out.println("1. Registrar Venda");
+            System.out.println("2. Remover Venda");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1 -> DadosVendas.registrarVenda(scanner);
+                case 2 -> DadosVendas.excluirVenda(scanner);
                 case 0 -> {
                 }
                 default -> System.out.println("Opção inválida.");
@@ -402,3 +439,4 @@ public class SistemaOficina {
         } while (opcao != 0);
     }
 }
+

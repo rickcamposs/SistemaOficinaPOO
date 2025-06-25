@@ -133,6 +133,14 @@ public class DadosProduto {
         return null;
     }
     
+    public static void reduzirEstoque(int idProduto, int quantidade) {
+        Produto p = buscarId(idProduto);
+        if (p != null && p.getQuantidade() >= quantidade) {
+            p.setQuantidade(p.getQuantidade() - quantidade);
+            salvarProdutosJson();
+        }
+    }
+    
     public static void excluir(Scanner scanner) {
         listar();
         if(listaProdutos.isEmpty()) return;

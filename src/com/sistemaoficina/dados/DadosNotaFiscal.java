@@ -11,11 +11,13 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sistemaoficina.dto.ItemProduto;
 import com.sistemaoficina.dto.NotaFiscal;
-import com.sistemaoficina.dto.Despesa;
 import com.sistemaoficina.dto.OrdemServico;
+import com.sistemaoficina.dto.Produto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.OptionalInt;
 
 
@@ -115,23 +117,41 @@ public class DadosNotaFiscal {
     
     public static void imprimirNotaFiscal(NotaFiscal nf) {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
     System.out.println("========================================");
     System.out.println("            OFICINA MILHO VERDE         ");
     System.out.println("           NOTA FISCAL SIMPLIFICADA     ");
     System.out.println("========================================");
     System.out.println("Data: " + sdf.format(nf.getData()));
     System.out.println("----------------------------------------");
-    System.out.println("ID: " + nf.getId());
+    System.out.println("ID NF: " + nf.getId());
     System.out.println("Descrição: " + nf.getDescricao());
 
     OrdemServico os = DadosOrdemServico.buscarId(nf.getIdOrdemServico());
     if (os != null) {
-        System.out.printf("Valor Total do Serviço: R$ %.2f\n", os.getValorEstimado());
-    } else {
-        System.out.println("Valor Total do Serviço: [OS não encontrada]");
-    }
+        System.out.printf("Valor do Serviço: R$ %.2f\n", os.getValorEstimado());
 
+        List<ItemProduto> itens = os.getProdutosUtilizados();
+        if (itens != null && !itens.isEmpty()) {
+            System.out.println("Produtos Utilizados:");
+            double totalProdutos = 0;
+            for (ItemProduto item : itens) {
+                Produto p = DadosProduto.buscarId(item.getIdProduto());
+                if (p != null) {
+                    double subtotal = p.getValorVendido() * item.getQuantidade();
+                    System.out.printf("- %s (Qtd: %d | Unitário: R$ %.2f) -> Subtotal: R$ %.2f\n",
+                            p.getNome(), item.getQuantidade(), p.getValorVendido(), subtotal);
+                    totalProdutos += subtotal;
+                }
+            }
+            double totalGeral = os.getValorEstimado() + totalProdutos;
+            System.out.printf("Total Produtos: R$ %.2f\n", totalProdutos);
+            System.out.printf("TOTAL GERAL: R$ %.2f\n", totalGeral);
+        } else {
+            System.out.println("Nenhum produto registrado na OS.");
+        }
+    } else {
+        System.out.println("Ordem de Serviço não encontrada.");
+    }
     System.out.println("----------------------------------------");
     System.out.println("Obrigado pela preferência!");
     System.out.println("========================================\n");
