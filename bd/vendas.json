@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "idProduto": 1,
+    "quantidadeVendida": 1,
+    "valorUnitario": 1.0,
+    "dataVenda": "Jun 25, 2025, 1:01:52 PM"
+  },
+  {
+    "id": 2,
+    "idProduto": 1,
+    "quantidadeVendida": 1,
+    "valorUnitario": 1.0,
+    "dataVenda": "Jun 25, 2025, 6:52:51 PM"
+  },
+  {
+    "id": 3,
+    "idProduto": 1,
+    "quantidadeVendida": 5,
+    "valorUnitario": 75.0,
+    "dataVenda": "Jun 25, 2025, 7:06:57 PM"
+  }
+]

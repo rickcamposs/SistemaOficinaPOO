@@ -97,4 +97,16 @@ public class Funcionario {
     public boolean validarCredenciais(String usuario, String senha) {
         return this.usuario.equals(usuario) && this.senha.equals(senha);
     }
+    
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "nome='" + nome + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", salario='" + salario + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
+    }
+    
 }

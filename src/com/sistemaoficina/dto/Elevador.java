@@ -19,5 +19,14 @@ public class Elevador {
     }
     public void setTipoElevador(String tipoElevador) {
         this.tipoElevador = tipoElevador;
-    }    
+    }
+    
+    @Override
+    public String toString() {
+        return "Elevador{" +
+                "idOrdemServico='" + idOrdemServico + '\'' +
+                ", tipoElevador='" + tipoElevador + '\'' +
+                '}';
+    }
+    
 }

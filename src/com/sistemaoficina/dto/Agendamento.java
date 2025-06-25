@@ -72,6 +72,11 @@ public class Agendamento {
         this.id = id;
     }
 
+
+    public double getValorEstimado() {
+        return valorEstimado;
+    }
+
     @Override
     public String toString() {
         String info = "Agendamento ID: " + id
@@ -87,9 +92,4 @@ public class Agendamento {
 
         return info;
     }
-
-    public double getValorEstimado() {
-        return valorEstimado;
-    }
-
 }

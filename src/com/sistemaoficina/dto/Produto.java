@@ -53,5 +53,16 @@ public class Produto {
     public void setValorVendido(Double valorVendido) {
         this.valorVendido = valorVendido;
     }
+    
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "nome='" + nome + '\'' +
+                ", id='" + id + '\'' +
+                ", quantidade='" + quantidade + '\'' +
+                ", valorPago='" + valorPago + '\'' +
+                ", valorVendido='" + valorVendido + '\'' +
+                '}';
+    }
 
 }

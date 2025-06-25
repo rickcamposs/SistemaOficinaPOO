@@ -1,6 +1,9 @@
 package com.sistemaoficina.dto;
 
 import com.sistemaoficina.enums.StatusServico;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class OrdemServico{
     private int id;
@@ -9,9 +12,10 @@ public class OrdemServico{
     private int idVeiculo;
     private String diagnostico;
     private String solucao;
-    private String dataServico;
+    private Date dataServico;
     private double valorEstimado;
     private StatusServico status;
+    private List<ItemProduto> produtosUtilizados = new ArrayList<>();
 
     public OrdemServico (int id, int idCliente, int idFuncionarioResponsavel, int idVeiculo, double valorEstimado) {
         this.id = id;
@@ -20,12 +24,17 @@ public class OrdemServico{
         this.status = StatusServico.RECEBIDO;
         this.idVeiculo = idVeiculo;
         this.valorEstimado = valorEstimado;
+        this.produtosUtilizados = new ArrayList<>();
     }
 
     public int getIdCliente() {
         return idCliente;
     }
 
+    public Date getDataServico() {
+        return dataServico;
+    }
+    
     public int getIdFuncionarioResponsavel() {
         return idFuncionarioResponsavel;
     }
@@ -78,6 +87,44 @@ public class OrdemServico{
         this.id = id;
     }
     
+    public double getValorEstimado(){
+        return valorEstimado;
+    }
+
+    public String getSolucao() {
+        return solucao;
+    }
+    
+    public int getIdVeiculo() {
+        return idVeiculo;
+    }
+    
+    public void setSolucao(String solucao) {
+        this.solucao = solucao;
+    }
+
+
+    public void setIdVeiculo(int idVeiculo) {
+        this.idVeiculo = idVeiculo;
+    }
+
+    public void setDataServico(Date dataServico) {
+        this.dataServico = dataServico;
+    }
+
+    public void setValorEstimado(double valorEstimado) {
+        this.valorEstimado = valorEstimado;
+    }
+    
+    
+    public List<ItemProduto> getProdutosUtilizados() {
+        return produtosUtilizados;
+    }
+    
+    public void setProdutosUtilizados(List<ItemProduto> produtosUtilizados) {
+        this.produtosUtilizados = produtosUtilizados;
+    }
+    
     @Override
     public String toString(){
         String info = "Ordem de Serviço ID: " + id
@@ -93,29 +140,5 @@ public class OrdemServico{
         }
         
         return info;
-    }
-    
-    public double getValorEstimado(){
-        return valorEstimado;
-    }
-
-    public String getSolucao() {
-        return solucao;
-    }
-
-    public void setSolucao(String solucao) {
-        this.solucao = solucao;
-    }
-
-    public int getIdVeiculo() {
-        return idVeiculo;
-    }
-
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
-
-    public void setValorEstimado(double valorEstimado) {
-        this.valorEstimado = valorEstimado;
     }
 } 

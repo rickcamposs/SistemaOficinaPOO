@@ -11,7 +11,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sistemaoficina.dto.Despesa;
+import com.sistemaoficina.dto.ItemProduto;
+import com.sistemaoficina.dto.OrdemServico;
+import com.sistemaoficina.dto.Produto;
+import com.sistemaoficina.dto.Venda;
 import com.sistemaoficina.enums.CategoriaDespesa;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.OptionalInt;
 
@@ -170,4 +175,73 @@ public class DadosDespesas {
         
         System.out.println("Veículo editado com sucesso.");
     } 
-}
+    
+    public static void gerarBalancoMensal(int mes, int ano) {
+        double totalVendas = 0;
+        double totalProdutosEmServicos = 0;
+        double totalServicos = 0;
+        double totalDespesas = 0;
+
+        Calendar cal = Calendar.getInstance();
+
+        // Vendas Diretas
+        for (Venda v : DadosVendas.listaVendas) {
+            if (v.getDataVenda() != null) {
+                cal.setTime(v.getDataVenda());
+                if (cal.get(Calendar.MONTH) == mes - 1 && cal.get(Calendar.YEAR) == ano) {
+                    totalVendas += v.getValorTotal();
+                }
+            }
+        }
+
+        // Produtos utilizados em Ordens de Serviço + valor estimado do serviço
+        for (OrdemServico os : DadosOrdemServico.listaOrdemServico) {
+            Date dataCriacao = os.getDataServico(); // você pode renomear se for diferente
+            if (dataCriacao != null) {
+                cal.setTime(dataCriacao);
+                if (cal.get(Calendar.MONTH) == mes - 1 && cal.get(Calendar.YEAR) == ano) {
+                    // Soma valor do serviço
+                    totalServicos += os.getValorEstimado();
+
+                    // Soma produtos utilizados
+                    if (os.getProdutosUtilizados() != null) {
+                        for (ItemProduto item : os.getProdutosUtilizados()) {
+                            Produto p = DadosProduto.buscarId(item.getIdProduto());
+                            if (p != null) {
+                                totalProdutosEmServicos += item.getQuantidade() * p.getValorVendido();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Despesas
+        for (Despesa d : listaDespesa) {
+            if (d.getData() != null) {
+                cal.setTime(d.getData());
+                if (cal.get(Calendar.MONTH) == mes - 1 && cal.get(Calendar.YEAR) == ano) {
+                    totalDespesas += d.getValor();
+                }
+            }
+        }
+
+        double totalReceitas = totalVendas + totalProdutosEmServicos + totalServicos;
+        double saldoFinal = totalReceitas - totalDespesas;
+
+        // Impressão do balanço
+        System.out.println("====== BALANÇO MENSAL ======");
+        System.out.printf("MÊS: %02d/%d\n", mes, ano);
+        System.out.println("-------------------------------------");
+        System.out.printf("RECEITA - Vendas Diretas: R$ %.2f\n", totalVendas);
+        System.out.printf("RECEITA - Produtos em Serviços: R$ %.2f\n", totalProdutosEmServicos);
+        System.out.printf("RECEITA - Serviços Prestados: R$ %.2f\n", totalServicos);
+        System.out.printf("TOTAL DE RECEITAS: R$ %.2f\n", totalReceitas);
+        System.out.println("-------------------------------------");
+        System.out.printf("TOTAL DE DESPESAS: R$ %.2f\n", totalDespesas);
+        System.out.println("-------------------------------------");
+        System.out.printf("SALDO FINAL DO MÊS: R$ %.2f\n", saldoFinal);
+        System.out.println("=====================================");
+    }
+    
+    }
