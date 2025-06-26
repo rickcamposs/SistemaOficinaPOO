@@ -22,7 +22,8 @@ public class Produto {
     private Double valorPago;
     /** Valor pelo qual o produto será vendido (preço de venda). */
     private Double valorVendido;
-
+    /** ID do Fornecedor ao qual o prooduto é relacionado */
+    private int idFornecedor;
     /**
      * Construtor para criar um novo produto.
      * 
@@ -31,11 +32,12 @@ public class Produto {
      * @param valorPago    Valor de compra (custo).
      * @param valorVendido Valor de venda ao cliente.
      */
-    public Produto(int quantidade, String nome, Double valorPago, Double valorVendido) {
+    public Produto(int quantidade, String nome, Double valorPago, Double valorVendido, int idFornecedor) {
         this.quantidade = quantidade;
         this.nome = nome;
         this.valorPago = valorPago;
         this.valorVendido = valorVendido;
+        this.idFornecedor = idFornecedor;
     }
 
     /**
@@ -127,6 +129,16 @@ public class Produto {
     public void setValorVendido(Double valorVendido) {
         this.valorVendido = valorVendido;
     }
+    
+    /**@return  o ID do Fornecedor do produto*/
+    public int getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    /**@param idFornecedor o ID do Fornecedor */
+    public void setIdFornecedor(int idFornecedor) {
+        this.idFornecedor = idFornecedor;
+    }
 
     /**
      * Retorna uma representação em texto do produto.
@@ -141,6 +153,7 @@ public class Produto {
                 ", quantidade='" + quantidade + '\'' +
                 ", valorPago='" + valorPago + '\'' +
                 ", valorVendido='" + valorVendido + '\'' +
+                ", idFornecedor='" + idFornecedor + '\'' +
                 '}';
     }
 }

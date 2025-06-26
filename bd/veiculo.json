@@ -1,26 +1,66 @@
 [
   {
     "id": 0,
-    "placa": "BVC-5898",
-    "modelo": "Ford new fiesta",
-    "ano": 2013,
-    "cor": "Rosa",
-    "combustivel": "HIBRIDO"
-  },
-  {
-    "id": 1,
-    "placa": "AAA-1111",
-    "modelo": "BMW S1000RR",
+    "placa": "UVW6X78",
+    "modelo": "Porshe Cayman 718",
     "ano": 2025,
-    "cor": "branca",
+    "cor": "Roxo",
     "combustivel": "GASOLINA"
   },
   {
+    "id": 1,
+    "placa": "SHY6U78",
+    "modelo": "Toyota Corolla XEi",
+    "ano": 2023,
+    "cor": "Cinza",
+    "combustivel": "FLEX"
+  },
+  {
     "id": 2,
-    "placa": "AAA-0000",
-    "modelo": "Carro",
-    "ano": 2025,
+    "placa": "ABC1D23",
+    "modelo": "Chevrolet Onix LT",
+    "ano": 2021,
     "cor": "Branco",
+    "combustivel": "GASOLINA"
+  },
+  {
+    "id": 3,
+    "placa": "CDE2F34",
+    "modelo": "Hyundai HB20 Comfort",
+    "ano": 2021,
+    "cor": "Prata",
+    "combustivel": "HIBRIDO"
+  },
+  {
+    "id": 4,
+    "placa": "FGH4J56",
+    "modelo": "Volkswagen Gol Trend",
+    "ano": 2017,
+    "cor": "Prata",
+    "combustivel": "HIBRIDO"
+  },
+  {
+    "id": 5,
+    "placa": "IJK7L89",
+    "modelo": "Fiat Argo Drive",
+    "ano": 2020,
+    "cor": "Vermelho",
     "combustivel": "DIESEL"
+  },
+  {
+    "id": 6,
+    "placa": "MNO0P12",
+    "modelo": "Ford Ka SE",
+    "ano": 2019,
+    "cor": "Preto",
+    "combustivel": "ALCOOL"
+  },
+  {
+    "id": 7,
+    "placa": "QRS3T45",
+    "modelo": "Reuanult Kwid Zen",
+    "ano": 2022,
+    "cor": "Azul",
+    "combustivel": "FLEX"
   }
 ]

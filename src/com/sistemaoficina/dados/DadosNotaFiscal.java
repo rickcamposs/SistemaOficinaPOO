@@ -20,7 +20,12 @@ import java.util.OptionalInt;
 
 /**
  * Classe responsável por gerenciar as notas fiscais do sistema.
+ * <p>
  * Permite criar, listar, buscar, imprimir e salvar notas fiscais em arquivo JSON.
+ * <p>
+ * 
+ * @author Riquelme Moreira Campos
+ * @version 1.0
  */
 public class DadosNotaFiscal {
 
