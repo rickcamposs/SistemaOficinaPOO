@@ -2,8 +2,16 @@ package com.sistemaoficina.dto;
 
 /**
  * Representa um funcionário do sistema de oficina mecânica.
+ * 
+ * <p>
+ * 
  * Contém informações sobre o nome, cargo, usuário, senha e salário do
  * funcionário.
+ * 
+ * <p>
+ * 
+ * @author Janaina Alves Cordeiro
+ * @version 1.0
  */
 public class Funcionario {
     private int id;

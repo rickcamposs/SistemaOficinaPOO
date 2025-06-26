@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -15,12 +14,23 @@ import com.sistemaoficina.dto.Funcionario;
 import com.sistemaoficina.dto.OrdemServico;
 import com.sistemaoficina.dto.Veiculo;
 
+/**
+ * Classe responsável pelo gerenciamento dos elevadores da oficina.
+ * Permite cadastrar, listar, associar/desassociar elevadores a ordens de serviço
+ * e persistir os dados em arquivo JSON.
+ * 
+ * @author Riquelme Moreira Campos
+ * @version 1.0
+ */
 public class DadosElevador {
-
+    /** Caminho do arquivo JSON para persistência dos elevadores. */
     private static final String ARQUIVO_ELEVADOR = "bd/elevador.json";
-
+    /** Lista estática com todos os elevadores em memória. */
     public static ArrayList<Elevador> listaElevador = carregarElevadores();
 
+    /**
+     * Salva a lista de elevadores no arquivo JSON.
+     */
     public static void salvarElevadorJson() {
         try (FileWriter writer = new FileWriter(ARQUIVO_ELEVADOR)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -30,6 +40,11 @@ public class DadosElevador {
         }
     }
 
+    /**
+     * Carrega a lista de elevadores a partir do arquivo JSON.
+     * 
+     * @return Uma lista de elevadores carregada do arquivo ou uma lista vazia em caso de erro.
+     */
     public static ArrayList<Elevador> carregarElevadores() {
         try (FileReader reader = new FileReader(ARQUIVO_ELEVADOR)) {
             Type listaTipo = new TypeToken<ArrayList<Elevador>>(){}.getType();
@@ -41,19 +56,22 @@ public class DadosElevador {
         }
     }
   
+    /**
+     * Atribui uma ordem de serviço a um elevador disponível de um determinado tipo.
+     * 
+     * @param scanner Scanner utilizado para entrada de dados do usuário.
+     */
     public static void atribuirOrdemServico(Scanner scanner) {        
         DadosOrdemServico.listar();
         if(DadosOrdemServico.listaOrdemServico.isEmpty()) return;
         System.out.print("Selecione a ordem de serviço para atribuir ao elevador: ");
         int idOrdemServico = scanner.nextInt();
         scanner.nextLine(); // Limpar o buffer do scanner
-
         OrdemServico os = DadosOrdemServico.buscarId(idOrdemServico);
         if (os == null) {
             System.out.println("Ordem de serviço não encontrada.");
             return;
         }
-
         System.out.println("Selecione o tipo do elevador: ");
         System.out.println("1 - Elevador geral");
         System.out.println("2 - Elevador de alinhamento e balanceamento");
@@ -69,7 +87,6 @@ public class DadosElevador {
                 return;
             }
         }
-
         Elevador elevador = buscarElevadorLivrePorTipo(tipoElevador);
         if (elevador == null) {
             System.out.println("Não há elevadores livres do tipo: " + tipoElevador);
@@ -84,13 +101,17 @@ public class DadosElevador {
         System.out.println("Elevador atribuído com sucesso!");
     }
 
+    /**
+     * Desvincula uma ordem de serviço de um elevador selecionado.
+     * 
+     * @param scanner Scanner utilizado para entrada de dados do usuário.
+     */
     public static void desvincularOrdemServico(Scanner scanner) {
         listar();
         if(listaElevador.isEmpty()) return;
         System.out.print("Selecione o elevador para desvincular a ordem de serviço: ");
         int idElevador = scanner.nextInt();
         scanner.nextLine();
-
         if(idElevador < 0 || idElevador >= listaElevador.size()) {
             System.out.println("Elevador inválido.");
             return;
@@ -103,6 +124,12 @@ public class DadosElevador {
         System.out.println("Ordem de serviço desvinculada com sucesso!");
     }
 
+    /**
+     * Busca um elevador livre (sem ordem de serviço) do tipo informado.
+     * 
+     * @param tipoElevador Tipo do elevador desejado.
+     * @return Elevador livre encontrado, ou null caso não exista nenhum disponível.
+     */
     public static Elevador buscarElevadorLivrePorTipo(String tipoElevador) {
         for (Elevador elevador : listaElevador) {
             if (elevador.getTipoElevador().equals(tipoElevador) && elevador.getIdOrdemServico() == null) {
@@ -112,7 +139,9 @@ public class DadosElevador {
         return null;
     }
 
-
+    /**
+     * Lista todos os elevadores cadastrados e suas ordens de serviço associadas (se houver).
+     */
     public static void listar(){
         if(listaElevador.isEmpty()){
             System.out.println("Não há elevadores para serem listados!");
@@ -133,6 +162,9 @@ public class DadosElevador {
         }
     }
 
+    /**
+     * Inicializa a lista de elevadores com um conjunto padrão, caso a lista esteja vazia.
+     */
     public static void inicilizarElevadores() {
         if (listaElevador.isEmpty()) {
             listaElevador.add(new Elevador("Elevador geral"));
@@ -144,5 +176,4 @@ public class DadosElevador {
             System.out.println("Elevadores já inicializados.");
         }
     }
-    
 }
