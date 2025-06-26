@@ -15,17 +15,22 @@ import com.sistemaoficina.dto.OrdemServico;
 import com.sistemaoficina.dto.Veiculo;
 
 /**
- * Classe responsável pelo gerenciamento dos elevadores da oficina.
- * Permite cadastrar, listar, associar/desassociar elevadores a ordens de serviço
- * e persistir os dados em arquivo JSON.
- * 
+ * Classe responsável pelo gerenciamento dos elevadores da oficina. Permite
+ * cadastrar, listar, associar/desassociar elevadores a ordens de serviço e
+ * persistir os dados em arquivo JSON.
+ *
  * @author Riquelme Moreira Campos
  * @version 1.0
  */
 public class DadosElevador {
-    /** Caminho do arquivo JSON para persistência dos elevadores. */
+
+    /**
+     * Caminho do arquivo JSON para persistência dos elevadores.
+     */
     private static final String ARQUIVO_ELEVADOR = "bd/elevador.json";
-    /** Lista estática com todos os elevadores em memória. */
+    /**
+     * Lista estática com todos os elevadores em memória.
+     */
     public static ArrayList<Elevador> listaElevador = carregarElevadores();
 
     /**
@@ -34,7 +39,7 @@ public class DadosElevador {
     public static void salvarElevadorJson() {
         try (FileWriter writer = new FileWriter(ARQUIVO_ELEVADOR)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(listaElevador, writer);            
+            gson.toJson(listaElevador, writer);
         } catch (IOException e) {
             System.out.println("Erro ao salvar produtos: " + e.getMessage());
         }
@@ -42,12 +47,14 @@ public class DadosElevador {
 
     /**
      * Carrega a lista de elevadores a partir do arquivo JSON.
-     * 
-     * @return Uma lista de elevadores carregada do arquivo ou uma lista vazia em caso de erro.
+     *
+     * @return Uma lista de elevadores carregada do arquivo ou uma lista vazia
+     * em caso de erro.
      */
     public static ArrayList<Elevador> carregarElevadores() {
         try (FileReader reader = new FileReader(ARQUIVO_ELEVADOR)) {
-            Type listaTipo = new TypeToken<ArrayList<Elevador>>(){}.getType();
+            Type listaTipo = new TypeToken<ArrayList<Elevador>>() {
+            }.getType();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             return gson.fromJson(reader, listaTipo);
         } catch (IOException e) {
@@ -55,15 +62,18 @@ public class DadosElevador {
             return new ArrayList<>();
         }
     }
-  
+
     /**
-     * Atribui uma ordem de serviço a um elevador disponível de um determinado tipo.
-     * 
+     * Atribui uma ordem de serviço a um elevador disponível de um determinado
+     * tipo.
+     *
      * @param scanner Scanner utilizado para entrada de dados do usuário.
      */
-    public static void atribuirOrdemServico(Scanner scanner) {        
+    public static void atribuirOrdemServico(Scanner scanner) {
         DadosOrdemServico.listar();
-        if(DadosOrdemServico.listaOrdemServico.isEmpty()) return;
+        if (DadosOrdemServico.listaOrdemServico.isEmpty()) {
+            return;
+        }
         System.out.print("Selecione a ordem de serviço para atribuir ao elevador: ");
         int idOrdemServico = scanner.nextInt();
         scanner.nextLine(); // Limpar o buffer do scanner
@@ -77,11 +87,13 @@ public class DadosElevador {
         System.out.println("2 - Elevador de alinhamento e balanceamento");
         Integer op = scanner.nextInt();
         scanner.nextLine();
-        
+
         String tipoElevador;
         switch (op) {
-            case 1 -> tipoElevador = "Elevador geral";
-            case 2 -> tipoElevador = "Elevador de alinhamento e balanceamento";
+            case 1 ->
+                tipoElevador = "Elevador geral";
+            case 2 ->
+                tipoElevador = "Elevador de alinhamento e balanceamento";
             default -> {
                 System.out.println("Opção Inválida");
                 return;
@@ -92,27 +104,29 @@ public class DadosElevador {
             System.out.println("Não há elevadores livres do tipo: " + tipoElevador);
             return;
         }
-        
+
         int index = listaElevador.indexOf(elevador);
         elevador.setIdOrdemServico(idOrdemServico);
         listaElevador.set(index, elevador);
         salvarElevadorJson();
-        
+
         System.out.println("Elevador atribuído com sucesso!");
     }
 
     /**
      * Desvincula uma ordem de serviço de um elevador selecionado.
-     * 
+     *
      * @param scanner Scanner utilizado para entrada de dados do usuário.
      */
     public static void desvincularOrdemServico(Scanner scanner) {
         listar();
-        if(listaElevador.isEmpty()) return;
+        if (listaElevador.isEmpty()) {
+            return;
+        }
         System.out.print("Selecione o elevador para desvincular a ordem de serviço: ");
         int idElevador = scanner.nextInt();
         scanner.nextLine();
-        if(idElevador < 0 || idElevador >= listaElevador.size()) {
+        if (idElevador < 0 || idElevador >= listaElevador.size()) {
             System.out.println("Elevador inválido.");
             return;
         }
@@ -120,15 +134,16 @@ public class DadosElevador {
         int index = listaElevador.indexOf(elevador);
         elevador.setIdOrdemServico(null);
         listaElevador.set(index, elevador);
-        salvarElevadorJson();        
+        salvarElevadorJson();
         System.out.println("Ordem de serviço desvinculada com sucesso!");
     }
 
     /**
      * Busca um elevador livre (sem ordem de serviço) do tipo informado.
-     * 
+     *
      * @param tipoElevador Tipo do elevador desejado.
-     * @return Elevador livre encontrado, ou null caso não exista nenhum disponível.
+     * @return Elevador livre encontrado, ou null caso não exista nenhum
+     * disponível.
      */
     public static Elevador buscarElevadorLivrePorTipo(String tipoElevador) {
         for (Elevador elevador : listaElevador) {
@@ -140,30 +155,43 @@ public class DadosElevador {
     }
 
     /**
-     * Lista todos os elevadores cadastrados e suas ordens de serviço associadas (se houver).
+     * Lista todos os elevadores cadastrados e suas ordens de serviço associadas
+     * (se houver).
      */
-    public static void listar(){
-        if(listaElevador.isEmpty()){
+    public static void listar() {
+        if (listaElevador.isEmpty()) {
             System.out.println("Não há elevadores para serem listados!");
+            return; // <-- importante!
         }
         int i = 0;
-        for(Elevador e : listaElevador){     
+        for (Elevador e : listaElevador) {
             if (e.getIdOrdemServico() == null) {
                 System.out.println("Elevador (" + i + "): " + e.getTipoElevador() + " - Não vinculado a nenhuma ordem de serviço.");
                 i++;
                 continue;
             }
             OrdemServico os = DadosOrdemServico.buscarId(e.getIdOrdemServico());
+            if (os == null) {
+                System.out.println("Elevador (" + i + "): " + e.getTipoElevador() + " - Ordem de serviço associada não encontrada (pode ter sido excluída).");
+                i++;
+                continue;
+            }
             Funcionario f = DadosFuncionario.buscarId(os.getIdFuncionarioResponsavel());
             Veiculo v = DadosVeiculo.buscarId(os.getIdVeiculo());
-            System.out.println("Elevador (" + i + "): " + e.getTipoElevador() + "- Funcionario responsável: " + f.getNome()
-                + " - Ordem de Serviço: " + e.getIdOrdemServico() + " - Veiculo: " + v.getPlaca() + " " + v.getModelo());
-            i++;       
+            String nomeFuncionario = (f != null) ? f.getNome() : "Desconhecido";
+            String infoVeiculo = (v != null) ? (v.getPlaca() + " " + v.getModelo()) : "Veículo não encontrado";
+            System.out.println("Elevador (" + i + "): " + e.getTipoElevador()
+                    + " - Funcionário responsável: " + nomeFuncionario
+                    + " - Ordem de Serviço: " + e.getIdOrdemServico()
+                    + " - Veículo: " + infoVeiculo
+            );
+            i++;
         }
     }
 
     /**
-     * Inicializa a lista de elevadores com um conjunto padrão, caso a lista esteja vazia.
+     * Inicializa a lista de elevadores com um conjunto padrão, caso a lista
+     * esteja vazia.
      */
     public static void inicilizarElevadores() {
         if (listaElevador.isEmpty()) {

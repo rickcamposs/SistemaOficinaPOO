@@ -16,22 +16,26 @@ import com.sistemaoficina.dto.Veiculo;
 import com.sistemaoficina.enums.Combustivel;
 
 /**
- * Classe utilitária responsável pela manipulação, cadastro, edição,
- * listagem, busca e exclusão de veículos do sistema.
+ * Classe utilitária responsável pela manipulação, cadastro, edição, listagem,
+ * busca e exclusão de veículos do sistema.
  * <p>
- * Esta classe faz a persistência dos dados utilizando arquivos JSON
- * por meio da biblioteca Gson.
+ * Esta classe faz a persistência dos dados utilizando arquivos JSON por meio da
+ * biblioteca Gson.
  * </p>
- * 
+ *
  * @author Riquelme Moreira Campos
  * @version 1.0
  */
 public class DadosVeiculo {
 
-    /** Caminho do arquivo JSON de armazenamento dos veículos. */
+    /**
+     * Caminho do arquivo JSON de armazenamento dos veículos.
+     */
     private static final String ARQUIVO_VEICULOS = "bd/veiculo.json";
 
-    /** Lista global de veículos em memória. */
+    /**
+     * Lista global de veículos em memória.
+     */
     public static ArrayList<Veiculo> listaVeiculos = carregarVeiculos();
 
     /**
@@ -40,7 +44,7 @@ public class DadosVeiculo {
     public static void salvarVeiculosJson() {
         try (FileWriter writer = new FileWriter(ARQUIVO_VEICULOS)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(listaVeiculos, writer);            
+            gson.toJson(listaVeiculos, writer);
         } catch (IOException e) {
             System.out.println("Erro ao salvar produtos: " + e.getMessage());
         }
@@ -48,12 +52,14 @@ public class DadosVeiculo {
 
     /**
      * Carrega a lista de veículos do arquivo JSON para memória.
-     * 
-     * @return Lista de veículos carregada do arquivo, ou vazia se não houver dados.
+     *
+     * @return Lista de veículos carregada do arquivo, ou vazia se não houver
+     * dados.
      */
     public static ArrayList<Veiculo> carregarVeiculos() {
         try (FileReader reader = new FileReader(ARQUIVO_VEICULOS)) {
-            Type listaTipo = new TypeToken<ArrayList<Veiculo>>(){}.getType();
+            Type listaTipo = new TypeToken<ArrayList<Veiculo>>() {
+            }.getType();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             return gson.fromJson(reader, listaTipo);
         } catch (IOException e) {
@@ -63,11 +69,12 @@ public class DadosVeiculo {
     }
 
     /**
-     * Realiza o cadastro de um novo veículo, solicitando informações via Scanner.
-     * 
+     * Realiza o cadastro de um novo veículo, solicitando informações via
+     * Scanner.
+     *
      * @param scanner Scanner para entrada dos dados.
      */
-    public static void cadastrar(Scanner scanner){
+    public static void cadastrar(Scanner scanner) {
         System.out.println("Cadastrar veículo");
         System.out.print("Placa do veículo: ");
         String placa = scanner.nextLine();
@@ -81,8 +88,8 @@ public class DadosVeiculo {
         Combustivel combustivel = selecionarCombustivel(scanner);
         Veiculo veiculo = new Veiculo(placa, modelo, ano, cor, combustivel);
         OptionalInt maxId = listaVeiculos.stream()
-            .mapToInt(Veiculo::getId)
-            .max();
+                .mapToInt(Veiculo::getId)
+                .max();
         veiculo.setId(maxId.isPresent() ? maxId.getAsInt() + 1 : 0);
         listaVeiculos.add(veiculo);
         salvarVeiculosJson();
@@ -91,7 +98,7 @@ public class DadosVeiculo {
 
     /**
      * Permite a seleção do tipo de combustível via menu interativo.
-     * 
+     *
      * @param scanner Scanner para entrada do usuário.
      * @return Combustivel selecionado.
      */
@@ -106,12 +113,18 @@ public class DadosVeiculo {
         int opcao = scanner.nextInt();
         scanner.nextLine();
         return switch (opcao) {
-            case 1 -> Combustivel.DIESEL;
-            case 2 -> Combustivel.ALCOOL;
-            case 3 -> Combustivel.GASOLINA;
-            case 5 -> Combustivel.FLEX;
-            case 4 -> Combustivel.HIBRIDO;
-            case 6 -> Combustivel.ELETRICO;
+            case 1 ->
+                Combustivel.DIESEL;
+            case 2 ->
+                Combustivel.ALCOOL;
+            case 3 ->
+                Combustivel.GASOLINA;
+            case 5 ->
+                Combustivel.FLEX;
+            case 4 ->
+                Combustivel.HIBRIDO;
+            case 6 ->
+                Combustivel.ELETRICO;
             default -> {
                 System.out.println("Opção inválida. Por favor, selecione uma opção válida.");
                 yield selecionarCombustivel(scanner);
@@ -121,39 +134,47 @@ public class DadosVeiculo {
 
     /**
      * Retorna a representação textual do tipo de combustível.
-     * 
+     *
      * @param combustivel Tipo de combustível.
      * @return String correspondente.
      */
-    public static String getTextoCombustivel(Combustivel combustivel){
-        if(combustivel == null){
+    public static String getTextoCombustivel(Combustivel combustivel) {
+        if (combustivel == null) {
             return "Combustível Indefinido";
         }
         return switch (combustivel) {
-            case GASOLINA -> "Gasolina";
-            case ALCOOL -> "Álcool";
-            case DIESEL -> "Diesel";
-            case FLEX -> "Flex";
-            case ELETRICO -> "Elétrico";
-            case HIBRIDO -> "Híbrido";
+            case GASOLINA ->
+                "Gasolina";
+            case ALCOOL ->
+                "Álcool";
+            case DIESEL ->
+                "Diesel";
+            case FLEX ->
+                "Flex";
+            case ELETRICO ->
+                "Elétrico";
+            case HIBRIDO ->
+                "Híbrido";
         };
     }
 
     /**
      * Edita os dados de um veículo existente, escolhendo pelo ID.
-     * 
+     *
      * @param scanner Scanner para entrada dos dados.
      */
-    public static void editar(Scanner scanner){
+    public static void editar(Scanner scanner) {
         System.out.println("Escolha um veiculo por Id:");
         listar();
-        if(listaVeiculos.isEmpty()) return;
+        if (listaVeiculos.isEmpty()) {
+            return;
+        }
         int idVeiculo = Integer.parseInt(scanner.nextLine());
         Veiculo veiculo = buscarId(idVeiculo);
         if (veiculo == null) {
             System.out.println("Veículo não existente!");
             return;
-        }   
+        }
         System.out.println("Digite as informações do Veículo");
         System.out.print("Placa do veículo: ");
         String placa = scanner.nextLine();
@@ -165,7 +186,7 @@ public class DadosVeiculo {
         String cor = scanner.nextLine();
         System.out.print("Combustível do veículo: ");
         Combustivel combustivel = selecionarCombustivel(scanner);
-        
+
         Veiculo novoVeiculo = new Veiculo(placa, modelo, ano, cor, combustivel);
         novoVeiculo.setId(veiculo.getId());
         int index = listaVeiculos.indexOf(veiculo);
@@ -179,24 +200,41 @@ public class DadosVeiculo {
     /**
      * Lista todos os veículos cadastrados.
      */
-    public static void listar(){
-        if(listaVeiculos.isEmpty()){
+    /**
+     * Lista todos os veículos cadastrados, exibindo o cliente associado (se
+     * houver).
+     */
+    public static void listar() {
+        if (listaVeiculos.isEmpty()) {
             System.out.println("Não há veículos para serem listados!");
         }
-        for(Veiculo v : listaVeiculos){
-            System.out.println("Id: " + v.getId() + " - " + v.getPlaca() + " - Modelo: " + v.getModelo());
+        for (Veiculo v : listaVeiculos) {
+            String nomeCliente = "Nenhum cliente associado";
+            // Procura pelo cliente que contém o ID deste veículo em sua lista de veículos
+            for (Cliente c : DadosClientes.listaClientes) {
+                if (c.getVeiculos() != null && c.getVeiculos().contains(v.getId())) {
+                    nomeCliente = c.getNome();
+                    break;
+                }
+            }
+            System.out.println(
+                    "Id: " + v.getId()
+                    + " - Placa: " + v.getPlaca()
+                    + " - Modelo: " + v.getModelo()
+                    + " - Cliente: " + nomeCliente
+            );
         }
     }
 
     /**
      * Busca um veículo pelo seu ID.
-     * 
+     *
      * @param id ID do veículo.
      * @return Veiculo encontrado ou null.
      */
-    public static Veiculo buscarId(int id){
-        for(Veiculo v : listaVeiculos){
-            if(v.getId() == id){
+    public static Veiculo buscarId(int id) {
+        for (Veiculo v : listaVeiculos) {
+            if (v.getId() == id) {
                 return v;
             }
         }
@@ -205,16 +243,18 @@ public class DadosVeiculo {
 
     /**
      * Exclui um veículo, se não estiver vinculado a nenhum cliente.
-     * 
+     *
      * @param scanner Scanner para entrada do usuário.
      */
     public static void excluir(Scanner scanner) {
         listar();
-        if(listaVeiculos.isEmpty()) return;
+        if (listaVeiculos.isEmpty()) {
+            return;
+        }
         System.out.print("Digite o id do veículo que deseja excluir: ");
         int indice = Integer.parseInt(scanner.nextLine());
         Veiculo v = buscarId(indice);
-        if(v == null){
+        if (v == null) {
             System.out.println("Veículo não existente!");
             return;
         }
@@ -225,18 +265,20 @@ public class DadosVeiculo {
             }
         }
         listaVeiculos.remove(v);
-        salvarVeiculosJson(); 
+        salvarVeiculosJson();
         System.out.println("Veículo excluido com sucesso.");
     }
 
     /**
      * Atribui um veículo a um cliente.
-     * 
+     *
      * @param scanner Scanner para entrada do usuário.
      */
-    public static void atribuirCliente(Scanner scanner){
+    public static void atribuirCliente(Scanner scanner) {
         listar();
-        if(listaVeiculos.isEmpty()) return;
+        if (listaVeiculos.isEmpty()) {
+            return;
+        }
         System.out.print("Digite o ID do veículo a ser atribuido: ");
         int idVeiculo = Integer.parseInt(scanner.nextLine());
         Veiculo veiculo = buscarId(idVeiculo);
@@ -246,15 +288,17 @@ public class DadosVeiculo {
             return;
         }
         DadosClientes.listar();
-        if(DadosClientes.listaClientes.isEmpty()) return;
+        if (DadosClientes.listaClientes.isEmpty()) {
+            return;
+        }
         System.out.print("Digite o ID do cliente dono do veículo: ");
         int idCliente = Integer.parseInt(scanner.nextLine());
         Cliente cliente = DadosClientes.buscarId(idCliente);
-        if(cliente == null) {
+        if (cliente == null) {
             System.out.println("Cliente não encontrado.");
             return;
         }
-        int index = DadosClientes.listaClientes.indexOf(cliente);   
+        int index = DadosClientes.listaClientes.indexOf(cliente);
         ArrayList<Integer> veiculosCliente = cliente.getVeiculos();
         if (veiculosCliente == null) {
             veiculosCliente = new ArrayList<>();
@@ -269,31 +313,33 @@ public class DadosVeiculo {
                 return;
             }
         }
-        veiculosCliente.add(veiculo.getId());        
+        veiculosCliente.add(veiculo.getId());
         cliente.setVeiculos(veiculosCliente);
-        if(index != -1) {
+        if (index != -1) {
             DadosClientes.listaClientes.set(index, cliente);
         }
-        DadosClientes.salvarClientesJson();      
+        DadosClientes.salvarClientesJson();
         System.out.println("Veículo atribuído ao cliente com sucesso.");
     }
 
     /**
      * Desvincula um veículo de um cliente.
-     * 
+     *
      * @param scanner Scanner para entrada do usuário.
      */
     public static void desvincularCliente(Scanner scanner) {
         DadosClientes.listar();
-        if(DadosClientes.listaClientes.isEmpty()) return;
+        if (DadosClientes.listaClientes.isEmpty()) {
+            return;
+        }
         System.out.print("Digite o ID do cliente dono do veículo: ");
         int idCliente = Integer.parseInt(scanner.nextLine());
         Cliente cliente = DadosClientes.buscarId(idCliente);
-        if(cliente == null) {
+        if (cliente == null) {
             System.out.println("Cliente não encontrado.");
             return;
         }
-        int index = DadosClientes.listaClientes.indexOf(cliente);   
+        int index = DadosClientes.listaClientes.indexOf(cliente);
         ArrayList<Integer> veiculosCliente = cliente.getVeiculos();
         if (veiculosCliente == null || veiculosCliente.isEmpty()) {
             System.out.println("Este cliente não possui veículos vinculados.");

@@ -1,39 +1,11 @@
 [
   {
     "id": 0,
-    "idCliente": 1,
-    "idFuncionarioResponsavel": 0,
-    "idVeiculo": 2,
-    "valorEstimado": 0.0,
-    "status": "RECEBIDO",
-    "produtosUtilizados": [
-      {
-        "idProduto": 0,
-        "quantidade": 1
-      }
-    ]
-  },
-  {
-    "id": 1,
-    "idCliente": 1,
-    "idFuncionarioResponsavel": 2,
-    "idVeiculo": 1,
-    "valorEstimado": 0.0,
+    "idCliente": 0,
+    "idFuncionarioResponsavel": 1,
+    "idVeiculo": 0,
+    "valorEstimado": 1200.0,
     "status": "RECEBIDO",
     "produtosUtilizados": []
-  },
-  {
-    "id": 2,
-    "idCliente": 0,
-    "idFuncionarioResponsavel": 2,
-    "idVeiculo": 0,
-    "valorEstimado": 0.0,
-    "status": "RECEBIDO",
-    "produtosUtilizados": [
-      {
-        "idProduto": 1,
-        "quantidade": 2
-      }
-    ]
   }
 ]

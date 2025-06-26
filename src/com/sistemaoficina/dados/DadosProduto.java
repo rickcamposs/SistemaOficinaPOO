@@ -10,6 +10,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sistemaoficina.dto.Fornecedor;
 import com.sistemaoficina.dto.Produto;
 
 /**
@@ -18,7 +19,7 @@ import com.sistemaoficina.dto.Produto;
  * Responsável por cadastrar, editar, listar, excluir, buscar e persistir produtos em arquivo JSON.
  * </p>
  * 
- * @author Seu Nome
+ * @author Riquelme Moreira Campos
  * @version 1.0
  */
 public class DadosProduto {
@@ -63,7 +64,7 @@ public class DadosProduto {
      *
      * @param scanner Scanner para entrada dos dados do usuário.
      */
-    public static void cadastrar(Scanner scanner){
+    public static void cadastrar(Scanner scanner) {
         System.out.println("Cadastrar produto");
         System.out.print("Nome do produto: ");
         String nome = scanner.nextLine();
@@ -73,7 +74,13 @@ public class DadosProduto {
         Double valorPago = Double.parseDouble(scanner.nextLine());
         System.out.print("Valor de venda: ");
         Double valorVendido = Double.parseDouble(scanner.nextLine());
-        Produto produto = new Produto(qt, nome, valorPago, valorVendido);
+
+        // Associe ao fornecedor
+        DadosFornecedores.listar();
+        System.out.print("Digite o ID do fornecedor deste produto: ");
+        int idFornecedor = Integer.parseInt(scanner.nextLine());
+
+        Produto produto = new Produto(qt, nome, valorPago, valorVendido, idFornecedor);
         OptionalInt maxId = listaProdutos.stream()
             .mapToInt(Produto::getId)
             .max();
@@ -89,16 +96,18 @@ public class DadosProduto {
      *
      * @param scanner Scanner para entrada dos dados do usuário.
      */
-    public static void editar(Scanner scanner){
+    public static void editar(Scanner scanner) {
         System.out.println("Escolha um produto por Id:");
         listar();
-        if(listaProdutos.isEmpty()) return;
+        if (listaProdutos.isEmpty()) {
+            return;
+        }
         int idProduto = Integer.parseInt(scanner.nextLine());
         Produto prod = buscarId(idProduto);
         if (prod == null) {
             System.out.println("Produto não existente!");
             return;
-        }   
+        }
         System.out.println("Digite as informações do produto");
         System.out.print("Nome do produto: ");
         String nome = scanner.nextLine();
@@ -108,17 +117,23 @@ public class DadosProduto {
         Double valorPago = Double.parseDouble(scanner.nextLine());
         System.out.print("Valor de venda: ");
         Double valorVendido = Double.parseDouble(scanner.nextLine());
-        Produto novoProduto = new Produto(qt, nome, valorPago, valorVendido);
+
+        // Listar fornecedores para o usuário escolher
+        DadosFornecedores.listar();
+        System.out.print("Digite o ID do fornecedor: ");
+        int idFornecedor = Integer.parseInt(scanner.nextLine());
+
+        // Novo construtor com o campo fornecedor
+        Produto novoProduto = new Produto(qt, nome, valorPago, valorVendido, idFornecedor);
         novoProduto.setId(prod.getId());
         int index = listaProdutos.indexOf(prod);
         if (index != -1) {
             listaProdutos.set(index, novoProduto);
         }
         salvarProdutosJson();
-        
+
         System.out.println("Produto editado com sucesso.");
     }
-    
     /**
      * Verifica o estoque de um produto selecionado.
      *
@@ -145,14 +160,22 @@ public class DadosProduto {
     /**
      * Lista todos os produtos cadastrados.
      */
-    public static void listar(){
-        if(listaProdutos.isEmpty()){
+    public static void listar() {
+        if (listaProdutos.isEmpty()) {
             System.out.println("Não há produtos para serem listados!");
+            return;
         }
-        for(Produto p : listaProdutos){
-            System.out.println("Id: " + p.getId() + " - " + p.getNome() + " - Estoque: " + p.getQuantidade());
+        for (Produto p : listaProdutos) {
+            // Busca o fornecedor pelo ID associado ao produto
+            Fornecedor fornecedor = DadosFornecedores.buscarId(p.getIdFornecedor());
+            String nomeFornecedor = (fornecedor != null) ? fornecedor.getNomeFantasia() : "Fornecedor não cadastrado";
+            System.out.println("Id: " + p.getId()
+                    + " - " + p.getNome()
+                    + " - Estoque: " + p.getQuantidade()
+                    + " - Fornecedor: " + nomeFornecedor);
         }
     }
+
     
     /**
      * Busca um produto pelo seu ID.

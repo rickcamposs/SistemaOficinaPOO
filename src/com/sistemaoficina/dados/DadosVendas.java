@@ -14,7 +14,12 @@ import java.util.*;
 
 /**
  * Classe responsável pela gestão das vendas no sistema.
+ * <p>
  * Permite registrar vendas, listar vendas, gerar relatórios e excluir registros.
+ * <p>
+ * @author Riquelme Moreira Campos
+ * @version 1.0
+ 
  */
 public class DadosVendas {
 

@@ -13,6 +13,7 @@ import com.sistemaoficina.dados.DadosNotaFiscal;
 import com.sistemaoficina.dados.DadosOrdemServico;
 import com.sistemaoficina.dados.DadosPonto;
 import com.sistemaoficina.dados.DadosProduto;
+import com.sistemaoficina.dados.DadosFornecedores;
 import com.sistemaoficina.dados.DadosVeiculo;
 import com.sistemaoficina.dados.DadosVendas;
 import com.sistemaoficina.dto.Funcionario;
@@ -33,7 +34,7 @@ import com.sistemaoficina.dto.Funcionario;
  * Cliente, Veículo, Produto, Agendamento, Ordem de Serviço, Funcionário, Financeiro, Vendas e Ponto.
  * </p>
  * 
- * @author Seu Nome
+ * @author Riquelme Moreira Campos
  */
 
 public class SistemaOficina {
@@ -77,14 +78,15 @@ public class SistemaOficina {
         acoesMenu.put(6, () -> menuOrdemServico());
         acoesMenu.put(7, () -> menuPonto(usuario));
         acoesMenu.put(8, () -> menuVendasServicos());
+        acoesMenu.put(9, () -> menuFornecedor());
 
         if (usuarioAdmin || usuarioProprietario) {
-            acoesMenu.put(9, () -> menuFuncionario());
-            acoesMenu.put(10, () -> menuAdmin(usuario));
+            acoesMenu.put(10, () -> menuFuncionario());
+            acoesMenu.put(11, () -> menuAdmin(usuario));
         }
 
         if (usuarioProprietario) {
-            acoesMenu.put(11, () -> menuFinanceiro());
+            acoesMenu.put(12, () -> menuFinanceiro());
         }
 
         do {
@@ -97,14 +99,15 @@ public class SistemaOficina {
             System.out.println("6. Menu Ordem de Serviço");
             System.out.println("7. Menu Ponto");
             System.out.println("8. Menu Vendas");
+            System.out.println("9. Menu Fornecedores");
 
             if (usuarioAdmin || usuarioProprietario) {
-                System.out.println("9. Menu Funcionario");
-                System.out.println("10. Menu Admin");
+                System.out.println("10. Menu Funcionario");
+                System.out.println("11. Menu Admin");
             }
 
             if (usuarioProprietario) {
-                System.out.println("11. Menu Financeiro");
+                System.out.println("12. Menu Financeiro");
             }
 
             System.out.println("0. Sair");
@@ -538,5 +541,30 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    public static void menuFornecedor(){
+    int opcao;
+    do {
+        System.out.println("\n--- FORNECEDOR ---");
+        System.out.println("1. Cadastrar Fornecedor");
+        System.out.println("2. Editar Fornecedor");
+        System.out.println("3. Excluir Fornecedor");
+        System.out.println("4. Listar Fornecedores");
+        System.out.println("0. Voltar");
+        System.out.print("Escolha: ");
+        opcao = scanner.nextInt();
+        scanner.nextLine();
+        switch (opcao) {
+            case 1 -> DadosFornecedores.cadastrar(scanner);
+            case 2 -> DadosFornecedores.editar(scanner);
+            case 3 -> DadosFornecedores.excluir(scanner);
+            case 4 -> DadosFornecedores.listar();
+            case 0 -> {}
+            default -> System.out.println("Opção inválida.");
+        }
+    } while (opcao != 0);
+}
+
+    
 }
 
