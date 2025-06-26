@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 /**
  * Representa um cliente da oficina, com informações como nome, endereço,
- * telefone,
- * email, CPF anonimizado e uma lista de veículos associados ao cliente.
- * Esta classe oferece funcionalidades para adicionar, editar, remover e listar
- * veículos
+ * telefone, email, CPF anonimizado e uma lista de veículos associados ao cliente.
+ * 
+ * <p>
+ * Esta classe oferece funcionalidades para adicionar, editar, remover e listar veículos
  * de um cliente, além de realizar o cadastro de novos clientes via console.
+ * 
+ * <p>
+ * 
+ * @author Janaina Alves Cordeiro
+ * @version 1.0
  */
 public class Cliente {
 

@@ -17,8 +17,33 @@ import com.sistemaoficina.dados.DadosVeiculo;
 import com.sistemaoficina.dados.DadosVendas;
 import com.sistemaoficina.dto.Funcionario;
 
+/**
+ * Classe principal do sistema de oficina, responsável por inicializar
+ * o programa, realizar login de funcionários e exibir o menu principal
+ * conforme o perfil do usuário logado.
+ * 
+ * <p>
+ * Cada menu oferece opções de acordo com o perfil do usuário (funcionário, admin ou proprietário),
+ * encaminhando as chamadas para os métodos responsáveis pelo CRUD e operações de cada módulo
+ * do sistema.
+ * </p>
+ * 
+ * <p>
+ * Este sistema utiliza um modelo baseado em menus, permitindo navegação entre módulos como:
+ * Cliente, Veículo, Produto, Agendamento, Ordem de Serviço, Funcionário, Financeiro, Vendas e Ponto.
+ * </p>
+ * 
+ * @author Seu Nome
+ */
+
 public class SistemaOficina {
     private static Scanner scanner = new Scanner(System.in);
+    
+    /**
+     * Método principal que inicia o sistema e solicita o login do funcionário.
+     * 
+     * @param args Argumentos de linha de comando (não utilizados).
+     */
 
     public static void main(String[] args) {
         Funcionario funcionarioLogado = DadosFuncionario.realizaLogin(scanner);
@@ -29,6 +54,14 @@ public class SistemaOficina {
         }
         scanner.close();
     }
+    
+    /**
+     * Exibe o menu principal e redireciona para os submenus conforme
+     * o perfil do funcionário autenticado.
+     * 
+     * @param usuario Funcionário logado.
+     */
+
 
     public static void menuPrincipal(Funcionario usuario) {
         int opcao;
@@ -93,6 +126,11 @@ public class SistemaOficina {
 
         } while (opcao != 0);
     }
+    
+     /**
+     * Exibe o menu do módulo de clientes e encaminha as opções
+     * para o respectivo CRUD.
+     */
 
     public static void menuCliente(){
         int opcao;
@@ -125,6 +163,12 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu do módulo de funcionários e permite operações de CRUD,
+     * busca por iterator e forEach.
+     */
+    
     public static void menuFuncionario(){
         int opcao;
         do {
@@ -152,6 +196,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu do módulo de produtos, permitindo cadastro,
+     * edição, exclusão e consulta de estoque.
+     */
 
     public static void menuProduto(){
         int opcao;
@@ -176,6 +225,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+     /**
+     * Exibe o menu do módulo de agendamentos, incluindo cadastro,
+     * cancelamento, finalização, listagem e atualização de status.
+     */
     
     public static void menuAgendamento(){
         int opcao;
@@ -202,6 +256,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu do módulo de ordens de serviço, permitindo criação,
+     * atualização, finalização, cancelamento, listagem, vínculo de produtos e notas fiscais.
+     */
     
     public static void menuOrdemServico(){
         int opcao;
@@ -239,6 +298,10 @@ public class SistemaOficina {
         } while (opcao != 0);
     }
     
+    /**
+     * Exibe o menu de notas fiscais, permitindo criação, listagem e impressão.
+     */
+    
     public static void menuNotasFiscais(){
         int opcao;
         do{
@@ -259,6 +322,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu financeiro, permitindo gerenciar despesas, gerar balanço mensal
+     * e relatórios de vendas e serviços.
+     */
     
     public static void menuFinanceiro() {
         int opcao;
@@ -290,6 +358,10 @@ public class SistemaOficina {
         } while (opcao != 0);
     }
     
+    /**
+     * Exibe o menu para vendas e serviços, permitindo registrar vendas e excluir vendas.
+     */
+    
     public static void menuVendasServicos(){
         int opcao;
         do {
@@ -310,6 +382,10 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu para despesas, incluindo cadastro, exclusão, edição e listagem.
+     */
     
     public static void menuDespesas() {
         int opcao;
@@ -335,6 +411,13 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu administrativo para o usuário admin ou proprietário, com opções para
+     * alteração de senha e inicialização de elevadores.
+     * 
+     * @param usuario Funcionário logado.
+     */
 
     public static void menuAdmin(Funcionario usuario) {
         int opcao;
@@ -356,6 +439,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu para gerenciamento de veículos, incluindo cadastro, edição,
+     * exclusão, vinculação e desvinculação de cliente.
+     */
 
     public static void menuVeiculo(){
         int opcao;
@@ -384,6 +472,11 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu para gerenciamento de elevadores, permitindo atribuição e desvinculação
+     * de ordens de serviço, além de listagem.
+     */
 
     public static void menuElevador(){
         int opcao;
@@ -406,6 +499,13 @@ public class SistemaOficina {
             }
         } while (opcao != 0);
     }
+    
+    /**
+     * Exibe o menu de ponto (controle de jornada), permitindo abertura,
+     * fechamento e listagem de pontos para o proprietário.
+     * 
+     * @param usuario Funcionário logado.
+     */
 
     public static void menuPonto(Funcionario usuario){
         int opcao;
