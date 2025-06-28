@@ -93,6 +93,24 @@ public class Agendamento {
         this.idCliente = idCliente;
     }
     
+    /**Retorna a Data do Agendamento do Cliente
+     *
+     *@return data do agendamento
+     */
+    public String getData() {
+        return data;
+    }
+    
+    /**Atualiza a data do agendamento
+     *
+     * @param data nova data.
+     */
+    public void setData(String data) {
+        this.data = data;
+    }
+    
+    
+    
     /**
      * Define o direcionamento do serviço.
      * 

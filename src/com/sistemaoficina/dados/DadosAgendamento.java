@@ -126,7 +126,7 @@ public class DadosAgendamento {
         for (Agendamento a : listaAgendamentos) {
             Cliente cliente = DadosClientes.buscarId(a.getIdCliente());
             System.out.println("Id: " + a.getId() + " - " + cliente.getNome() + 
-                " - R$" + a.getValorEstimado() + " - " + getTextoStatus(a.getStatus()));
+                " - R$" + a.getValorEstimado() + " - " + getTextoStatus(a.getStatus()) + "| Data do Agendmento: " + a.getData());
             if (a.getStatus() == StatusServico.Direcionamento && a.getDirecionamento() != null){
                 System.out.println("| Direcionamento: " + a.getDirecionamento());
             }

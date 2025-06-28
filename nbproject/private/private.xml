@@ -9,7 +9,6 @@
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Funcionario.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Produto.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Agendamento.java</file>
-            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/OrdemServico.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Elevador.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Ponto.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Venda.java</file>
@@ -27,6 +26,8 @@
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosDespesas.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosNotaFiscal.java</file>
             <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosVendas.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dto/Fornecedor.java</file>
+            <file>file:/C:/Users/User/Desktop/Atividades%20POO/Projeto%20Final/SistemaOficinaPOO/src/com/sistemaoficina/dados/DadosFornecedores.java</file>
         </group>
     </open-files>
 </project-private>
