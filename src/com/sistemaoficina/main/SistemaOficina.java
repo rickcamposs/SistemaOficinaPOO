@@ -79,10 +79,10 @@ public class SistemaOficina {
         acoesMenu.put(7, () -> menuPonto(usuario));
         acoesMenu.put(8, () -> menuVendasServicos());
         acoesMenu.put(9, () -> menuFornecedor());
+        acoesMenu.put(11, () -> menuAdmin(usuario));
 
         if (usuarioAdmin || usuarioProprietario) {
             acoesMenu.put(10, () -> menuFuncionario());
-            acoesMenu.put(11, () -> menuAdmin(usuario));
         }
 
         if (usuarioProprietario) {
@@ -100,10 +100,10 @@ public class SistemaOficina {
             System.out.println("7. Menu Ponto");
             System.out.println("8. Menu Vendas");
             System.out.println("9. Menu Fornecedores");
+            System.out.println("11. Menu Admin");
 
             if (usuarioAdmin || usuarioProprietario) {
                 System.out.println("10. Menu Funcionario");
-                System.out.println("11. Menu Admin");
             }
 
             if (usuarioProprietario) {
