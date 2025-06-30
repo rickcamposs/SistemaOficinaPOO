@@ -96,4 +96,15 @@ public class Venda {
     public double getValorTotal() {
         return quantidadeVendida * valorUnitario;
     }
+    
+    @Override
+    public String toString(){ //Questão 3
+        return "Venda{" +
+                "id='" + id + '\'' +
+                ", idProduto='" + idProduto + '\'' +
+                ", quantidadeVendida='" + quantidadeVendida + '\'' +
+                ", valorUnitario='" + valorUnitario + '\'' +
+                ", dataVenda='" + dataVenda + '\'' +
+                '}';
+    }
 }

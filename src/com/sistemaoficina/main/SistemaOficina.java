@@ -19,35 +19,35 @@ import com.sistemaoficina.dados.DadosVendas;
 import com.sistemaoficina.dto.Funcionario;
 
 /**
- * Classe principal do sistema de oficina, responsável por inicializar
- * o programa, realizar login de funcionários e exibir o menu principal
- * conforme o perfil do usuário logado.
- * 
+ * Classe principal do sistema de oficina, responsável por inicializar o
+ * programa, realizar login de funcionários e exibir o menu principal conforme o
+ * perfil do usuário logado.
+ *
  * <p>
- * Cada menu oferece opções de acordo com o perfil do usuário (funcionário, admin ou proprietário),
- * encaminhando as chamadas para os métodos responsáveis pelo CRUD e operações de cada módulo
- * do sistema.
+ * Cada menu oferece opções de acordo com o perfil do usuário (funcionário,
+ * admin ou proprietário), encaminhando as chamadas para os métodos responsáveis
+ * pelo CRUD e operações de cada módulo do sistema.
  * </p>
- * 
+ *
  * <p>
- * Este sistema utiliza um modelo baseado em menus, permitindo navegação entre módulos como:
- * Cliente, Veículo, Produto, Agendamento, Ordem de Serviço, Funcionário, Financeiro, Vendas e Ponto.
+ * Este sistema utiliza um modelo baseado em menus, permitindo navegação entre
+ * módulos como: Cliente, Veículo, Produto, Agendamento, Ordem de Serviço,
+ * Funcionário, Financeiro, Vendas e Ponto.
  * </p>
- * 
+ *
  * @author Riquelme Moreira Campos
  */
-
 public class SistemaOficina {
+
     private static Scanner scanner = new Scanner(System.in);
-    
+
     /**
      * Método principal que inicia o sistema e solicita o login do funcionário.
-     * 
+     *
      * @param args Argumentos de linha de comando (não utilizados).
      */
-
     public static void main(String[] args) {
-        Funcionario funcionarioLogado = DadosFuncionario.realizaLogin(scanner);
+        Funcionario funcionarioLogado = DadosFuncionario.realizaLogin(scanner); //Questão 2
         if (funcionarioLogado != null) {
             menuPrincipal(funcionarioLogado);
         } else {
@@ -55,15 +55,13 @@ public class SistemaOficina {
         }
         scanner.close();
     }
-    
+
     /**
-     * Exibe o menu principal e redireciona para os submenus conforme
-     * o perfil do funcionário autenticado.
-     * 
+     * Exibe o menu principal e redireciona para os submenus conforme o perfil
+     * do funcionário autenticado.
+     *
      * @param usuario Funcionário logado.
      */
-
-
     public static void menuPrincipal(Funcionario usuario) {
         int opcao;
         boolean usuarioProprietario = usuario.getCargo().equals("Proprietario");
@@ -79,14 +77,15 @@ public class SistemaOficina {
         acoesMenu.put(7, () -> menuPonto(usuario));
         acoesMenu.put(8, () -> menuVendasServicos());
         acoesMenu.put(9, () -> menuFornecedor());
-        acoesMenu.put(11, () -> menuAdmin(usuario));
+        acoesMenu.put(10, () -> menuTestes());
+        acoesMenu.put(12, () -> menuAdmin(usuario));
 
         if (usuarioAdmin || usuarioProprietario) {
-            acoesMenu.put(10, () -> menuFuncionario());
+            acoesMenu.put(11, () -> menuFuncionario());
         }
 
         if (usuarioProprietario) {
-            acoesMenu.put(12, () -> menuFinanceiro());
+            acoesMenu.put(13, () -> menuFinanceiro());
         }
 
         do {
@@ -100,14 +99,15 @@ public class SistemaOficina {
             System.out.println("7. Menu Ponto");
             System.out.println("8. Menu Vendas");
             System.out.println("9. Menu Fornecedores");
-            System.out.println("11. Menu Admin");
+            System.out.println("10. Testes");
+            System.out.println("12. Menu Admin");
 
             if (usuarioAdmin || usuarioProprietario) {
-                System.out.println("10. Menu Funcionario");
+                System.out.println("11. Menu Funcionario");
             }
 
             if (usuarioProprietario) {
-                System.out.println("12. Menu Financeiro");
+                System.out.println("13. Menu Financeiro");
             }
 
             System.out.println("0. Sair");
@@ -129,13 +129,12 @@ public class SistemaOficina {
 
         } while (opcao != 0);
     }
-    
-     /**
-     * Exibe o menu do módulo de clientes e encaminha as opções
-     * para o respectivo CRUD.
-     */
 
-    public static void menuCliente(){
+    /**
+     * Exibe o menu do módulo de clientes e encaminha as opções para o
+     * respectivo CRUD.
+     */
+    public static void menuCliente() {
         int opcao;
         do {
             System.out.println("\n--- CLIENTE ---");
@@ -153,26 +152,35 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosClientes.cadastrar(scanner);
-                case 2 -> DadosClientes.editar(scanner);
-                case 3 -> DadosClientes.excluir(scanner);
-                case 4 -> DadosClientes.listar();
-                case 5 -> DadosClientes.listaCrescente();
-                case 6 -> DadosClientes.listaDecrescente();
-                case 7 -> DadosClientes.buscarIdIterator(scanner);
-                case 8 -> DadosClientes.buscaIdBinary(scanner);
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+                case 1 ->
+                    DadosClientes.cadastrar(scanner);
+                case 2 ->
+                    DadosClientes.editar(scanner);
+                case 3 ->
+                    DadosClientes.excluir(scanner);
+                case 4 ->
+                    DadosClientes.listar();
+                case 5 ->
+                    DadosClientes.listaCrescente();
+                case 6 ->
+                    DadosClientes.listaDecrescente();
+                case 7 ->
+                    DadosClientes.buscarIdIterator(scanner);
+                case 8 ->
+                    DadosClientes.buscaIdBinary(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
-     * Exibe o menu do módulo de funcionários e permite operações de CRUD,
-     * busca por iterator e forEach.
+     * Exibe o menu do módulo de funcionários e permite operações de CRUD, busca
+     * por iterator e forEach.
      */
-    
-    public static void menuFuncionario(){
+    public static void menuFuncionario() {
         int opcao;
         do {
             System.out.println("\n--- FUNCIONARIO ---");
@@ -187,25 +195,32 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {                
-                case 1 -> DadosFuncionario.cadastrar(scanner);
-                case 2 -> DadosFuncionario.editar(scanner);
-                case 3 -> DadosFuncionario.excluir(scanner);
-                case 4 -> DadosFuncionario.listar();
-                case 5 -> DadosFuncionario.buscarIdIterator(scanner);
-                case 6 -> DadosFuncionario.buscarIdForEach(scanner);
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+            switch (opcao) {
+                case 1 ->
+                    DadosFuncionario.cadastrar(scanner);
+                case 2 ->
+                    DadosFuncionario.editar(scanner);
+                case 3 ->
+                    DadosFuncionario.excluir(scanner);
+                case 4 ->
+                    DadosFuncionario.listar();
+                case 5 ->
+                    DadosFuncionario.buscarIdIterator(scanner);
+                case 6 ->
+                    DadosFuncionario.buscarIdForEach(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
-    /**
-     * Exibe o menu do módulo de produtos, permitindo cadastro,
-     * edição, exclusão e consulta de estoque.
-     */
 
-    public static void menuProduto(){
+    /**
+     * Exibe o menu do módulo de produtos, permitindo cadastro, edição, exclusão
+     * e consulta de estoque.
+     */
+    public static void menuProduto() {
         int opcao;
         do {
             System.out.println("\n--- PRODUTO ---");
@@ -219,22 +234,27 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosProduto.cadastrar(scanner);         
-                case 2 -> DadosProduto.editar(scanner);
-                case 3 -> DadosProduto.listar();
-                case 4 -> DadosProduto.excluir(scanner);
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+                case 1 ->
+                    DadosProduto.cadastrar(scanner);
+                case 2 ->
+                    DadosProduto.editar(scanner);
+                case 3 ->
+                    DadosProduto.listar();
+                case 4 ->
+                    DadosProduto.excluir(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
-     /**
-     * Exibe o menu do módulo de agendamentos, incluindo cadastro,
-     * cancelamento, finalização, listagem e atualização de status.
+
+    /**
+     * Exibe o menu do módulo de agendamentos, incluindo cadastro, cancelamento,
+     * finalização, listagem e atualização de status.
      */
-    
-    public static void menuAgendamento(){
+    public static void menuAgendamento() {
         int opcao;
         do {
             System.out.println("\n--- AGENDAMENTO ---");
@@ -248,24 +268,31 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {   
-                case 1 -> DadosAgendamento.cadastrar(scanner);   
-                case 2 -> DadosAgendamento.cancelar(scanner);   
-                case 3 -> DadosAgendamento.finalizar(scanner);
-                case 4 -> DadosAgendamento.listar();
-                case 5 -> DadosAgendamento.atualizarStatus(scanner);
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+            switch (opcao) {
+                case 1 ->
+                    DadosAgendamento.cadastrar(scanner);
+                case 2 ->
+                    DadosAgendamento.cancelar(scanner);
+                case 3 ->
+                    DadosAgendamento.finalizar(scanner);
+                case 4 ->
+                    DadosAgendamento.listar();
+                case 5 ->
+                    DadosAgendamento.atualizarStatus(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
      * Exibe o menu do módulo de ordens de serviço, permitindo criação,
-     * atualização, finalização, cancelamento, listagem, vínculo de produtos e notas fiscais.
+     * atualização, finalização, cancelamento, listagem, vínculo de produtos e
+     * notas fiscais.
      */
-    
-    public static void menuOrdemServico(){
+    public static void menuOrdemServico() {
         int opcao;
         do {
             System.out.println("\n--- Ordem de Serviço ---");
@@ -281,13 +308,19 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {   
-                case 1 -> DadosOrdemServico.cadastrar(scanner);   
-                case 2 -> DadosOrdemServico.atualizar(scanner);   
-                case 3 -> DadosOrdemServico.finalizar(scanner);
-                case 4 -> DadosOrdemServico.listar();
-                case 5 -> DadosOrdemServico.cancelar(scanner);
-                case 6 -> menuNotasFiscais();
+            switch (opcao) {
+                case 1 ->
+                    DadosOrdemServico.cadastrar(scanner);
+                case 2 ->
+                    DadosOrdemServico.atualizar(scanner);
+                case 3 ->
+                    DadosOrdemServico.finalizar(scanner);
+                case 4 ->
+                    DadosOrdemServico.listar();
+                case 5 ->
+                    DadosOrdemServico.cancelar(scanner);
+                case 6 ->
+                    menuNotasFiscais();
                 case 7 -> {
                     System.out.print("Digite o ID da Ordem de Serviço para adicionar produtos: ");
                     DadosOrdemServico.listar();
@@ -295,19 +328,20 @@ public class SistemaOficina {
                     scanner.nextLine();
                     DadosOrdemServico.adicionarProdutosNaOrdem(idOrdem, scanner);
                 }
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
      * Exibe o menu de notas fiscais, permitindo criação, listagem e impressão.
      */
-    
-    public static void menuNotasFiscais(){
+    public static void menuNotasFiscais() {
         int opcao;
-        do{
+        do {
             System.out.println("\n--- Notas Fiscais ---");
             System.out.println("1. Criar Nota Fiscal de Serviço");
             System.out.println("2. Listar Nota Fiscal de Serviço");
@@ -315,22 +349,26 @@ public class SistemaOficina {
             System.out.println("0. Voltar");
             opcao = scanner.nextInt();
             scanner.nextLine();
-            
-            switch (opcao){
-                case 1 -> DadosNotaFiscal.criarNF(scanner);
-                case 2 -> DadosNotaFiscal.listar();
-                case 3 -> DadosNotaFiscal.imprimirNF(scanner);
-                case 0 -> {}
-                default ->System.out.println("Opção Inválida");
+
+            switch (opcao) {
+                case 1 ->
+                    DadosNotaFiscal.criarNF(scanner);
+                case 2 ->
+                    DadosNotaFiscal.listar();
+                case 3 ->
+                    DadosNotaFiscal.imprimirNF(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção Inválida");
             }
         } while (opcao != 0);
     }
-    
+
     /**
-     * Exibe o menu financeiro, permitindo gerenciar despesas, gerar balanço mensal
-     * e relatórios de vendas e serviços.
+     * Exibe o menu financeiro, permitindo gerenciar despesas, gerar balanço
+     * mensal e relatórios de vendas e serviços.
      */
-    
     public static void menuFinanceiro() {
         int opcao;
         do {
@@ -344,7 +382,8 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> menuDespesas();
+                case 1 ->
+                    menuDespesas();
                 case 2 -> {
                     System.out.print("Digite o mês (1-12): ");
                     int mes = scanner.nextInt();
@@ -353,19 +392,21 @@ public class SistemaOficina {
                     scanner.nextLine();
                     DadosDespesas.gerarBalancoMensal(mes, ano);;
                 }
-                case 3 -> DadosVendas.gerarRelatorioVendas();
+                case 3 ->
+                    DadosVendas.gerarRelatorioVendas();
                 case 0 -> {
                 }
-                default -> System.out.println("Opção inválida.");
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
-     * Exibe o menu para vendas e serviços, permitindo registrar vendas e excluir vendas.
+     * Exibe o menu para vendas e serviços, permitindo registrar vendas e
+     * excluir vendas.
      */
-    
-    public static void menuVendasServicos(){
+    public static void menuVendasServicos() {
         int opcao;
         do {
             System.out.println("\n--- VENDAS E SERVICOS ---");
@@ -377,19 +418,22 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosVendas.registrarVenda(scanner);
-                case 2 -> DadosVendas.excluirVenda(scanner);
+                case 1 ->
+                    DadosVendas.registrarVenda(scanner);
+                case 2 ->
+                    DadosVendas.excluirVenda(scanner);
                 case 0 -> {
                 }
-                default -> System.out.println("Opção inválida.");
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
-     * Exibe o menu para despesas, incluindo cadastro, exclusão, edição e listagem.
+     * Exibe o menu para despesas, incluindo cadastro, exclusão, edição e
+     * listagem.
      */
-    
     public static void menuDespesas() {
         int opcao;
         do {
@@ -404,24 +448,28 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosDespesas.adicionarDespesa(scanner);
-                case 2 -> DadosDespesas.excluirDespesa(scanner);
-                case 3 -> DadosDespesas.editar(scanner);
-                case 4 -> DadosDespesas.listar();
+                case 1 ->
+                    DadosDespesas.adicionarDespesa(scanner);
+                case 2 ->
+                    DadosDespesas.excluirDespesa(scanner);
+                case 3 ->
+                    DadosDespesas.editar(scanner);
+                case 4 ->
+                    DadosDespesas.listar();
                 case 0 -> {
                 }
-                default -> System.out.println("Opção inválida.");
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
-     * Exibe o menu administrativo para o usuário admin ou proprietário, com opções para
-     * alteração de senha e inicialização de elevadores.
-     * 
+     * Exibe o menu administrativo para o usuário admin ou proprietário, com
+     * opções para alteração de senha e inicialização de elevadores.
+     *
      * @param usuario Funcionário logado.
      */
-
     public static void menuAdmin(Funcionario usuario) {
         int opcao;
         do {
@@ -434,21 +482,23 @@ public class SistemaOficina {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> DadosFuncionario.alterarSenha(usuario, scanner);
-                case 2 -> DadosElevador.inicilizarElevadores();
+                case 1 ->
+                    DadosFuncionario.alterarSenha(usuario, scanner);
+                case 2 ->
+                    DadosElevador.inicilizarElevadores();
                 case 0 -> {
                 }
-                default -> System.out.println("Opção inválida.");
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
      * Exibe o menu para gerenciamento de veículos, incluindo cadastro, edição,
      * exclusão, vinculação e desvinculação de cliente.
      */
-
-    public static void menuVeiculo(){
+    public static void menuVeiculo() {
         int opcao;
         do {
             System.out.println("\n--- VEÍCULO ---");
@@ -463,25 +513,32 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {   
-                case 1 -> DadosVeiculo.cadastrar(scanner);   
-                case 2 -> DadosVeiculo.editar(scanner);   
-                case 3 -> DadosVeiculo.excluir(scanner);
-                case 4 -> DadosVeiculo.listar();
-                case 5 -> DadosVeiculo.atribuirCliente(scanner);
-                case 6 -> DadosVeiculo.desvincularCliente(scanner);
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+            switch (opcao) {
+                case 1 ->
+                    DadosVeiculo.cadastrar(scanner);
+                case 2 ->
+                    DadosVeiculo.editar(scanner);
+                case 3 ->
+                    DadosVeiculo.excluir(scanner);
+                case 4 ->
+                    DadosVeiculo.listar();
+                case 5 ->
+                    DadosVeiculo.atribuirCliente(scanner);
+                case 6 ->
+                    DadosVeiculo.desvincularCliente(scanner);
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
-    /**
-     * Exibe o menu para gerenciamento de elevadores, permitindo atribuição e desvinculação
-     * de ordens de serviço, além de listagem.
-     */
 
-    public static void menuElevador(){
+    /**
+     * Exibe o menu para gerenciamento de elevadores, permitindo atribuição e
+     * desvinculação de ordens de serviço, além de listagem.
+     */
+    public static void menuElevador() {
         int opcao;
         do {
             System.out.println("\n--- ELEVADOR ---");
@@ -493,24 +550,28 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {   
-                case 1 -> DadosElevador.atribuirOrdemServico(scanner);  
-                case 2 -> DadosElevador.desvincularOrdemServico(scanner);  
-                case 3 -> DadosElevador.listar();
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+            switch (opcao) {
+                case 1 ->
+                    DadosElevador.atribuirOrdemServico(scanner);
+                case 2 ->
+                    DadosElevador.desvincularOrdemServico(scanner);
+                case 3 ->
+                    DadosElevador.listar();
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
+
     /**
      * Exibe o menu de ponto (controle de jornada), permitindo abertura,
      * fechamento e listagem de pontos para o proprietário.
-     * 
+     *
      * @param usuario Funcionário logado.
      */
-
-    public static void menuPonto(Funcionario usuario){
+    public static void menuPonto(Funcionario usuario) {
         int opcao;
         boolean usuarioProprietario = usuario.getCargo().equals("Proprietario");
         do {
@@ -518,7 +579,7 @@ public class SistemaOficina {
             System.out.println("\n--- PONTO ---");
             System.out.println("1. Abrir ponto");
             System.out.println("2. Fechar ponto");
-            if(usuarioProprietario) {
+            if (usuarioProprietario) {
                 System.out.println("3. Listar pontos");
             }
             System.out.println("0. Voltar");
@@ -526,45 +587,151 @@ public class SistemaOficina {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {   
-                case 1 -> DadosPonto.abrirPonto(usuario);
-                case 2 -> DadosPonto.fecharPonto(usuario);
+            switch (opcao) {
+                case 1 ->
+                    DadosPonto.abrirPonto(usuario);
+                case 2 ->
+                    DadosPonto.fecharPonto(usuario);
                 case 3 -> {
-                    if (usuarioProprietario){
+                    if (usuarioProprietario) {
                         DadosPonto.listarPontosPorUsuario(scanner);
                     } else {
                         System.out.println("Opção Inválida");
                     }
                 }
-                case 0 -> {}
-                default -> System.out.println("Opção inválida.");
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
     }
-    
-    public static void menuFornecedor(){
-    int opcao;
-    do {
-        System.out.println("\n--- FORNECEDOR ---");
-        System.out.println("1. Cadastrar Fornecedor");
-        System.out.println("2. Editar Fornecedor");
-        System.out.println("3. Excluir Fornecedor");
-        System.out.println("4. Listar Fornecedores");
-        System.out.println("0. Voltar");
-        System.out.print("Escolha: ");
-        opcao = scanner.nextInt();
-        scanner.nextLine();
-        switch (opcao) {
-            case 1 -> DadosFornecedores.cadastrar(scanner);
-            case 2 -> DadosFornecedores.editar(scanner);
-            case 3 -> DadosFornecedores.excluir(scanner);
-            case 4 -> DadosFornecedores.listar();
-            case 0 -> {}
-            default -> System.out.println("Opção inválida.");
-        }
-    } while (opcao != 0);
-}
 
-    
+    /**
+ * Exibe o menu de gerenciamento de fornecedores, permitindo ao usuário realizar
+ * operações de cadastro, edição, exclusão e listagem de fornecedores.
+ * <p>
+ * As opções do menu encaminham as operações para os métodos responsáveis da
+ * classe {@code DadosFornecedores}. O método permanece em execução até que o usuário
+ * escolha a opção de voltar (0).
+ * </p>
+ * 
+ * As funcionalidades disponíveis são:
+ * <ul>
+ *   <li>Cadastrar um novo fornecedor</li>
+ *   <li>Editar um fornecedor existente</li>
+ *   <li>Excluir um fornecedor do sistema</li>
+ *   <li>Listar todos os fornecedores cadastrados</li>
+ *   <li>Voltar ao menu anterior</li>
+ * </ul>
+ */
+    public static void menuFornecedor() {
+        int opcao;
+        do {
+            System.out.println("\n--- FORNECEDOR ---");
+            System.out.println("1. Cadastrar Fornecedor");
+            System.out.println("2. Editar Fornecedor");
+            System.out.println("3. Excluir Fornecedor");
+            System.out.println("4. Listar Fornecedores");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1 ->
+                    DadosFornecedores.cadastrar(scanner);
+                case 2 ->
+                    DadosFornecedores.editar(scanner);
+                case 3 ->
+                    DadosFornecedores.excluir(scanner);
+                case 4 ->
+                    DadosFornecedores.listar();
+                case 0 -> {
+                }
+                default ->
+                    System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
+    /**
+     * Menu de Testes - Chama explicitamente as funções relacionadas a cada
+     * questão do escopo do trabalho. Cada opção executa/testa uma
+     * funcionalidade pedida pelo professor.
+     *
+     * Sugestão: Adicione este menu como uma opção no menuPrincipal apenas para
+     * avaliação/testes.
+     */
+    public static void menuTestes() {
+        int opcao;
+        do {
+            System.out.println("\n=== MENU DE TESTES DO TRABALHO ===");
+            System.out.println("1. Questão 5: Mostrar elevadores estáticos");
+            System.out.println("2. Questão 6: Cadastrar colaborador (funcionário)");
+            System.out.println("3. Questão 7: Cadastrar cliente");
+            System.out.println("4. Questão 8: Listar ordens de serviço de clientes");
+            System.out.println("5. Questão 10: Registrar venda/serviço e imprimir extrato");
+            System.out.println("6. Questão 13: Testar Comparator de Cliente (por nome e por CPF)");
+            System.out.println("7. Questão 15: Testar Iterator e forEach para clientes");
+            System.out.println("8. Questão 16: Testar Comparator no sort de clientes");
+            System.out.println("9. Questão 17: Testar método find para clientes e comparar com binarySearch");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1 -> {
+                    // Questão 5: Mostrar elevadores estáticos
+                    DadosElevador.listar();
+                }
+                case 2 -> {
+                    // Questão 6: Cadastrar colaborador
+                    DadosFuncionario.cadastrar(scanner);
+                }
+                case 3 -> {
+                    // Questão 7: Cadastrar cliente
+                    DadosClientes.cadastrar(scanner);
+                }
+                case 4 -> {
+                    // Questão 8: Listar ordens de serviço por cliente
+                    DadosOrdemServico.listar(); 
+                }
+                case 5 -> {
+                    // Questão 10: Registrar venda e imprimir extrato
+                    DadosVendas.registrarVenda(scanner);
+                    // Assumindo que registrarVenda já gera/imprime extrato associado ao cliente
+                }
+                case 6 -> {
+                    // Questão 13: Comparator de Cliente por nome/CPF
+                    System.out.println("Ordenando clientes por nome:");
+                    DadosClientes.listaCrescente();
+                }
+                case 7 -> {
+                    // Questão 15: Testar Iterator e forEach para clientes
+                    System.out.println("Testando Iterator (buscarIdIterator):");
+                    DadosClientes.buscarIdIterator(scanner);
+                    System.out.println("Testando forEach (listar):");
+                    DadosClientes.listar();
+                }
+                case 8 -> {
+                    // Questão 16: Testar Comparator no sort de clientes (duas ordenações diferentes)
+                    System.out.println("Ordenando clientes por nome:");
+                    DadosClientes.listaCrescente(); // Ordenação Crescente
+                    System.out.println("Ordenando clientes por CPF:");
+                    DadosClientes.listaDecrescente();  // Ordenação Decrescente
+                }
+                case 9 -> {
+                    // Questão 17: Testar método find para clientes e comparar com binarySearch
+                    System.out.println("Testando busca com find (iterator+comparator):");
+                    DadosClientes.buscaIdBinary(scanner);
+                    System.out.println("Testando busca com binarySearch:");
+                    DadosClientes.buscaIdBinary(scanner);
+                }
+                case 0 -> {
+                    // Sair do menu de testes
+                }
+                default ->
+                    System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
+    }
 }
-

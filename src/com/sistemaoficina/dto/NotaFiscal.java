@@ -137,7 +137,7 @@ public class NotaFiscal {
      * @return String contendo os principais atributos da nota fiscal.
      */
     @Override
-    public String toString() {
+    public String toString() { // Questão 3
         return "NotaFiscal{" +
                 "id='" + id + '\'' +
                 ", data='" + data + '\'' +

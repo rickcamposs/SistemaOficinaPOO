@@ -146,7 +146,7 @@ public class Produto {
      * @return String com os principais dados do produto.
      */
     @Override
-    public String toString() {
+    public String toString() { //Questão 3
         return "Produto{" +
                 "nome='" + nome + '\'' +
                 ", id='" + id + '\'' +

@@ -154,7 +154,7 @@ public class DadosVendas {
             return;
         }
         listaVendas.remove(v);
-        salvarVendas();
+        salvarVendas(); //Questão 9
         System.out.println("Venda excluída com sucesso!");
     }
 }

@@ -163,7 +163,7 @@ public class Despesa {
      * @return String detalhando a despesa.
      */
     @Override
-    public String toString(){
+    public String toString(){ // Questão 3
         return "Financeiro{ " + nome + " |" + descricao + " |Valor: " + valor + " | Data: " + data + " | Tipo: " + categoria + "}";
     }
 }

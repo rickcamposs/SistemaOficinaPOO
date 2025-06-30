@@ -69,7 +69,7 @@ public class Elevador {
      * @return String com os dados do elevador.
      */
     @Override
-    public String toString() {
+    public String toString() { //Questão 3
         return "Elevador{" +
                 "idOrdemServico='" + idOrdemServico + '\'' +
                 ", tipoElevador='" + tipoElevador + '\'' +
