@@ -124,7 +124,7 @@ public class DadosNotaFiscal {
                 .max();
         f.setId(maxId.isPresent() ? maxId.getAsInt() + 1 : 0);
         listaNF.add(f);
-        salvarNFJson();
+        salvarNFJson(); // Questão 9
 
         System.out.println("NF salva com sucesso.");
     }

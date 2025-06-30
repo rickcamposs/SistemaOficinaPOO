@@ -245,7 +245,7 @@ public class Cliente {
      * @return A representação em string do cliente.
      */
     @Override
-    public String toString() {
+    public String toString() {//Questão 3
         return "Cliente{" +
                 "nome='" + nome + '\'' +
                 ", endereco='" + endereco + '\'' +

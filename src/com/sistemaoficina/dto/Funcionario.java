@@ -107,7 +107,7 @@ public class Funcionario {
     }
     
     @Override
-    public String toString() {
+    public String toString() { //Questão 3
         return "Funcionario{" +
                 "nome='" + nome + '\'' +
                 ", cargo='" + cargo + '\'' +

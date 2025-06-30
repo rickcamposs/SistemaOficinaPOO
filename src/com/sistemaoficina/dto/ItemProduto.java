@@ -54,7 +54,7 @@ public class ItemProduto {
      * @return String detalhando id do produto e quantidade.
      */
     @Override
-    public String toString() {
+    public String toString() { // Questão 3
         return "ItemProduto{" +
                 "idProduto='" + idProduto + '\'' +
                 ", quantidade='" + quantidade + '\'' +

@@ -187,7 +187,7 @@ public class Agendamento {
      * @return String detalhada com as informações do agendamento.
      */
     @Override
-    public String toString() {
+    public String toString() { //Questão 3
         String info = "Agendamento ID: " + id
                 + "\nData: " + data
                 + "\nDescrição: " + descricao
