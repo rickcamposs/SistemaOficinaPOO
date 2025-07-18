@@ -1,4 +1,4 @@
- Sistema de Gestão de Oficina – Milho Verde
+# Sistema de Gestão de Oficina – Milho Verde
 
 Projeto acadêmico de Programação Orientada a Objetos (POO)
 **Em desenvolvimento – versão atual cobre todos os principais requisitos da disciplina.**
@@ -55,8 +55,8 @@ com.sistemaoficina/
 5. Navegue pelos menus para gerenciar clientes, veículos, serviços, funcionários, financeiro, etc.
 
 ## Dependências
-
-* Gson (serialização e leitura dos arquivos JSON)
+ 
+* [Gson](https://github.com/google/gson) (serialização e leitura dos arquivos JSON)
 * Java SE 8 ou superior
 
 ## Observações
